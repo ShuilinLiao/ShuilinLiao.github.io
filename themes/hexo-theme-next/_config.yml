@@ -97,10 +97,7 @@ creative_commons:
 # ---------------------------------------------------------------
 
 # Schemes
-scheme: Muse
-#scheme: Mist
-#scheme: Pisces
-#scheme: Gemini
+scheme: Pisces
 
 # Dark Mode
 darkmode: false

@@ -3,9 +3,6 @@ title: 如何用Hexo+Github搭建个人博客
 date: 2020-10-15 19:17:56
 tags:
 ---
-# 如何用Hexo+Github搭建个人博客
-
-
 
 ## Git与GiHub的配置
 
@@ -15,11 +12,11 @@ tags:
 
 ### **GitHub创建个人仓库**
 
-登录到GitHub,如果没有GitHub帐号，使用你的邮箱注册GitHub帐号：[Build software better, together](https://link.zhihu.com/?target=https%3A//github.com/) 点击GitHub中的New repository创建新仓库，仓库名应该为：**用户名**.[http://github.io](https://link.zhihu.com/?target=http%3A//github.io) 这个**用户名**使用你的GitHub帐号名称代替，这是固定写法，比如我的仓库名为：`图片xxx`
+登录到GitHub,如果没有GitHub帐号，使用你的邮箱注册GitHub帐号：[Build software better, together](https://link.zhihu.com/?target=https%3A//github.com/) 点击GitHub中的New repository创建新仓库，仓库名应该为：`用户名.github.io` 这个**用户名**使用你的GitHub帐号名称代替。
 
 ### **安装GitHub**
 
-什么是Git ?简单来说Git是开源的分布式版本控制系统，用于敏捷高效地处理项目。我们网站在本地搭建好了，需要使用Git同步到GitHub上。如果想要了解Git的细节，参看[廖雪峰](https://link.zhihu.com/?target=http%3A//weibo.com/liaoxuefeng)老师的Git教程：[Git教程](https://link.zhihu.com/?target=http%3A//www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000) 。（缺一篇自己写Git的文章）。安装成功后，将你的Git与GitHub帐号绑定，鼠标右击打开Git Bash
+什么是Git ?简单来说Git是开源的分布式版本控制系统，用于敏捷高效地处理项目。我们网站在本地搭建好了，需要使用Git同步到GitHub上。如果想要了解Git的细节，参看[廖雪峰](https://link.zhihu.com/?target=http%3A//weibo.com/liaoxuefeng)老师的Git教程：[Git教程](https://link.zhihu.com/?target=http%3A//www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000) 。安装成功后，将你的Git与GitHub帐号绑定，鼠标右击打开Git Bash
 
 创建名为“Blog”的目录，以下命令可以在git bash界面处理
 
@@ -41,12 +38,8 @@ ssh-keygen -t rsa -C "你的GitHub注册邮箱"
 
 打开[GitHub_Settings_keys](https://link.zhihu.com/?target=https%3A//github.com/settings/keys) 页面，新建new SSH Key
 
-`图片xxx`
-
 Title为标题，任意填即可，将刚刚复制的id_rsa.pub内容粘贴进去，最后点击Add SSH key。
 在Git Bash中检测GitHub公钥设置是否成功，输入 ssh git@github.com ：
-
-`图片xxx`
 
 如上则说明成功。这里之所以设置GitHub密钥原因是，通过非对称加密的公钥与私钥来完成加密，公钥放置在GitHub上，私钥放置在自己的电脑里。GitHub要求每次推送代码都是合法用户，所以每次推送都需要输入账号密码验证推送用户是否是合法用户，为了省去每次输入密码的步骤，采用了ssh，当你推送的时候，git就会匹配你的私钥跟GitHub上面的公钥是否是配对的，若是匹配就认为你是合法用户，则允许推送。这样可以保证每次的推送都是正确合法的。
 
@@ -64,10 +57,7 @@ git branch # 显示当前在main分支
 git checkout -b source # 创建并切换到source分支 因调整source为默认主支，因此克隆后直接是源代码仓库
 ```
 
-## 什么是Hexo ?
-
-xxxx
-
+## hexo搭建博客
 ### **安装Node.js**
 
 Hexo基于Node.js，Node.js下载地址：[Download | Node.js](https://link.zhihu.com/?target=https%3A//nodejs.org/en/download/) 下载安装包，注意安装Node.js会包含环境变量及npm的安装，安装后，检测Node.js是否安装成功，在命令行中输入 `node -v` 。检测npm是否安装成功，在命令行中输入`npm -v` 。
@@ -89,10 +79,10 @@ npm install -g hexo-cli
 - 安装完成后，初始化我们的博客（在Blog目录下），输入：
 
 ```bash
-hexo init "Shuilin's blog"
+hexo init "xx's blog"
 ```
 
-- 复制/剪切Shuilin's blog **`内容`**至博客仓库ShuilinLiao.github.io
+- 复制/剪切 xx's blog **`内容`**至博客仓库 username.github.io
 
 - 更换主题：如果你不喜欢Hexo默认的主题，可以更换不同的主题，主题传送门：[Themes](https://link.zhihu.com/?target=https%3A//hexo.io/themes/)。 如：我自己使用的是Next主题，可以在blog目录中的themes文件夹中查看你自己主题是什么。现在把默认主题更改成Next主题，在blog目录中（就是命令行的位置处于blog目录），打开命令行输入以下，将Next主题下载到blog目录的themes主题下的next文件夹中：
 
@@ -131,7 +121,7 @@ http://localhost:40000
 ```
 deploy:
     type: git
-    repo: https://github.com/ShuilinLiao/ShuilinLiao.github.io.git
+    repo: https://github.com/ShuilinLiao/username.github.io.git
     branch: master
 ```
 
@@ -149,7 +139,7 @@ hexo g
 hexo d
 ```
 
-其实第三条的 hexo d 就是部署网站命令，d是deploy的缩写。完成后，打开浏览器，在地址栏输入你的放置个人网站的仓库路径，即 [http://xxxx.github.io](https://link.zhihu.com/?target=http%3A//xxxx.github.io) (知乎排版可能会出现"http://"字样，参考下图) 比如我的我的GitHub用户名为：**ShuilinLiao.github.io**
+其实第三条的 hexo d 就是部署网站命令，d是deploy的缩写。完成后，打开浏览器，在地址栏输入你的放置个人网站的仓库路径，即 [http://xxxx.github.io](https://link.zhihu.com/?target=http%3A//xxxx.github.io) 
 
 你就会发现你的博客已经上线了，可以在网络上被访问了。
 
@@ -161,19 +151,14 @@ hexo n "博客文章名字"
 
 我们会发现在blog根目录下的source文件夹中的_post文件夹中多了一个 **博客文章名字.md** 文件，使用**Typora**软件打开编辑，就可以开始你的个人博客之旅了。
 
-编辑好之后生成和部署。
-
-```
-hexo g 
-hexo d
-```
+编辑好之后生成和部署。`hexo g` 和 `hexo d`
 
 在hexo d推送网站后，可以将源代码上传至GitHub的博客仓库source分支。
 
 git bash处跳转到当前博客目录，根目录下输入博客所在目录
 
 ```
-cd ShuilinLiao.github.io
+cd username.github.io
 ```
 
 一定是在source分支查看文件是否存在修改
@@ -190,14 +175,11 @@ git commit -m "update files"
 git push origin source
 ```
 
-PS： 在提交时需要git pull更新本地仓库，这可以保证不发生冲突
-
 随后可以在浏览器中输入域名浏览。
 
 
 
 ### 参考链接
 
-https://zouhua.top/archives/ec7d7221.html#more
-
-https://zhuanlan.zhihu.com/p/26625249
+1. [Hexo搭建个人博客](https://zouhua.top/archives/ec7d7221.html#more)
+2. [GitHub+Hexo 搭建个人网站详细教程](https://zhuanlan.zhihu.com/p/26625249)
