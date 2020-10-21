@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Visual Studio Code连接集群配置 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Visual Studio Code连接集群配置第一步：安装插件 配置远程开发首先需要安装一个名为Remote - SSH的插件，具体操作步骤如下，  点击扩展按钮 搜索Remote - SSH 安装  第二步：配置VSCode step1: 点击VS code边栏的远程连接图标。 step2: 点击SSH TARGETS右边的齿轮状⚙️按钮。 step3: 在弹出来的C:\Users\XXX\.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Visual Studio Code连接集群配置">
+<meta property="og:url" content="http://example.com/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Visual Studio Code连接集群配置第一步：安装插件 配置远程开发首先需要安装一个名为Remote - SSH的插件，具体操作步骤如下，  点击扩展按钮 搜索Remote - SSH 安装  第二步：配置VSCode step1: 点击VS code边栏的远程连接图标。 step2: 点击SSH TARGETS右边的齿轮状⚙️按钮。 step3: 在弹出来的C:\Users\XXX\.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/vscode/0.png">
+<meta property="article:published_time" content="2020-10-21T06:44:08.000Z">
+<meta property="article:modified_time" content="2020-10-21T06:56:35.152Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/vscode/0.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Visual-Studio-Code连接集群配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time datetime="2020-10-21T06:44:08.000Z" itemprop="datePublished">2020-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Visual Studio Code连接集群配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Visual-Studio-Code连接集群配置"><a href="#Visual-Studio-Code连接集群配置" class="headerlink" title="Visual Studio Code连接集群配置"></a>Visual Studio Code连接集群配置</h1><p><strong>第一步：安装插件</strong></p>
+<p>配置远程开发首先需要安装一个名为<strong>Remote - SSH</strong>的插件，具体操作步骤如下，</p>
+<ul>
+<li>点击扩展按钮</li>
+<li>搜索<strong>Remote - SSH</strong></li>
+<li>安装</li>
+</ul>
+<p><strong>第二步：配置VSCode</strong></p>
+<p>step1: 点击VS code边栏的远程连接图标。<img src="/images/vscode/0.png"></p>
+<p>step2: 点击SSH TARGETS右边的齿轮状⚙️按钮。</p>
+<p>step3: 在弹出来的<code>C:\Users\XXX\.ssh\config</code>文件中添加下面内容，根据自己的用户名填写好各个字段，<code>Ctrl + s</code>保存。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Read more about SSH config files: https:&#x2F;&#x2F;linux.die.net&#x2F;man&#x2F;5&#x2F;ssh_config</span><br><span class="line">Host gdl</span><br><span class="line">	HostName 192.168.106.31</span><br><span class="line">	User liaoshuilin</span><br><span class="line"> 	Port 22</span><br></pre></td></tr></table></figure>
+
+<p>step3: 设置terminal，Setting - Terminal - Integrated &gt; Env:Windows - 点击 Edit in settings.json。（TERMINAL窗口中显示为1：powershell）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;python.languageServer&quot;: &quot;Microsoft&quot;,</span><br><span class="line">    &quot;terminal.integrated.shell.windows&quot;: &quot;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&quot;,</span><br><span class="line">    &quot;workbench.iconTheme&quot;: &quot;vscode-icons&quot;,</span><br><span class="line">    &quot;remote.SSH.remotePlatform&quot;: &#123;</span><br><span class="line">        &quot;gdl&quot;: &quot;linux&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;python.showStartPage&quot;: false,</span><br><span class="line">    &quot;explorer.confirmDelete&quot;: false,</span><br><span class="line">    &quot;window.zoomLevel&quot;: 1,</span><br><span class="line">    &quot;terminal.integrated.automationShell.windows&quot;: &quot;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第三步：配置远程服务器</strong></p>
+<p>这个需要windows配置有ssh工具，可以通过安装git、openssh实现。在本地打开cmd，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+
+<p>然后一直点击Enter键，不用输入任何内容，最后会在<code>C:\Users\user_name\.ssh</code>路径下生成公钥文件，可以看到有一个<code>id_rsa.pub</code>文件，然后通过FTP等方式把这个文件上传到远程服务器。进入集群SSH配置目录，<code>cd ~/.ssh</code>，查看一下是否有一个名为<code>authorized_keys</code>的文件，如果没有就创建一个，然后把刚上传的<code>id_rsa.pub</code>中的内容附到<code>authorized_keys</code>文件中，并更改文件权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch authorized_keys</span><br><span class="line">cat ~&#x2F;id_rsa.pub &gt;&gt; authorized_keys</span><br><span class="line">chmod -R 600 authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>在本地的<code>C:\Users\user_name\.ssh\config</code>输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Read more about SSH config files: https:&#x2F;&#x2F;linux.die.net&#x2F;man&#x2F;5&#x2F;ssh_config</span><br><span class="line">Host gdl</span><br><span class="line">    HostName 192.168.106.31</span><br><span class="line">    User liaoshuilin</span><br><span class="line">    Port 22</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/93239107"><strong>VS Code远程开发</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yamengxi/article/details/108156610">Windows10系统下使用VS code远程连接集群（在有跳板机的情况下）</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/" data-id="ckgj18pbk0000pgv3hdr53eeu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/">Visual Studio Code连接集群配置</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/15/%E5%A6%82%E4%BD%95%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">如何用Hexo+Github搭建个人博客</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
