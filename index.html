@@ -64,6 +64,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Vim中如何对Snakemake代码进行高亮" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/" class="article-date">
+  <time datetime="2020-10-21T07:00:26.000Z" itemprop="datePublished">2020-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/">Vim中如何对Snakemake代码进行高亮</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Snakemake的官方vim高亮配置<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/snakemake/snakemake/master/misc/vim/syntax/snakemake.vim">文件</a>下载，将其内容复制到名为<code>snakemake.vim</code>的文件中，将其文件复制到<code>$HOME/.vim/syntax</code>目录中（如果没有该目录，则用<code>mkdir</code>创建）。接着在<code>$HOME/.vimrc</code>添加以下命令，使得每次打开*.snk, *.smk和Snakefile文件都以特定方式高亮：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">autocmd BufNewFile,BufRead Snakefile set syntax&#x3D;snakemake</span><br><span class="line">autocmd BufNewFile,BufRead *.smk set syntax&#x3D;snakemake</span><br><span class="line">autocmd BufNewFile,BufRead *.snk set syntax&#x3D;snakemake</span><br></pre></td></tr></table></figure>
+
+<p>在vim中也可以强制显示高亮 ：<code>:set syntax=snakemake</code></p>
+<p>注：<code>vimrc</code>不需要source，每次添加新的内容保存后退出则自动更新。</p>
+<h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://snakemake.readthedocs.io/en/stable/project_info/faq.html#how-do-i-enable-syntax-highlighting-in-vim-for-snakefiles">How do I enable syntax highlighting in Vim for Snakefiles? </a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nankai0912678/article/details/108671782?utm_medium=distribute.pc_relevant.none-task-blog-title-3&spm=1001.2101.3001.4242"> 对于一个自定义的文件类型, 如何使用C, python等语言的关键字高亮方案 </a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/" data-id="ckgj0ywpc0000kcv3cizpgkco" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Visual-Studio-Code连接集群配置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/" class="article-date">
@@ -86,7 +131,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Visual-Studio-Code连接集群配置"><a href="#Visual-Studio-Code连接集群配置" class="headerlink" title="Visual Studio Code连接集群配置"></a>Visual Studio Code连接集群配置</h1><p><strong>第一步：安装插件</strong></p>
+        <p><strong>第一步：安装插件</strong></p>
 <p>配置远程开发首先需要安装一个名为<strong>Remote - SSH</strong>的插件，具体操作步骤如下，</p>
 <ul>
 <li>点击扩展按钮</li>
@@ -132,42 +177,6 @@
 
 
   
-    <article id="post-Vim中如何对Snakemake代码进行高亮" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/" class="article-date">
-  <time datetime="2020-10-21T05:09:21.846Z" itemprop="datePublished">2020-10-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: Vim中如何对Snakemake代码进行高亮<br>date: 2020-10-21 14:44:08<br>tags:</p>
-<h1 id="Vim中如何对Snakemake代码进行高亮"><a href="#Vim中如何对Snakemake代码进行高亮" class="headerlink" title="Vim中如何对Snakemake代码进行高亮"></a>Vim中如何对Snakemake代码进行高亮</h1><p>Snakemake的官方vim高亮配置<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/snakemake/snakemake/master/misc/vim/syntax/snakemake.vim">文件</a>下载，将其内容复制到名为<code>snakemake.vim</code>的文件中，将其文件复制到<code>$HOME/.vim/syntax</code>目录中（如果没有该目录，则用<code>mkdir</code>创建）。接着在<code>$HOME/.vimrc</code>添加以下命令，使得每次打开*.snk, *.smk和Snakefile文件都以特定方式高亮：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">autocmd BufNewFile,BufRead Snakefile set syntax&#x3D;snakemake</span><br><span class="line">autocmd BufNewFile,BufRead *.smk set syntax&#x3D;snakemake</span><br><span class="line">autocmd BufNewFile,BufRead *.snk set syntax&#x3D;snakemake</span><br></pre></td></tr></table></figure>
-
-<p>在vim中也可以强制显示高亮 ：<code>:set syntax=snakemake</code></p>
-<p>注：<code>vimrc</code>不需要source，每次添加新的内容保存后退出则自动更新。</p>
-<h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://snakemake.readthedocs.io/en/stable/project_info/faq.html#how-do-i-enable-syntax-highlighting-in-vim-for-snakefiles">How do I enable syntax highlighting in Vim for Snakefiles? </a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nankai0912678/article/details/108671782?utm_medium=distribute.pc_relevant.none-task-blog-title-3&spm=1001.2101.3001.4242"> 对于一个自定义的文件类型, 如何使用C, python等语言的关键字高亮方案 </a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/" data-id="ckgj0ywpc0000kcv3cizpgkco" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-如何用Hexo-Github搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/10/15/%E5%A6%82%E4%BD%95%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="article-date">
@@ -190,7 +199,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="如何用Hexo-Github搭建个人博客"><a href="#如何用Hexo-Github搭建个人博客" class="headerlink" title="如何用Hexo+Github搭建个人博客"></a>如何用Hexo+Github搭建个人博客</h1><h2 id="Git与GiHub的配置"><a href="#Git与GiHub的配置" class="headerlink" title="Git与GiHub的配置"></a>Git与GiHub的配置</h2><hr>
+        <h2 id="Git与GiHub的配置"><a href="#Git与GiHub的配置" class="headerlink" title="Git与GiHub的配置"></a>Git与GiHub的配置</h2><hr>
 <p><strong><u>这一步主要目的为执行Git的安装，并将GitHub远程仓库克隆到本地，以方便后续更新的博客内容同步到GitHub远程仓库</u></strong></p>
 <h3 id="GitHub创建个人仓库"><a href="#GitHub创建个人仓库" class="headerlink" title="GitHub创建个人仓库"></a><strong>GitHub创建个人仓库</strong></h3><p>登录到GitHub,如果没有GitHub帐号，使用你的邮箱注册GitHub帐号：<a href="https://link.zhihu.com/?target=https://github.com/">Build software better, together</a> 点击GitHub中的New repository创建新仓库，仓库名应该为：<code>用户名.github.io</code> 这个<strong>用户名</strong>使用你的GitHub帐号名称代替。</p>
 <h3 id="安装GitHub"><a href="#安装GitHub" class="headerlink" title="安装GitHub"></a><strong>安装GitHub</strong></h3><p>什么是Git ?简单来说Git是开源的分布式版本控制系统，用于敏捷高效地处理项目。我们网站在本地搭建好了，需要使用Git同步到GitHub上。如果想要了解Git的细节，参看<a href="https://link.zhihu.com/?target=http://weibo.com/liaoxuefeng">廖雪峰</a>老师的Git教程：<a href="https://link.zhihu.com/?target=http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Git教程</a> 。安装成功后，将你的Git与GitHub帐号绑定，鼠标右击打开Git Bash</p>
@@ -203,7 +212,7 @@
 
 <p>然后直接三个回车即可，默认不需要设置密码<br>然后找到生成的.ssh的文件夹中的id_rsa.pub密钥，将内容全部复制</p>
 <p>打开<a href="https://link.zhihu.com/?target=https://github.com/settings/keys">GitHub_Settings_keys</a> 页面，新建new SSH Key</p>
-<p>Title为标题，任意填即可，将刚刚复制的id_rsa.pub内容粘贴进去，最后点击Add SSH key。<br>在Git Bash中检测GitHub公钥设置是否成功，输入 ssh <a href="mailto:&#103;&#x69;&#116;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;">&#103;&#x69;&#116;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;</a> ：</p>
+<p>Title为标题，任意填即可，将刚刚复制的id_rsa.pub内容粘贴进去，最后点击Add SSH key。<br>在Git Bash中检测GitHub公钥设置是否成功，输入 ssh <a href="mailto:&#x67;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#98;&#46;&#99;&#111;&#109;">&#x67;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#98;&#46;&#99;&#111;&#109;</a> ：</p>
 <p>如上则说明成功。这里之所以设置GitHub密钥原因是，通过非对称加密的公钥与私钥来完成加密，公钥放置在GitHub上，私钥放置在自己的电脑里。GitHub要求每次推送代码都是合法用户，所以每次推送都需要输入账号密码验证推送用户是否是合法用户，为了省去每次输入密码的步骤，采用了ssh，当你推送的时候，git就会匹配你的私钥跟GitHub上面的公钥是否是配对的，若是匹配就认为你是合法用户，则允许推送。这样可以保证每次的推送都是正确合法的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:theme-next&#x2F;theme-next.org.git</span><br></pre></td></tr></table></figure>
 
@@ -327,11 +336,11 @@
       <ul>
         
           <li>
-            <a href="/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/">Visual Studio Code连接集群配置</a>
+            <a href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/">Vim中如何对Snakemake代码进行高亮</a>
           </li>
         
           <li>
-            <a href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/">(no title)</a>
+            <a href="/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/">Visual Studio Code连接集群配置</a>
           </li>
         
           <li>
