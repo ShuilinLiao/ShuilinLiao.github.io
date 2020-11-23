@@ -1,7 +1,13 @@
 ---
 title: Vim中如何对Snakemake代码进行高亮
 date: 2020-10-21 15:00:26
+categories: 
+- 基础知识
+- hexo
 tags:
+- hexo
+- github
+- 博客
 ---
 
 Snakemake的官方vim高亮配置[文件](https://raw.githubusercontent.com/snakemake/snakemake/master/misc/vim/syntax/snakemake.vim)下载，将其内容复制到名为`snakemake.vim`的文件中，将其文件复制到`$HOME/.vim/syntax`目录中（如果没有该目录，则用`mkdir`创建）。接着在`$HOME/.vimrc`添加以下命令，使得每次打开*.snk, *.smk和Snakefile文件都以特定方式高亮：
