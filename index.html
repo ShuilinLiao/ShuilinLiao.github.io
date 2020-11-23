@@ -144,7 +144,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        这是篇受保护的文章！
+        有东西被加密了, 请输入密码查看.
         
           <p class="article-more-link">
             <a href="/2020/11/15/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/#more">Read More</a>
@@ -567,22 +567,19 @@
 <ol start="2">
 <li>修改 _config.yml</li>
 </ol>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Security</span></span><br><span class="line">encrypt:</span><br><span class="line"><span class="code">    enable: true # 开启为true，关闭为false</span></span><br><span class="line"><span class="code">    default_abstract: 这是篇受保护的文章！#默认文章描述，可选</span></span><br><span class="line"><span class="code">    default_message: 请输入文章密码！#默认密码输入提示，可选</span></span><br><span class="line"><span class="code">    default_template: </span></span><br><span class="line"><span class="code">                    &lt;script src=&quot;//cdn.bootcss.com/jquery/1.11.3/jquery.min.js&quot;&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="code">                    &lt;div id=&quot;security&quot;&gt;</span></span><br><span class="line"><span class="code">                        &lt;div class=&quot;input-container&quot;&gt;</span></span><br><span class="line"><span class="code">                            &lt;input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;pass&quot; placeholder=&quot; &#123;&#123;message&#125;&#125; &quot; /&gt;</span></span><br><span class="line"><span class="code">                            &lt;label for=&quot;pass&quot;&gt; &#123;&#123;message&#125;&#125; &lt;/label&gt;</span></span><br><span class="line"><span class="code">                            &lt;div class=&quot;bottom-line&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="code">                        &lt;/div&gt;</span></span><br><span class="line"><span class="code">                    &lt;/div&gt;</span></span><br><span class="line"><span class="code">                    &lt;div id=&quot;encrypt-blog&quot; style=&quot;display:none&quot;&gt;</span></span><br><span class="line"><span class="code">                        &#123;&#123;content&#125;&#125;</span></span><br><span class="line"><span class="code">                    &lt;/div&gt;</span></span><br><span class="line"><span class="code">                    #默认的文章详情页密码输入提示框，可选</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Security</span></span><br><span class="line">encrypt:</span><br><span class="line">  enable: true # 开启为true，关闭为false</span><br></pre></td></tr></table></figure>
 
 <p><code>default_template</code> ，这个是指在文章详情页，我们看到的输入密码阅读的模板，同理，这个也是针对所有文章的。<br> 最后的 <code>content</code> 显示 <code>div</code> 的 <code>id</code> 必须 是 <code>encrypt-blog</code>同时为了好看，也希望进行隐藏。<br> 必须要有一个 <code>input</code> 输入框，<code>id</code> 必须是<code>&quot;pass&quot;</code>，用来供用户输入密码。<br> 输入密码之后，务必要有一个触发器，用来调用<code>decryptAES</code> 函数。样例中以 <code>button</code> 来触发。</p>
 <ol start="3">
-<li><p>针对某篇文章加密</p>
-<p>在Front-Matter添加<code>password: 密码</code>即可。</p>
-<p>或者如下：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: hello world</span><br><span class="line">date: </span><br><span class="line">tags:</span><br><span class="line"><span class="bullet">    -</span> tags1</span><br><span class="line"><span class="bullet">    -</span> tags2</span><br><span class="line">password: password </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
+<li>文章开头设置</li>
 </ol>
+   <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">   title: hello world</span><br><span class="line">   date: </span><br><span class="line">   categories: </span><br><span class="line"><span class="bullet">   -</span> cate1</span><br><span class="line">   tags:</span><br><span class="line"><span class="bullet">       -</span> tag1</span><br><span class="line"><span class="bullet">       -</span> tag2</span><br><span class="line">   password: xxx</span><br><span class="line">   abstract: &#x27;有东西被加密了, 请输入密码查看.&#x27;</span><br><span class="line">   message: &#x27;您好, 这里需要密码.&#x27;</span><br><span class="line">   wrong<span class="emphasis">_pass_</span>message: &#x27;抱歉, 这个密码看着不太对, 请再试试.&#x27;</span><br><span class="line">   wrong<span class="emphasis">_hash_</span>message: &#x27;抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容&#x27;</span><br><span class="line">   ---</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50787870">Hexo+Github博客教程</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50787832">Hexo+Github博客教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50787870">Hexo+Github博客教程3</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50787832">Hexo+Github博客教程2</a></li>
 <li><a target="_blank" rel="noopener" href="https://ohlia.github.io/Wiki-site/wiki/Hexo/encrypt-hexo-post/">hexo文章加密</a></li>
 </ol>
 
@@ -640,7 +637,7 @@
 
 <p>然后直接三个回车即可，默认不需要设置密码<br>然后找到生成的.ssh的文件夹中的id_rsa.pub密钥，将内容全部复制</p>
 <p>打开<a href="https://link.zhihu.com/?target=https://github.com/settings/keys">GitHub_Settings_keys</a> 页面，新建new SSH Key</p>
-<p>Title为标题，任意填即可，将刚刚复制的id_rsa.pub内容粘贴进去，最后点击Add SSH key。<br>在Git Bash中检测GitHub公钥设置是否成功，输入 ssh <a href="mailto:&#103;&#105;&#x74;&#64;&#103;&#x69;&#x74;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;">&#103;&#105;&#x74;&#64;&#103;&#x69;&#x74;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;</a> ：</p>
+<p>Title为标题，任意填即可，将刚刚复制的id_rsa.pub内容粘贴进去，最后点击Add SSH key。<br>在Git Bash中检测GitHub公钥设置是否成功，输入 ssh <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#x69;&#116;&#104;&#117;&#x62;&#46;&#x63;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#103;&#x69;&#116;&#104;&#117;&#x62;&#46;&#x63;&#111;&#x6d;</a> ：</p>
 <p>如上则说明成功。这里之所以设置GitHub密钥原因是，通过非对称加密的公钥与私钥来完成加密，公钥放置在GitHub上，私钥放置在自己的电脑里。GitHub要求每次推送代码都是合法用户，所以每次推送都需要输入账号密码验证推送用户是否是合法用户，为了省去每次输入密码的步骤，采用了ssh，当你推送的时候，git就会匹配你的私钥跟GitHub上面的公钥是否是配对的，若是匹配就认为你是合法用户，则允许推送。这样可以保证每次的推送都是正确合法的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:theme-next&#x2F;theme-next.org.git</span><br></pre></td></tr></table></figure>
 
@@ -678,7 +675,7 @@
 <h3 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h3><ul>
 <li>为了检测我们的网站雏形，分别按顺序输入以下三条命令：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo new my_test # 新建文章</span><br><span class="line">hexo g # 生成</span><br><span class="line">hexo s # 部署</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo new my_test # 新建文章</span><br><span class="line">hexo g # 生成</span><br><span class="line">hexo s # 本地部署</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>完成后，打开浏览器输入地址：</li>
@@ -696,7 +693,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 
 <p>这时，我们分别输入三条命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo g </span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo g </span><br><span class="line">hexo d <span class="comment"># 部署到网站上</span></span><br></pre></td></tr></table></figure>
 
 <p>其实第三条的 hexo d 就是部署网站命令，d是deploy的缩写。完成后，打开浏览器，在地址栏输入你的放置个人网站的仓库路径，即 <a href="https://link.zhihu.com/?target=http://xxxx.github.io">http://xxxx.github.io</a> </p>
 <p>你就会发现你的博客已经上线了，可以在网络上被访问了。</p>

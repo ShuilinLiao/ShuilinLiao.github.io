@@ -15,7 +15,7 @@
 <meta property="og:description" content="添加分类1  创建“分类”选项1.1 生成“分类”页并添加tpye属性打开命令行，进入博客所在文件夹。执行命令 1hexo new page categories  成功后会提示： 1INFO  Created: ~&#x2F;Documents&#x2F;blog&#x2F;source&#x2F;categories&#x2F;index.md  根据上面的路径，找到index.md这个文件，打开后默认内容是这样的： 1234---title">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-10-15T11:17:56.000Z">
-<meta property="article:modified_time" content="2020-11-23T10:14:50.321Z">
+<meta property="article:modified_time" content="2020-11-23T10:26:20.184Z">
 <meta property="article:author" content="ShuilinL">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Github">
@@ -138,22 +138,19 @@
 <ol start="2">
 <li>修改 _config.yml</li>
 </ol>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Security</span></span><br><span class="line">encrypt:</span><br><span class="line"><span class="code">    enable: true # 开启为true，关闭为false</span></span><br><span class="line"><span class="code">    default_abstract: 这是篇受保护的文章！#默认文章描述，可选</span></span><br><span class="line"><span class="code">    default_message: 请输入文章密码！#默认密码输入提示，可选</span></span><br><span class="line"><span class="code">    default_template: </span></span><br><span class="line"><span class="code">                    &lt;script src=&quot;//cdn.bootcss.com/jquery/1.11.3/jquery.min.js&quot;&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="code">                    &lt;div id=&quot;security&quot;&gt;</span></span><br><span class="line"><span class="code">                        &lt;div class=&quot;input-container&quot;&gt;</span></span><br><span class="line"><span class="code">                            &lt;input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;pass&quot; placeholder=&quot; &#123;&#123;message&#125;&#125; &quot; /&gt;</span></span><br><span class="line"><span class="code">                            &lt;label for=&quot;pass&quot;&gt; &#123;&#123;message&#125;&#125; &lt;/label&gt;</span></span><br><span class="line"><span class="code">                            &lt;div class=&quot;bottom-line&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="code">                        &lt;/div&gt;</span></span><br><span class="line"><span class="code">                    &lt;/div&gt;</span></span><br><span class="line"><span class="code">                    &lt;div id=&quot;encrypt-blog&quot; style=&quot;display:none&quot;&gt;</span></span><br><span class="line"><span class="code">                        &#123;&#123;content&#125;&#125;</span></span><br><span class="line"><span class="code">                    &lt;/div&gt;</span></span><br><span class="line"><span class="code">                    #默认的文章详情页密码输入提示框，可选</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Security</span></span><br><span class="line">encrypt:</span><br><span class="line">  enable: true # 开启为true，关闭为false</span><br></pre></td></tr></table></figure>
 
 <p><code>default_template</code> ，这个是指在文章详情页，我们看到的输入密码阅读的模板，同理，这个也是针对所有文章的。<br> 最后的 <code>content</code> 显示 <code>div</code> 的 <code>id</code> 必须 是 <code>encrypt-blog</code>同时为了好看，也希望进行隐藏。<br> 必须要有一个 <code>input</code> 输入框，<code>id</code> 必须是<code>&quot;pass&quot;</code>，用来供用户输入密码。<br> 输入密码之后，务必要有一个触发器，用来调用<code>decryptAES</code> 函数。样例中以 <code>button</code> 来触发。</p>
 <ol start="3">
-<li><p>针对某篇文章加密</p>
-<p>在Front-Matter添加<code>password: 密码</code>即可。</p>
-<p>或者如下：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: hello world</span><br><span class="line">date: </span><br><span class="line">tags:</span><br><span class="line"><span class="bullet">    -</span> tags1</span><br><span class="line"><span class="bullet">    -</span> tags2</span><br><span class="line">password: password </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
+<li>文章开头设置</li>
 </ol>
+   <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">   title: hello world</span><br><span class="line">   date: </span><br><span class="line">   categories: </span><br><span class="line"><span class="bullet">   -</span> cate1</span><br><span class="line">   tags:</span><br><span class="line"><span class="bullet">       -</span> tag1</span><br><span class="line"><span class="bullet">       -</span> tag2</span><br><span class="line">   password: xxx</span><br><span class="line">   abstract: &#x27;有东西被加密了, 请输入密码查看.&#x27;</span><br><span class="line">   message: &#x27;您好, 这里需要密码.&#x27;</span><br><span class="line">   wrong<span class="emphasis">_pass_</span>message: &#x27;抱歉, 这个密码看着不太对, 请再试试.&#x27;</span><br><span class="line">   wrong<span class="emphasis">_hash_</span>message: &#x27;抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容&#x27;</span><br><span class="line">   ---</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50787870">Hexo+Github博客教程</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50787832">Hexo+Github博客教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50787870">Hexo+Github博客教程3</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50787832">Hexo+Github博客教程2</a></li>
 <li><a target="_blank" rel="noopener" href="https://ohlia.github.io/Wiki-site/wiki/Hexo/encrypt-hexo-post/">hexo文章加密</a></li>
 </ol>
 
