@@ -64,12 +64,352 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-用Rmarkdown生成简历" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/11/17/%E7%94%A8Rmarkdown%E7%94%9F%E6%88%90%E7%AE%80%E5%8E%86/" class="article-date">
+  <time datetime="2020-11-17T07:16:16.152Z" itemprop="datePublished">2020-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: 用Rmarkdown生成简历<br>date: 2020-11-17<br>author: 廖水林</p>
+<hr>
+<h3 id="用Rmarkdown生成简历"><a href="#用Rmarkdown生成简历" class="headerlink" title="用Rmarkdown生成简历"></a>用Rmarkdown生成简历</h3><ul>
+<li>将Y叔发表在GitHub上的代码用git clone下来<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;GuangchuangYu&#x2F;cv.git</span><br></pre></td></tr></table></figure></li>
+<li>为避免出现函数的冲突，建议将index.Rmd中select和rename函数前<strong>声明所属包</strong>，即有关部分将改成以下代码：<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xx[[i]] &lt;- dplyr::select(y, -c(start, end)) %&gt;%</span><br><span class="line">      dplyr::rename(start=start2, end=end2)</span><br></pre></td></tr></table></figure></li>
+<li>教育经历，工作经历，发表的文章等都是一个一个的block，而简历正由这些block组成。这些信息全都存在<code>position.csv</code>中。<code>index.Rmd</code>也有部分个人信息。因此把<code>position.csv</code>和<code>index.Rmd</code>内的有关信息照着格式更改成自己的，不需要填写的用NA替代。不需要的block可直接删除（和相关代码一并删除）。</li>
+<li>在按照模板在csv修改内容的时候，不需要的行/列<strong>不要</strong>用清除内容方式，而<strong>直接进行行/列的删除</strong>，以免在后续代码的运行中空白行/列产生干扰</li>
+<li>在R命令行或者Rstudio中的脚本中输入以下命令：<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmarkdown::render(<span class="string">&quot;index.Rmd&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li>随即会生成<code>.html</code>格式的简历，另存为pdf即可。</li>
+<li>在csv中把<code>position.csv</code>信息更改好之后，再用文本编辑器（此处为Notepad++）将编码方式换成UTF-8编码（此时再用csv打开会出现乱码），并将代码中关于读取positions_CN.csv的部分改成以下内容：<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">position_data &lt;- read.csv(<span class="string">&#x27;positions_CN.csv&#x27;</span>,encoding = <span class="string">&#x27;UTF-8&#x27;</span>) %&gt;% </span><br><span class="line">  mutate_all(fill_nas) %&gt;% </span><br><span class="line">  arrange(order, desc(end)) %&gt;% </span><br><span class="line">  mutate(id = <span class="number">1</span>:n()) %&gt;% </span><br><span class="line">  nest(data = c(-id, -section)) <span class="comment"># read.csv打开，并增加encoding = &#x27;UTF-8&#x27;参数</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Dz2fa83O_P5QPD8VLR7DRQ">Y叔笔记</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/11/17/%E7%94%A8Rmarkdown%E7%94%9F%E6%88%90%E7%AE%80%E5%8E%86/" data-id="ckhuafw1w000h6sy8g6x54sin" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-关于澳科大联培的一些问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/11/16/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="article-date">
+  <time datetime="2020-11-16T11:54:04.741Z" itemprop="datePublished">2020-11-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="关于费用"><a href="#关于费用" class="headerlink" title="关于费用"></a>关于费用</h2><ul>
+<li>费用是哪边出？培养单位还是澳科大？</li>
+<li>不在澳科大的学年也要继续交学费吗？</li>
+<li>奖学金的费用？</li>
+<li>第一年的住宿问题？</li>
+</ul>
+<h2 id="关于学位"><a href="#关于学位" class="headerlink" title="关于学位"></a>关于学位</h2><ul>
+<li>学位和学历拿的是哪一边的？澳科大的吗？</li>
+<li>经历能作外海外经历留学吗？</li>
+<li>海外留学认证需要到北京留学认证中心做认证，要求境外每年待够一定时间，如果一年修完所有学分，是否能满足要求？</li>
+<li>学年是1+2？还是1+3？</li>
+<li>毕业要求是什么？成果共享的要求是什么？</li>
+</ul>
+<h2 id="关于专业"><a href="#关于专业" class="headerlink" title="关于专业"></a>关于专业</h2><ul>
+<li>联培的学院、导师和专业有哪些选择？</li>
+<li>可以选择和硕士/本科专业不一样的专业吗？</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>需要考试吗？</li>
+</ul>
+<h2 id="咨询学姐的一些问题"><a href="#咨询学姐的一些问题" class="headerlink" title="咨询学姐的一些问题"></a>咨询学姐的一些问题</h2><ul>
+<li>其导师是科研处处长，梁勇，资讯科技学院，3年制（<strong>关注老师课题</strong>）</li>
+<li>和中医药（国家重点实验室）的老师认识（刘校长，有基因组学方向的研究），中医药学制四年</li>
+<li>奖学金分为两种：<ul>
+<li>科研资助：在扣完学费和生活费的基础上每个月补贴4500</li>
+<li>项目资助：每个月奖励12K，自己负责学费和生活费（参考澳大学费一学期4个月16K，住宿10K）</li>
+</ul>
+</li>
+<li>全英文教学</li>
+<li>毕业要求：2篇一作SCI</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/11/16/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" data-id="ckhuafw1w000g6sy8dql1e58q" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-essay" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/11/13/essay/" class="article-date">
+  <time datetime="2020-11-13T06:36:22.176Z" itemprop="datePublished">2020-11-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="随记"><a href="#随记" class="headerlink" title="随记"></a>随记</h1><h2 id="demo-标题"><a href="#demo-标题" class="headerlink" title="demo (标题)"></a>demo (标题)</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>xxx</p>
+<h3 id="原因和解决方法"><a href="#原因和解决方法" class="headerlink" title="原因和解决方法"></a>原因和解决方法</h3><p>xxx</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="xxx">xx</a></p>
+<h2 id="Anaconda使用conda-activate激活环境出错"><a href="#Anaconda使用conda-activate激活环境出错" class="headerlink" title="Anaconda使用conda activate激活环境出错"></a>Anaconda使用conda activate激活环境出错</h2><h3 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h3><p>使用激活python27环境时出错 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate py27</span><br><span class="line">CommandNotFoundError: Your shell has not been properly configured to use &#x27;conda activate&#x27;.</span><br></pre></td></tr></table></figure>
+
+<h3 id="原因和解决方法-1"><a href="#原因和解决方法-1" class="headerlink" title="原因和解决方法"></a>原因和解决方法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 激活环境</span></span><br><span class="line"><span class="built_in">source</span> activate</span><br><span class="line"><span class="comment"># 退出环境</span></span><br><span class="line">conda deactivate</span><br><span class="line"><span class="comment"># 重新激活</span></span><br><span class="line">conda activate py27</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考链接-1"><a href="#参考链接-1" class="headerlink" title="参考链接"></a>参考链接</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/cd0096b24b43">Anaconda使用conda activate激活环境出错</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/11/13/essay/" data-id="ckhuafw1q00046sy8fd0i1vgy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-windows_QA" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/30/windows_QA/" class="article-date">
+  <time datetime="2020-10-30T02:42:32.449Z" itemprop="datePublished">2020-10-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="cmd-不是内部或外部命令，也不是可运行程序"><a href="#cmd-不是内部或外部命令，也不是可运行程序" class="headerlink" title="cmd:不是内部或外部命令，也不是可运行程序"></a>cmd:不是内部或外部命令，也不是可运行程序</h2><p>在“我的电脑”上右击鼠标，在弹出菜单中选择“属性”。</p>
+<p>在“系统”界面选择“高级系统设置”，可以打开“系统属性”，选择“环境变量”</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/30/windows_QA/" data-id="ckhuafw1s00066sy87umq5psv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-windows上使用linux虚拟系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/30/windows%E4%B8%8A%E4%BD%BF%E7%94%A8linux%E8%99%9A%E6%8B%9F%E7%B3%BB%E7%BB%9F/" class="article-date">
+  <time datetime="2020-10-30T01:53:15.630Z" itemprop="datePublished">2020-10-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-配置window-terminal"><a href="#1-配置window-terminal" class="headerlink" title="1 配置window terminal"></a>1 配置window terminal</h2><p>建议使用window terminal登陆集群，可通过Microsoft store下载<strong>window terminal</strong>以及<strong>Ubuntu 20</strong>，提供登陆界面，借用后者的ssh等命令，直接使用ssh登陆集群。  </p>
+<ul>
+<li><p>进入电脑安全模式开启cpu开关（个别电脑需要）；</p>
+</li>
+<li><p>开启window的WSL功能：前往 “启用或关闭 Windows 功能” ，然后滚动至底部，如截图所示，勾选 “适用于 Linux 的 Windows 子系统”，点击确定。它将会下载安装需要的包。安装完成之后，系统将会询问是否重启。重启设备。</p>
+</li>
+<li><p>进入Microsoft store下载Ubuntu 20和window terminal；</p>
+</li>
+<li><p>下载window terminal后，启动并选择Ubuntu。配置window terminal界面，参考<a href="documents/ubuntu_settings.json">配置文件</a>。</p>
+</li>
+<li><p>此时Linux虚拟系统已经初步建立，进入d盘：<code>cd /mnt/d</code></p>
+</li>
+<li><p>在运行(<code>win+R</code>)或<code>cmd</code>里直接输入<code>\\wsl$</code>进入Ubuntu的目录，从而查看ubuntu在windows上home的目录 <code>\\wsl$\Ubuntu-20.04\home</code></p>
+<p>以个人系统为例，WSL的root目录对应windows的：<code>C:\Users\liaos\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu20.04onWindows_79rhkp1fndgsc\LocalState\rootfs</code>   其中AppData文件夹默认是隐藏的</p>
+</li>
+</ul>
+<h2 id="2-免密码登录服务器以及与服务器传输文件"><a href="#2-免密码登录服务器以及与服务器传输文件" class="headerlink" title="2 免密码登录服务器以及与服务器传输文件"></a>2 免密码登录服务器以及与服务器传输文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 本地进入home目录，并生成rsa密码</span></span><br><span class="line">cd </span><br><span class="line">ssh-keygen -t rsa</span><br><span class="line"><span class="meta">#</span><span class="bash"> 登录服务器</span></span><br><span class="line">ssh liaoshuilin@192.168.106.31</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将公钥复制粘贴到大型机的.ssh目录下authorized_keys（若没有，则创建）</span></span><br><span class="line">cat ~/.ssh/id_rsa.pub</span><br><span class="line">vi ~/.ssh/authorized_keys  </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-本地与集群传输文件"><a href="#3-本地与集群传输文件" class="headerlink" title="3 本地与集群传输文件"></a>3 本地与集群传输文件</h2><p>使用<a target="_blank" rel="noopener" href="https://www.cnblogs.com/likui360/p/6011769.html">scp</a>命令，在使用期先设置集群的别名信息，方便使用scp命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;Host  alias1 \n HostName 192.114.23.43 \n User username&quot; &gt; ~/.ssh/config </span><br></pre></td></tr></table></figure>
+
+<p>alias1为设置的别名，username为在集群上的用户名，最后呈现格式为</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host  gdl</span><br><span class="line">HostName 192.114.23.43</span><br><span class="line">User xxx</span><br></pre></td></tr></table></figure>
+
+<p>传输文件一般在本地进行command</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp -r alias1:/hwfssz1/filedir/  ./  # 集群传输到本地</span><br><span class="line">scp file.txt  alias2:/hwfssz1/filedir/  # 本地传输到集群</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-参考链接"><a href="#4-参考链接" class="headerlink" title="4 参考链接"></a>4 参考链接</h2><p><a target="_blank" rel="noopener" href="https://zouhua.top/archives/16954f4d.html">Cygwin：Linux模拟软件</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lepeCoder/p/wsl_dir.html">windows10 ubuntu子系统 WSL文件位置</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/30/windows%E4%B8%8A%E4%BD%BF%E7%94%A8linux%E8%99%9A%E6%8B%9F%E7%B3%BB%E7%BB%9F/" data-id="ckhuafw1t00086sy8hwb172fm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ubuntu安装anaconda" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/27/ubuntu%E5%AE%89%E8%A3%85anaconda/" class="article-date">
+  <time datetime="2020-10-27T03:13:05.491Z" itemprop="datePublished">2020-10-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是Anaconda"><a href="#什么是Anaconda" class="headerlink" title="什么是Anaconda"></a>什么是Anaconda</h2><p>Anaconda 是一个流行的 Python/R 数据科学和机器学习平台，大数据处理，预测分析，和科学计算。</p>
+<p>Anaconda 发行版附带了250个开源数据软件包，并且超过 7500 个软件包可以从 Anaconda 软件源中安装。它同时还包含了一个命令行工具和一个被称为”Anaconda Navigator”的图形用户界面。</p>
+<p>这个指南将会跟你解释在 Ubuntu 20.04 上的 Anaconda Python 发行版安装过程。</p>
+<h2 id="安装Anaconda"><a href="#安装Anaconda" class="headerlink" title="安装Anaconda"></a>安装Anaconda</h2><p>在写这篇文章的时候，Anaconda 最新绑定版本是 2020.02。在下载安装脚本之前，浏览<a target="_blank" rel="noopener" href="https://www.anaconda.com/products/individual">下载页面</a>，并且检查是否有更新的Anaconda 可用。</p>
+<ul>
+<li>在 Ubuntu 20.04 上完成下面的步骤，安装 Anaconda。使用你的浏览器或者<code>wget</code>去下载 Anaconda 安装脚本：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -P /tmp https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这一步可选的，但是我们推荐你去验证脚本的数据完整性。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sha256sum /tmp/Anaconda3-2020.02-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+<p>输出类似于：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2b9f088b2022edb474915d9f69a803d6449d5fdb4c303041f60ac4aefcc208bb  /tmp/Anaconda3-2020.02-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+<p>确保上面的命令打印出来的哈希值和<a target="_blank" rel="noopener" href="https://docs.anaconda.com/anaconda/install/hashes/lin-3-64/">Anaconda with Python 3 on 64-bit Linux page</a>页面对应版本的 Anaconda 哈希值一样。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://docs.anaconda.com/anaconda/install/hashes/Anaconda3-2020.02-Linux-x86_64.sh-hash/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行脚本启动安装进程：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash /tmp/Anaconda3-2020.02-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+<p>看到以下输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Welcome to Anaconda3 2020.02</span><br><span class="line">In order to continue the installation process, please review the license</span><br><span class="line">agreement.</span><br><span class="line">Please, press ENTER to continue</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>按<code>ENTER</code>继续。往下滑动阅读协议，使用<code>ENTER</code>按键。一旦你看完协议，你将会被询问是否接受协议条款：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Do you approve the license terms? [yes|no]</span><br></pre></td></tr></table></figure>
+
+<p>输入<code>yes</code>接受协议，并且你会被提示选择安装路径：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Anaconda3 will now be installed into this location:</span><br><span class="line">/home/linuxize/anaconda3</span><br><span class="line"></span><br><span class="line">    - Press ENTER to confirm the location</span><br><span class="line">    - Press CTRL-C to abort the installation</span><br><span class="line">    - Or specify a different location below</span><br></pre></td></tr></table></figure>
+
+<p>安装过程将会花费一些时间，并且一旦完成，脚本将会问你是否想要运行<code>conda init</code>。输入<code>yes</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Installation finished.</span><br><span class="line">Do you wish the installer to initialize Anaconda3</span><br><span class="line">by running conda init? [yes|no]</span><br></pre></td></tr></table></figure>
+
+<p>这将会将命令行工具<code>conda</code>添加到系统的<code>PATH</code>环境变量中。</p>
+<ul>
+<li>想要激活 Anaconda，你可以关闭并且重新打开你的 shell 或者在当前 shell 会话中输入下面的命令，来重新加载<code>PATH</code>环境变量：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>想要验证安装过程，在你的终端输入<code>conda</code>。</p>
+<p>就这些。你已经成功地在你的 Ubuntu 机器上安装好了 Anaconda， 你可以开始使用它了。</p>
+<h2 id="更新Anaconda"><a href="#更新Anaconda" class="headerlink" title="更新Anaconda"></a>更新Anaconda</h2><p>打开你的终端，并且输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda update --all</span><br></pre></td></tr></table></figure>
+
+<p>如果有更新，<code>conda</code>将会显示一个列表，并且提示你确认是否更新：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">The following packages will be UPDATED:</span><br><span class="line"></span><br><span class="line">  anaconda-navigator                          1.9.12-py37_0 --&gt; 1.9.12-py37_1</span><br><span class="line">  conda                                        4.8.2-py37_0 --&gt; 4.8.3-py37_0</span><br><span class="line">  conda-package-han~                   1.6.0-py37h7b6447c_0 --&gt; 1.6.1-py37h7b6447c_0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Proceed ([y]/n)? </span><br></pre></td></tr></table></figure>
+
+<h2 id="卸载-Anaconda"><a href="#卸载-Anaconda" class="headerlink" title="卸载 Anaconda"></a>卸载 Anaconda</h2><p>如果你想从你的 Ubuntu 系统中卸载 Anaconda，移除 Anaconda 安装目录以及其他在安装过程中创建的文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~/anaconda3 ~/.condarc ~/.conda ~/.continuum</span><br></pre></td></tr></table></figure>
+
+<p>打开<code>~/.bashrc</code>，并且从环境变量中移除 Anaconda</p>
+<h2 id="Windows系统安装Anaconda"><a href="#Windows系统安装Anaconda" class="headerlink" title="Windows系统安装Anaconda"></a>Windows系统安装Anaconda</h2><ol>
+<li><p>前往<a target="_blank" rel="noopener" href="https://docs.anaconda.com/anaconda/install/windows/">官方下载页面</a>下载。有两个版本可供选择：Python 3.6 和 Python 2.7，选择版之后根据自己操作系统的情况点击“64-Bit Graphical Installer”或“32-Bit Graphical Installer”进行下载。</p>
+</li>
+<li><p>完成下载之后，双击下载文件，启动安装程序。</p>
+<p>① 如果在安装过程中遇到任何问题，那么暂时地关闭杀毒软件，并在安装程序完成之后再打开。</p>
+<p>② 如果在安装时选择了“为所有用户安装”，则卸载Anaconda然后重新安装，只为“我这个用户”安装。</p>
+</li>
+<li><p>选择“Next”。</p>
+</li>
+<li><p>阅读许可证协议条款，然后勾选“I Agree”并进行下一步。</p>
+</li>
+<li><p>除非是以管理员身份为所有用户安装，否则仅勾选“Just Me”并点击“Next”。</p>
+</li>
+<li><p>在“Choose Install Location”界面中选择安装Anaconda的目标路径，然后点击“Next”。</p>
+<p>① 目标路径中不能含有空格，同时不能是“unicode”编码。</p>
+<p>② 除非被要求以管理员权限安装，否则不要以管理员身份安装。</p>
+</li>
+<li><p>在“Advanced Installation Options”中不要勾选“Add Anaconda to my PATH environment variable.”（“添加Anaconda至我的环境变量。”）。因为如果勾选，则将会影响其他程序的使用。如果使用Anaconda，则通过打开Anaconda Navigator或者在开始菜单中的“Anaconda Prompt”（类似macOS中的“终端”）中进行使用。</p>
+<p>除非你打算使用多个版本的Anaconda或者多个版本的Python，否则便勾选“Register Anaconda as my default Python 3.6”。</p>
+<p>然后点击“Install”开始安装。如果想要查看安装细节，则可以点击“Show Details”。</p>
+</li>
+<li><p>点击“Next”。</p>
+</li>
+<li><p>进入“Thanks for installing Anaconda!”界面则意味着安装成功，点击“Finish”完成安装。</p>
+<p>如果你不想了解“Anaconda云”和“Anaconda支持”，则可以不勾选“Learn more about Anaconda Cloud”和“Learn more about Anaconda Support”。</p>
+</li>
+<li><p>验证安装结果。可选以下任意方法：</p>
+<p>① “开始 → Anaconda3（64-bit）→ Anaconda Navigator”，若可以成功启动Anaconda Navigator则说明安装成功。</p>
+<p>② “开始 → Anaconda3（64-bit）→ 右键点击Anaconda Prompt → 以管理员身份运行”，在Anaconda Prompt中输入 conda list ，可以查看已经安装的包名和版本号。若结果可以正常显示，则说明安装成功。</p>
+</li>
+</ol>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1649008">如何在 Ubuntu 20.04 上安装 Anaconda</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32925500">Anaconda介绍、安装及使用教程</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/27/ubuntu%E5%AE%89%E8%A3%85anaconda/" data-id="ckhuafw1r00056sy8gc466c9l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Vim中如何对Snakemake代码进行高亮" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/" class="article-date">
   <time datetime="2020-10-21T07:00:26.000Z" itemprop="datePublished">2020-10-21</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>►<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/hexo/">hexo</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -102,6 +442,8 @@
       <a data-url="http://example.com/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/" data-id="ckgj0ywpc0000kcv3cizpgkco" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+
     </footer>
   </div>
   
@@ -135,27 +477,30 @@
 <p>配置远程开发首先需要安装一个名为<strong>Remote - SSH</strong>的插件，具体操作步骤如下，</p>
 <ul>
 <li>点击扩展按钮</li>
-<li>搜索<strong>Remote - SSH</strong></li>
+<li>搜索<strong>Remote - SSH</strong> 、Remote -WSL 和 vscode-icons</li>
 <li>安装</li>
 </ul>
 <p><strong>第二步：配置VSCode</strong></p>
 <p>step1: 点击VS code边栏的远程连接图标。<img src="/images/vscode/0.png"></p>
 <p>step2: 点击SSH TARGETS右边的齿轮状⚙️按钮。</p>
-<p>step3: 在弹出来的<code>C:\Users\XXX\.ssh\config</code>文件中添加下面内容，根据自己的用户名填写好各个字段，<code>Ctrl + s</code>保存。</p>
+<p>step3: 在弹出来的<code>C:\Users\XXX\.ssh\config</code>文件中添加下面内容（即本地的<code>C:\Users\user_name\.ssh\config</code>），根据自己的用户名填写好各个字段，<code>Ctrl + s</code>保存。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Read more about SSH config files: https:&#x2F;&#x2F;linux.die.net&#x2F;man&#x2F;5&#x2F;ssh_config</span><br><span class="line">Host gdl</span><br><span class="line">	HostName 192.168.106.31</span><br><span class="line">	User liaoshuilin</span><br><span class="line"> 	Port 22</span><br></pre></td></tr></table></figure>
 
-<p>step3: 设置terminal，Setting - Terminal - Integrated &gt; Env:Windows - 点击 Edit in settings.json。（TERMINAL窗口中显示为1：powershell）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;python.languageServer&quot;: &quot;Microsoft&quot;,</span><br><span class="line">    &quot;terminal.integrated.shell.windows&quot;: &quot;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&quot;,</span><br><span class="line">    &quot;workbench.iconTheme&quot;: &quot;vscode-icons&quot;,</span><br><span class="line">    &quot;remote.SSH.remotePlatform&quot;: &#123;</span><br><span class="line">        &quot;gdl&quot;: &quot;linux&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;python.showStartPage&quot;: false,</span><br><span class="line">    &quot;explorer.confirmDelete&quot;: false,</span><br><span class="line">    &quot;window.zoomLevel&quot;: 1,</span><br><span class="line">    &quot;terminal.integrated.automationShell.windows&quot;: &quot;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>step3: 参数设置 </p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Setting - Features - Terminal - Integrated &gt; Automation Shell:Linux</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;python.languageServer&quot;</span>: <span class="string">&quot;Microsoft&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.shell.windows&quot;</span>: <span class="string">&quot;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;remote.SSH.remotePlatform&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;gdl&quot;</span>: <span class="string">&quot;linux&quot;</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="attr">&quot;python.showStartPage&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">   <span class="attr">&quot;explorer.confirmDelete&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">   <span class="attr">&quot;window.zoomLevel&quot;</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.automationShell.windows&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.iconTheme&quot;</span>: <span class="string">&quot;vscode-icons&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.colorTheme&quot;</span>: <span class="string">&quot;Default Dark+&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.editor.enablePreview&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.editor.enablePreviewFromQuickOpen&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.inheritEnv&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.automationShell.linux&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>第三步：配置远程服务器</strong></p>
+<p>// Setting - Extension- Terminal - Remote - SSH，勾选✔ 以下项 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Remote.SSH: Allow Local Server Download</span><br><span class="line">Remote.SSH: Enable Agent Forwarding</span><br><span class="line">Remote.SSH: Enable Dynamic Forwarding</span><br><span class="line">Remote.SSH: Use Flock</span><br><span class="line">Remote.SSH: Use Local Server</span><br></pre></td></tr></table></figure>
+
+<p><strong>第三步：配置远程服务器</strong>免密码登录</p>
 <p>这个需要windows配置有ssh工具，可以通过安装git、openssh实现。在本地打开cmd，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen # 获得本地客户端的公钥</span><br></pre></td></tr></table></figure>
 
 <p>然后一直点击Enter键，不用输入任何内容，最后会在<code>C:\Users\user_name\.ssh</code>路径下生成公钥文件，可以看到有一个<code>id_rsa.pub</code>文件，然后通过FTP等方式把这个文件上传到远程服务器。进入集群SSH配置目录，<code>cd ~/.ssh</code>，查看一下是否有一个名为<code>authorized_keys</code>的文件，如果没有就创建一个，然后把刚上传的<code>id_rsa.pub</code>中的内容附到<code>authorized_keys</code>文件中，并更改文件权限</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch authorized_keys</span><br><span class="line">cat ~&#x2F;id_rsa.pub &gt;&gt; authorized_keys</span><br><span class="line">chmod -R 600 authorized_keys</span><br></pre></td></tr></table></figure>
 
-<p>在本地的<code>C:\Users\user_name\.ssh\config</code>输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Read more about SSH config files: https:&#x2F;&#x2F;linux.die.net&#x2F;man&#x2F;5&#x2F;ssh_config</span><br><span class="line">Host gdl</span><br><span class="line">    HostName 192.168.106.31</span><br><span class="line">    User liaoshuilin</span><br><span class="line">    Port 22</span><br></pre></td></tr></table></figure>
+<p>删除 服务器中home目录下的 .vscode-server/目录后进行链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -r  ~&#x2F;.vscode-server&#x2F;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -312,18 +657,39 @@
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/hexo/">hexo</a></li></ul></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li></ul>
     </div>
   </div>
 
@@ -336,15 +702,23 @@
       <ul>
         
           <li>
-            <a href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/">Vim中如何对Snakemake代码进行高亮</a>
+            <a href="/2020/11/17/%E7%94%A8Rmarkdown%E7%94%9F%E6%88%90%E7%AE%80%E5%8E%86/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/">Visual Studio Code连接集群配置</a>
+            <a href="/2020/11/16/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2020/10/15/%E5%A6%82%E4%BD%95%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">如何用Hexo+Github搭建个人博客</a>
+            <a href="/2020/11/13/essay/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/30/windows_QA/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/30/windows%E4%B8%8A%E4%BD%BF%E7%94%A8linux%E8%99%9A%E6%8B%9F%E7%B3%BB%E7%BB%9F/">(no title)</a>
           </li>
         
       </ul>

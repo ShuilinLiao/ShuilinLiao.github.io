@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Study day by day</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是AnacondaAnaconda 是一个流行的 Python&#x2F;R 数据科学和机器学习平台，大数据处理，预测分析，和科学计算。 Anaconda 发行版附带了250个开源数据软件包，并且超过 7500 个软件包可以从 Anaconda 软件源中安装。它同时还包含了一个命令行工具和一个被称为”Anaconda Navigator”的图形用户界面。 这个指南将会跟你解释在 Ubuntu 20.04">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Study day by day">
+<meta property="og:url" content="http://example.com/2020/10/27/ubuntu%E5%AE%89%E8%A3%85anaconda/index.html">
+<meta property="og:site_name" content="Study day by day">
+<meta property="og:description" content="什么是AnacondaAnaconda 是一个流行的 Python&#x2F;R 数据科学和机器学习平台，大数据处理，预测分析，和科学计算。 Anaconda 发行版附带了250个开源数据软件包，并且超过 7500 个软件包可以从 Anaconda 软件源中安装。它同时还包含了一个命令行工具和一个被称为”Anaconda Navigator”的图形用户界面。 这个指南将会跟你解释在 Ubuntu 20.04">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-27T03:13:05.491Z">
+<meta property="article:modified_time" content="2020-10-27T06:07:37.261Z">
+<meta property="article:author" content="ShuilinL">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Study day by day" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Study day by day</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ubuntu安装anaconda" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/27/ubuntu%E5%AE%89%E8%A3%85anaconda/" class="article-date">
+  <time datetime="2020-10-27T03:13:05.491Z" itemprop="datePublished">2020-10-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是Anaconda"><a href="#什么是Anaconda" class="headerlink" title="什么是Anaconda"></a>什么是Anaconda</h2><p>Anaconda 是一个流行的 Python/R 数据科学和机器学习平台，大数据处理，预测分析，和科学计算。</p>
+<p>Anaconda 发行版附带了250个开源数据软件包，并且超过 7500 个软件包可以从 Anaconda 软件源中安装。它同时还包含了一个命令行工具和一个被称为”Anaconda Navigator”的图形用户界面。</p>
+<p>这个指南将会跟你解释在 Ubuntu 20.04 上的 Anaconda Python 发行版安装过程。</p>
+<h2 id="安装Anaconda"><a href="#安装Anaconda" class="headerlink" title="安装Anaconda"></a>安装Anaconda</h2><p>在写这篇文章的时候，Anaconda 最新绑定版本是 2020.02。在下载安装脚本之前，浏览<a target="_blank" rel="noopener" href="https://www.anaconda.com/products/individual">下载页面</a>，并且检查是否有更新的Anaconda 可用。</p>
+<ul>
+<li>在 Ubuntu 20.04 上完成下面的步骤，安装 Anaconda。使用你的浏览器或者<code>wget</code>去下载 Anaconda 安装脚本：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -P /tmp https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这一步可选的，但是我们推荐你去验证脚本的数据完整性。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sha256sum /tmp/Anaconda3-2020.02-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+<p>输出类似于：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2b9f088b2022edb474915d9f69a803d6449d5fdb4c303041f60ac4aefcc208bb  /tmp/Anaconda3-2020.02-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+<p>确保上面的命令打印出来的哈希值和<a target="_blank" rel="noopener" href="https://docs.anaconda.com/anaconda/install/hashes/lin-3-64/">Anaconda with Python 3 on 64-bit Linux page</a>页面对应版本的 Anaconda 哈希值一样。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://docs.anaconda.com/anaconda/install/hashes/Anaconda3-2020.02-Linux-x86_64.sh-hash/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行脚本启动安装进程：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash /tmp/Anaconda3-2020.02-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+<p>看到以下输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Welcome to Anaconda3 2020.02</span><br><span class="line">In order to continue the installation process, please review the license</span><br><span class="line">agreement.</span><br><span class="line">Please, press ENTER to continue</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>按<code>ENTER</code>继续。往下滑动阅读协议，使用<code>ENTER</code>按键。一旦你看完协议，你将会被询问是否接受协议条款：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Do you approve the license terms? [yes|no]</span><br></pre></td></tr></table></figure>
+
+<p>输入<code>yes</code>接受协议，并且你会被提示选择安装路径：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Anaconda3 will now be installed into this location:</span><br><span class="line">/home/linuxize/anaconda3</span><br><span class="line"></span><br><span class="line">    - Press ENTER to confirm the location</span><br><span class="line">    - Press CTRL-C to abort the installation</span><br><span class="line">    - Or specify a different location below</span><br></pre></td></tr></table></figure>
+
+<p>安装过程将会花费一些时间，并且一旦完成，脚本将会问你是否想要运行<code>conda init</code>。输入<code>yes</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Installation finished.</span><br><span class="line">Do you wish the installer to initialize Anaconda3</span><br><span class="line">by running conda init? [yes|no]</span><br></pre></td></tr></table></figure>
+
+<p>这将会将命令行工具<code>conda</code>添加到系统的<code>PATH</code>环境变量中。</p>
+<ul>
+<li>想要激活 Anaconda，你可以关闭并且重新打开你的 shell 或者在当前 shell 会话中输入下面的命令，来重新加载<code>PATH</code>环境变量：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>想要验证安装过程，在你的终端输入<code>conda</code>。</p>
+<p>就这些。你已经成功地在你的 Ubuntu 机器上安装好了 Anaconda， 你可以开始使用它了。</p>
+<h2 id="更新Anaconda"><a href="#更新Anaconda" class="headerlink" title="更新Anaconda"></a>更新Anaconda</h2><p>打开你的终端，并且输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda update --all</span><br></pre></td></tr></table></figure>
+
+<p>如果有更新，<code>conda</code>将会显示一个列表，并且提示你确认是否更新：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">The following packages will be UPDATED:</span><br><span class="line"></span><br><span class="line">  anaconda-navigator                          1.9.12-py37_0 --&gt; 1.9.12-py37_1</span><br><span class="line">  conda                                        4.8.2-py37_0 --&gt; 4.8.3-py37_0</span><br><span class="line">  conda-package-han~                   1.6.0-py37h7b6447c_0 --&gt; 1.6.1-py37h7b6447c_0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Proceed ([y]/n)? </span><br></pre></td></tr></table></figure>
+
+<h2 id="卸载-Anaconda"><a href="#卸载-Anaconda" class="headerlink" title="卸载 Anaconda"></a>卸载 Anaconda</h2><p>如果你想从你的 Ubuntu 系统中卸载 Anaconda，移除 Anaconda 安装目录以及其他在安装过程中创建的文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~/anaconda3 ~/.condarc ~/.conda ~/.continuum</span><br></pre></td></tr></table></figure>
+
+<p>打开<code>~/.bashrc</code>，并且从环境变量中移除 Anaconda</p>
+<h2 id="Windows系统安装Anaconda"><a href="#Windows系统安装Anaconda" class="headerlink" title="Windows系统安装Anaconda"></a>Windows系统安装Anaconda</h2><ol>
+<li><p>前往<a target="_blank" rel="noopener" href="https://docs.anaconda.com/anaconda/install/windows/">官方下载页面</a>下载。有两个版本可供选择：Python 3.6 和 Python 2.7，选择版之后根据自己操作系统的情况点击“64-Bit Graphical Installer”或“32-Bit Graphical Installer”进行下载。</p>
+</li>
+<li><p>完成下载之后，双击下载文件，启动安装程序。</p>
+<p>① 如果在安装过程中遇到任何问题，那么暂时地关闭杀毒软件，并在安装程序完成之后再打开。</p>
+<p>② 如果在安装时选择了“为所有用户安装”，则卸载Anaconda然后重新安装，只为“我这个用户”安装。</p>
+</li>
+<li><p>选择“Next”。</p>
+</li>
+<li><p>阅读许可证协议条款，然后勾选“I Agree”并进行下一步。</p>
+</li>
+<li><p>除非是以管理员身份为所有用户安装，否则仅勾选“Just Me”并点击“Next”。</p>
+</li>
+<li><p>在“Choose Install Location”界面中选择安装Anaconda的目标路径，然后点击“Next”。</p>
+<p>① 目标路径中不能含有空格，同时不能是“unicode”编码。</p>
+<p>② 除非被要求以管理员权限安装，否则不要以管理员身份安装。</p>
+</li>
+<li><p>在“Advanced Installation Options”中不要勾选“Add Anaconda to my PATH environment variable.”（“添加Anaconda至我的环境变量。”）。因为如果勾选，则将会影响其他程序的使用。如果使用Anaconda，则通过打开Anaconda Navigator或者在开始菜单中的“Anaconda Prompt”（类似macOS中的“终端”）中进行使用。</p>
+<p>除非你打算使用多个版本的Anaconda或者多个版本的Python，否则便勾选“Register Anaconda as my default Python 3.6”。</p>
+<p>然后点击“Install”开始安装。如果想要查看安装细节，则可以点击“Show Details”。</p>
+</li>
+<li><p>点击“Next”。</p>
+</li>
+<li><p>进入“Thanks for installing Anaconda!”界面则意味着安装成功，点击“Finish”完成安装。</p>
+<p>如果你不想了解“Anaconda云”和“Anaconda支持”，则可以不勾选“Learn more about Anaconda Cloud”和“Learn more about Anaconda Support”。</p>
+</li>
+<li><p>验证安装结果。可选以下任意方法：</p>
+<p>① “开始 → Anaconda3（64-bit）→ Anaconda Navigator”，若可以成功启动Anaconda Navigator则说明安装成功。</p>
+<p>② “开始 → Anaconda3（64-bit）→ 右键点击Anaconda Prompt → 以管理员身份运行”，在Anaconda Prompt中输入 conda list ，可以查看已经安装的包名和版本号。若结果可以正常显示，则说明安装成功。</p>
+</li>
+</ol>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1649008">如何在 Ubuntu 20.04 上安装 Anaconda</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32925500">Anaconda介绍、安装及使用教程</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/27/ubuntu%E5%AE%89%E8%A3%85anaconda/" data-id="ckhuafw1r00056sy8gc466c9l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/10/30/windows%E4%B8%8A%E4%BD%BF%E7%94%A8linux%E8%99%9A%E6%8B%9F%E7%B3%BB%E7%BB%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vim中如何对Snakemake代码进行高亮</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/hexo/">hexo</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/11/17/%E7%94%A8Rmarkdown%E7%94%9F%E6%88%90%E7%AE%80%E5%8E%86/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/16/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/13/essay/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/30/windows_QA/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/30/windows%E4%B8%8A%E4%BD%BF%E7%94%A8linux%E8%99%9A%E6%8B%9F%E7%B3%BB%E7%BB%9F/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 ShuilinL<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
