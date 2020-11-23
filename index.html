@@ -5,17 +5,17 @@
   
 
   
-  <title>Study day by day</title>
+  <title>积水穿石</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Study day by day">
+<meta property="og:title" content="积水穿石">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Study day by day">
+<meta property="og:site_name" content="积水穿石">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="ShuilinL">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Study day by day" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="积水穿石" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -36,7 +36,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Study day by day</a>
+        <a href="/" id="logo">积水穿石</a>
       </h1>
       
     </div>
@@ -67,19 +67,30 @@
     <article id="post-用Rmarkdown生成简历" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/11/17/%E7%94%A8Rmarkdown%E7%94%9F%E6%88%90%E7%AE%80%E5%8E%86/" class="article-date">
-  <time datetime="2020-11-17T07:16:16.152Z" itemprop="datePublished">2020-11-17</time>
+  <time datetime="2020-11-16T16:00:00.000Z" itemprop="datePublished">2020-11-17</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/R/">R</a>►<a class="article-category-link" href="/categories/R/Undef/">Undef</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/17/%E7%94%A8Rmarkdown%E7%94%9F%E6%88%90%E7%AE%80%E5%8E%86/">用Rmarkdown生成简历</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title: 用Rmarkdown生成简历<br>date: 2020-11-17<br>author: 廖水林</p>
-<hr>
-<h3 id="用Rmarkdown生成简历"><a href="#用Rmarkdown生成简历" class="headerlink" title="用Rmarkdown生成简历"></a>用Rmarkdown生成简历</h3><ul>
+        <h3 id="用Rmarkdown生成简历"><a href="#用Rmarkdown生成简历" class="headerlink" title="用Rmarkdown生成简历"></a>用Rmarkdown生成简历</h3><ul>
 <li>将Y叔发表在GitHub上的代码用git clone下来<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;GuangchuangYu&#x2F;cv.git</span><br></pre></td></tr></table></figure></li>
 <li>为避免出现函数的冲突，建议将index.Rmd中select和rename函数前<strong>声明所属包</strong>，即有关部分将改成以下代码：<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xx[[i]] &lt;- dplyr::select(y, -c(start, end)) %&gt;%</span><br><span class="line">      dplyr::rename(start=start2, end=end2)</span><br></pre></td></tr></table></figure></li>
 <li>教育经历，工作经历，发表的文章等都是一个一个的block，而简历正由这些block组成。这些信息全都存在<code>position.csv</code>中。<code>index.Rmd</code>也有部分个人信息。因此把<code>position.csv</code>和<code>index.Rmd</code>内的有关信息照着格式更改成自己的，不需要填写的用NA替代。不需要的block可直接删除（和相关代码一并删除）。</li>
@@ -98,6 +109,8 @@
       <a data-url="http://example.com/2020/11/17/%E7%94%A8Rmarkdown%E7%94%9F%E6%88%90%E7%AE%80%E5%8E%86/" data-id="ckhuafw1w000h6sy8g6x54sin" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rmarkdown/" rel="tag">Rmarkdown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/resume/" rel="tag">resume</a></li></ul>
+
     </footer>
   </div>
   
@@ -107,117 +120,44 @@
   
     <article id="post-关于澳科大联培的一些问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/11/16/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="article-date">
-  <time datetime="2020-11-16T11:54:04.741Z" itemprop="datePublished">2020-11-16</time>
+    <a href="/2020/11/15/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="article-date">
+  <time datetime="2020-11-15T11:17:56.000Z" itemprop="datePublished">2020-11-15</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Private/">Private</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="关于费用"><a href="#关于费用" class="headerlink" title="关于费用"></a>关于费用</h2><ul>
-<li>费用是哪边出？培养单位还是澳科大？</li>
-<li>不在澳科大的学年也要继续交学费吗？</li>
-<li>奖学金的费用？</li>
-<li>第一年的住宿问题？</li>
-</ul>
-<h2 id="关于学位"><a href="#关于学位" class="headerlink" title="关于学位"></a>关于学位</h2><ul>
-<li>学位和学历拿的是哪一边的？澳科大的吗？</li>
-<li>经历能作外海外经历留学吗？</li>
-<li>海外留学认证需要到北京留学认证中心做认证，要求境外每年待够一定时间，如果一年修完所有学分，是否能满足要求？</li>
-<li>学年是1+2？还是1+3？</li>
-<li>毕业要求是什么？成果共享的要求是什么？</li>
-</ul>
-<h2 id="关于专业"><a href="#关于专业" class="headerlink" title="关于专业"></a>关于专业</h2><ul>
-<li>联培的学院、导师和专业有哪些选择？</li>
-<li>可以选择和硕士/本科专业不一样的专业吗？</li>
-</ul>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>需要考试吗？</li>
-</ul>
-<h2 id="咨询学姐的一些问题"><a href="#咨询学姐的一些问题" class="headerlink" title="咨询学姐的一些问题"></a>咨询学姐的一些问题</h2><ul>
-<li>其导师是科研处处长，梁勇，资讯科技学院，3年制（<strong>关注老师课题</strong>）</li>
-<li>和中医药（国家重点实验室）的老师认识（刘校长，有基因组学方向的研究），中医药学制四年</li>
-<li>奖学金分为两种：<ul>
-<li>科研资助：在扣完学费和生活费的基础上每个月补贴4500</li>
-<li>项目资助：每个月奖励12K，自己负责学费和生活费（参考澳大学费一学期4个月16K，住宿10K）</li>
-</ul>
-</li>
-<li>全英文教学</li>
-<li>毕业要求：2篇一作SCI</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/11/16/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" data-id="ckhuafw1w000g6sy8dql1e58q" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
+      <header class="article-header">
+        
   
-</article>
-
-
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/15/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">关于澳科大联培的一些问题</a>
+    </h1>
   
-    <article id="post-essay" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/11/13/essay/" class="article-date">
-  <time datetime="2020-11-13T06:36:22.176Z" itemprop="datePublished">2020-11-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
+
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="随记"><a href="#随记" class="headerlink" title="随记"></a>随记</h1><h2 id="demo-标题"><a href="#demo-标题" class="headerlink" title="demo (标题)"></a>demo (标题)</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>xxx</p>
-<h3 id="原因和解决方法"><a href="#原因和解决方法" class="headerlink" title="原因和解决方法"></a>原因和解决方法</h3><p>xxx</p>
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="xxx">xx</a></p>
-<h2 id="Anaconda使用conda-activate激活环境出错"><a href="#Anaconda使用conda-activate激活环境出错" class="headerlink" title="Anaconda使用conda activate激活环境出错"></a>Anaconda使用conda activate激活环境出错</h2><h3 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h3><p>使用激活python27环境时出错 </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate py27</span><br><span class="line">CommandNotFoundError: Your shell has not been properly configured to use &#x27;conda activate&#x27;.</span><br></pre></td></tr></table></figure>
-
-<h3 id="原因和解决方法-1"><a href="#原因和解决方法-1" class="headerlink" title="原因和解决方法"></a>原因和解决方法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 激活环境</span></span><br><span class="line"><span class="built_in">source</span> activate</span><br><span class="line"><span class="comment"># 退出环境</span></span><br><span class="line">conda deactivate</span><br><span class="line"><span class="comment"># 重新激活</span></span><br><span class="line">conda activate py27</span><br></pre></td></tr></table></figure>
-
-<h3 id="参考链接-1"><a href="#参考链接-1" class="headerlink" title="参考链接"></a>参考链接</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/cd0096b24b43">Anaconda使用conda activate激活环境出错</a></p>
-
+        这是篇受保护的文章！
+        
+          <p class="article-more-link">
+            <a href="/2020/11/15/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/11/13/essay/" data-id="ckhuafw1q00046sy8fd0i1vgy" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/11/15/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" data-id="ckhuafw1w000g6sy8dql1e58q" class="article-share-link">Share</a>
       
       
-    </footer>
-  </div>
-  
-</article>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MUST/" rel="tag">MUST</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHD/" rel="tag">PHD</a></li></ul>
 
-
-  
-    <article id="post-windows_QA" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/10/30/windows_QA/" class="article-date">
-  <time datetime="2020-10-30T02:42:32.449Z" itemprop="datePublished">2020-10-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="cmd-不是内部或外部命令，也不是可运行程序"><a href="#cmd-不是内部或外部命令，也不是可运行程序" class="headerlink" title="cmd:不是内部或外部命令，也不是可运行程序"></a>cmd:不是内部或外部命令，也不是可运行程序</h2><p>在“我的电脑”上右击鼠标，在弹出菜单中选择“属性”。</p>
-<p>在“系统”界面选择“高级系统设置”，可以打开“系统属性”，选择“环境变量”</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/30/windows_QA/" data-id="ckhuafw1s00066sy87umq5psv" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -228,12 +168,26 @@
     <article id="post-windows上使用linux虚拟系统" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/10/30/windows%E4%B8%8A%E4%BD%BF%E7%94%A8linux%E8%99%9A%E6%8B%9F%E7%B3%BB%E7%BB%9F/" class="article-date">
-  <time datetime="2020-10-30T01:53:15.630Z" itemprop="datePublished">2020-10-30</time>
+  <time datetime="2020-10-30T07:00:26.000Z" itemprop="datePublished">2020-10-30</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tools/">Tools</a>►<a class="article-category-link" href="/categories/Tools/System/">System</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/30/windows%E4%B8%8A%E4%BD%BF%E7%94%A8linux%E8%99%9A%E6%8B%9F%E7%B3%BB%E7%BB%9F/">Windows上使用linux虚拟系统</a>
+    </h1>
+  
+
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
@@ -268,8 +222,7 @@
 
 
 
-<h2 id="4-参考链接"><a href="#4-参考链接" class="headerlink" title="4 参考链接"></a>4 参考链接</h2><p><a target="_blank" rel="noopener" href="https://zouhua.top/archives/16954f4d.html">Cygwin：Linux模拟软件</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lepeCoder/p/wsl_dir.html">windows10 ubuntu子系统 WSL文件位置</a></p>
+<h2 id="4-参考链接"><a href="#4-参考链接" class="headerlink" title="4 参考链接"></a>4 参考链接</h2><p><a target="_blank" rel="noopener" href="https://zouhua.top/archives/16954f4d.html">Cygwin：Linux模拟软件</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lepeCoder/p/wsl_dir.html">windows10 ubuntu子系统 WSL文件位置</a></p>
 
       
     </div>
@@ -277,6 +230,136 @@
       <a data-url="http://example.com/2020/10/30/windows%E4%B8%8A%E4%BD%BF%E7%94%A8linux%E8%99%9A%E6%8B%9F%E7%B3%BB%E7%BB%9F/" data-id="ckhuafw1t00086sy8hwb172fm" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Virtual-systems/" rel="tag">Virtual systems</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Vim中如何对Snakemake代码进行高亮" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/" class="article-date">
+  <time datetime="2020-10-21T07:00:26.000Z" itemprop="datePublished">2020-10-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tools/">Tools</a>►<a class="article-category-link" href="/categories/Tools/System/">System</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/">Vim中如何对Snakemake代码进行高亮</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Snakemake的官方vim高亮配置<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/snakemake/snakemake/master/misc/vim/syntax/snakemake.vim">文件</a>下载，将其内容复制到名为<code>snakemake.vim</code>的文件中，将其文件复制到<code>$HOME/.vim/syntax</code>目录中（如果没有该目录，则用<code>mkdir</code>创建）。接着在<code>$HOME/.vimrc</code>添加以下命令，使得每次打开*.snk, *.smk和Snakefile文件都以特定方式高亮：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">autocmd BufNewFile,BufRead Snakefile set syntax&#x3D;snakemake</span><br><span class="line">autocmd BufNewFile,BufRead *.smk set syntax&#x3D;snakemake</span><br><span class="line">autocmd BufNewFile,BufRead *.snk set syntax&#x3D;snakemake</span><br></pre></td></tr></table></figure>
+
+<p>在vim中也可以强制显示高亮 ：<code>:set syntax=snakemake</code></p>
+<p>注：<code>vimrc</code>不需要source，每次添加新的内容保存后退出则自动更新。</p>
+<h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://snakemake.readthedocs.io/en/stable/project_info/faq.html#how-do-i-enable-syntax-highlighting-in-vim-for-snakefiles">How do I enable syntax highlighting in Vim for Snakefiles? </a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nankai0912678/article/details/108671782?utm_medium=distribute.pc_relevant.none-task-blog-title-3&spm=1001.2101.3001.4242"> 对于一个自定义的文件类型, 如何使用C, python等语言的关键字高亮方案 </a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/" data-id="ckgj0ywpc0000kcv3cizpgkco" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Snakemake/" rel="tag">Snakemake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Visual-Studio-Code连接集群配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time datetime="2020-10-21T06:44:08.000Z" itemprop="datePublished">2020-10-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tools/">Tools</a>►<a class="article-category-link" href="/categories/Tools/System/">System</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/">Visual Studio Code连接集群配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>第一步：安装插件</strong></p>
+<p>配置远程开发首先需要安装一个名为<strong>Remote - SSH</strong>的插件，具体操作步骤如下，</p>
+<ul>
+<li>点击扩展按钮</li>
+<li>搜索<strong>Remote - SSH</strong> 、Remote -WSL 和 vscode-icons</li>
+<li>安装</li>
+</ul>
+<p><strong>第二步：配置VSCode</strong></p>
+<p>step1: 点击VS code边栏的远程连接图标。<img src="/images/vscode/0.png"></p>
+<p>step2: 点击SSH TARGETS右边的齿轮状⚙️按钮。</p>
+<p>step3: 在弹出来的<code>C:\Users\XXX\.ssh\config</code>文件中添加下面内容（即本地的<code>C:\Users\user_name\.ssh\config</code>），根据自己的用户名填写好各个字段，<code>Ctrl + s</code>保存。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Read more about SSH config files: https:&#x2F;&#x2F;linux.die.net&#x2F;man&#x2F;5&#x2F;ssh_config</span><br><span class="line">Host gdl</span><br><span class="line">	HostName 192.168.106.31</span><br><span class="line">	User liaoshuilin</span><br><span class="line"> 	Port 22</span><br></pre></td></tr></table></figure>
+
+<p>step3: 参数设置 </p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Setting - Features - Terminal - Integrated &gt; Automation Shell:Linux</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;python.languageServer&quot;</span>: <span class="string">&quot;Microsoft&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.shell.windows&quot;</span>: <span class="string">&quot;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;remote.SSH.remotePlatform&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;gdl&quot;</span>: <span class="string">&quot;linux&quot;</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="attr">&quot;python.showStartPage&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">   <span class="attr">&quot;explorer.confirmDelete&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">   <span class="attr">&quot;window.zoomLevel&quot;</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.automationShell.windows&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.iconTheme&quot;</span>: <span class="string">&quot;vscode-icons&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.colorTheme&quot;</span>: <span class="string">&quot;Default Dark+&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.editor.enablePreview&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.editor.enablePreviewFromQuickOpen&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.inheritEnv&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.automationShell.linux&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>// Setting - Extension- Terminal - Remote - SSH，勾选✔ 以下项 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Remote.SSH: Allow Local Server Download</span><br><span class="line">Remote.SSH: Enable Agent Forwarding</span><br><span class="line">Remote.SSH: Enable Dynamic Forwarding</span><br><span class="line">Remote.SSH: Use Flock</span><br><span class="line">Remote.SSH: Use Local Server</span><br></pre></td></tr></table></figure>
+
+<p><strong>第三步：配置远程服务器</strong>免密码登录</p>
+<p>这个需要windows配置有ssh工具，可以通过安装git、openssh实现。在本地打开cmd，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen # 获得本地客户端的公钥</span><br></pre></td></tr></table></figure>
+
+<p>然后一直点击Enter键，不用输入任何内容，最后会在<code>C:\Users\user_name\.ssh</code>路径下生成公钥文件，可以看到有一个<code>id_rsa.pub</code>文件，然后通过FTP等方式把这个文件上传到远程服务器。进入集群SSH配置目录，<code>cd ~/.ssh</code>，查看一下是否有一个名为<code>authorized_keys</code>的文件，如果没有就创建一个，然后把刚上传的<code>id_rsa.pub</code>中的内容附到<code>authorized_keys</code>文件中，并更改文件权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch authorized_keys</span><br><span class="line">cat ~&#x2F;id_rsa.pub &gt;&gt; authorized_keys</span><br><span class="line">chmod -R 600 authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>删除 服务器中home目录下的 .vscode-server/目录后进行链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -r  ~&#x2F;.vscode-server&#x2F;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/93239107"><strong>VS Code远程开发</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yamengxi/article/details/108156610">Windows10系统下使用VS code远程连接集群（在有跳板机的情况下）</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/" data-id="ckgj18pbk0000pgv3hdr53eeu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VScode/" rel="tag">VScode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cluster/" rel="tag">cluster</a></li></ul>
+
     </footer>
   </div>
   
@@ -286,13 +369,27 @@
   
     <article id="post-ubuntu安装anaconda" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/10/27/ubuntu%E5%AE%89%E8%A3%85anaconda/" class="article-date">
-  <time datetime="2020-10-27T03:13:05.491Z" itemprop="datePublished">2020-10-27</time>
+    <a href="/2020/10/15/ubuntu%E5%AE%89%E8%A3%85anaconda/" class="article-date">
+  <time datetime="2020-10-15T11:17:56.000Z" itemprop="datePublished">2020-10-15</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tools/">Tools</a>►<a class="article-category-link" href="/categories/Tools/System/">System</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/15/ubuntu%E5%AE%89%E8%A3%85anaconda/">ubuntu安装anaconda</a>
+    </h1>
+  
+
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
@@ -384,65 +481,15 @@
 <p>② “开始 → Anaconda3（64-bit）→ 右键点击Anaconda Prompt → 以管理员身份运行”，在Anaconda Prompt中输入 conda list ，可以查看已经安装的包名和版本号。若结果可以正常显示，则说明安装成功。</p>
 </li>
 </ol>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1649008">如何在 Ubuntu 20.04 上安装 Anaconda</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32925500">Anaconda介绍、安装及使用教程</a></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1649008">如何在 Ubuntu 20.04 上安装 Anaconda</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32925500">Anaconda介绍、安装及使用教程</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/27/ubuntu%E5%AE%89%E8%A3%85anaconda/" data-id="ckhuafw1r00056sy8gc466c9l" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/15/ubuntu%E5%AE%89%E8%A3%85anaconda/" data-id="ckhuafw1r00056sy8gc466c9l" class="article-share-link">Share</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Vim中如何对Snakemake代码进行高亮" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/" class="article-date">
-  <time datetime="2020-10-21T07:00:26.000Z" itemprop="datePublished">2020-10-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>►<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/hexo/">hexo</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/">Vim中如何对Snakemake代码进行高亮</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Snakemake的官方vim高亮配置<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/snakemake/snakemake/master/misc/vim/syntax/snakemake.vim">文件</a>下载，将其内容复制到名为<code>snakemake.vim</code>的文件中，将其文件复制到<code>$HOME/.vim/syntax</code>目录中（如果没有该目录，则用<code>mkdir</code>创建）。接着在<code>$HOME/.vimrc</code>添加以下命令，使得每次打开*.snk, *.smk和Snakefile文件都以特定方式高亮：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">autocmd BufNewFile,BufRead Snakefile set syntax&#x3D;snakemake</span><br><span class="line">autocmd BufNewFile,BufRead *.smk set syntax&#x3D;snakemake</span><br><span class="line">autocmd BufNewFile,BufRead *.snk set syntax&#x3D;snakemake</span><br></pre></td></tr></table></figure>
-
-<p>在vim中也可以强制显示高亮 ：<code>:set syntax=snakemake</code></p>
-<p>注：<code>vimrc</code>不需要source，每次添加新的内容保存后退出则自动更新。</p>
-<h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://snakemake.readthedocs.io/en/stable/project_info/faq.html#how-do-i-enable-syntax-highlighting-in-vim-for-snakefiles">How do I enable syntax highlighting in Vim for Snakefiles? </a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/nankai0912678/article/details/108671782?utm_medium=distribute.pc_relevant.none-task-blog-title-3&spm=1001.2101.3001.4242"> 对于一个自定义的文件类型, 如何使用C, python等语言的关键字高亮方案 </a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/" data-id="ckgj0ywpc0000kcv3cizpgkco" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/anaconda/" rel="tag">anaconda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li></ul>
 
     </footer>
   </div>
@@ -451,83 +498,16 @@
 
 
   
-    <article id="post-Visual-Studio-Code连接集群配置" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Hexo-Github搭建个人博客2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/" class="article-date">
-  <time datetime="2020-10-21T06:44:08.000Z" itemprop="datePublished">2020-10-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/">Visual Studio Code连接集群配置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>第一步：安装插件</strong></p>
-<p>配置远程开发首先需要安装一个名为<strong>Remote - SSH</strong>的插件，具体操作步骤如下，</p>
-<ul>
-<li>点击扩展按钮</li>
-<li>搜索<strong>Remote - SSH</strong> 、Remote -WSL 和 vscode-icons</li>
-<li>安装</li>
-</ul>
-<p><strong>第二步：配置VSCode</strong></p>
-<p>step1: 点击VS code边栏的远程连接图标。<img src="/images/vscode/0.png"></p>
-<p>step2: 点击SSH TARGETS右边的齿轮状⚙️按钮。</p>
-<p>step3: 在弹出来的<code>C:\Users\XXX\.ssh\config</code>文件中添加下面内容（即本地的<code>C:\Users\user_name\.ssh\config</code>），根据自己的用户名填写好各个字段，<code>Ctrl + s</code>保存。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Read more about SSH config files: https:&#x2F;&#x2F;linux.die.net&#x2F;man&#x2F;5&#x2F;ssh_config</span><br><span class="line">Host gdl</span><br><span class="line">	HostName 192.168.106.31</span><br><span class="line">	User liaoshuilin</span><br><span class="line"> 	Port 22</span><br></pre></td></tr></table></figure>
-
-<p>step3: 参数设置 </p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Setting - Features - Terminal - Integrated &gt; Automation Shell:Linux</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;python.languageServer&quot;</span>: <span class="string">&quot;Microsoft&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.shell.windows&quot;</span>: <span class="string">&quot;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;remote.SSH.remotePlatform&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;gdl&quot;</span>: <span class="string">&quot;linux&quot;</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="attr">&quot;python.showStartPage&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">   <span class="attr">&quot;explorer.confirmDelete&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">   <span class="attr">&quot;window.zoomLevel&quot;</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.automationShell.windows&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.iconTheme&quot;</span>: <span class="string">&quot;vscode-icons&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.colorTheme&quot;</span>: <span class="string">&quot;Default Dark+&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.editor.enablePreview&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.editor.enablePreviewFromQuickOpen&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.inheritEnv&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.automationShell.linux&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>// Setting - Extension- Terminal - Remote - SSH，勾选✔ 以下项 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Remote.SSH: Allow Local Server Download</span><br><span class="line">Remote.SSH: Enable Agent Forwarding</span><br><span class="line">Remote.SSH: Enable Dynamic Forwarding</span><br><span class="line">Remote.SSH: Use Flock</span><br><span class="line">Remote.SSH: Use Local Server</span><br></pre></td></tr></table></figure>
-
-<p><strong>第三步：配置远程服务器</strong>免密码登录</p>
-<p>这个需要windows配置有ssh工具，可以通过安装git、openssh实现。在本地打开cmd，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen # 获得本地客户端的公钥</span><br></pre></td></tr></table></figure>
-
-<p>然后一直点击Enter键，不用输入任何内容，最后会在<code>C:\Users\user_name\.ssh</code>路径下生成公钥文件，可以看到有一个<code>id_rsa.pub</code>文件，然后通过FTP等方式把这个文件上传到远程服务器。进入集群SSH配置目录，<code>cd ~/.ssh</code>，查看一下是否有一个名为<code>authorized_keys</code>的文件，如果没有就创建一个，然后把刚上传的<code>id_rsa.pub</code>中的内容附到<code>authorized_keys</code>文件中，并更改文件权限</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch authorized_keys</span><br><span class="line">cat ~&#x2F;id_rsa.pub &gt;&gt; authorized_keys</span><br><span class="line">chmod -R 600 authorized_keys</span><br></pre></td></tr></table></figure>
-
-<p>删除 服务器中home目录下的 .vscode-server/目录后进行链接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -r  ~&#x2F;.vscode-server&#x2F;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/93239107"><strong>VS Code远程开发</strong></a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yamengxi/article/details/108156610">Windows10系统下使用VS code远程连接集群（在有跳板机的情况下）</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/" data-id="ckgj18pbk0000pgv3hdr53eeu" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-如何用Hexo-Github搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/10/15/%E5%A6%82%E4%BD%95%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="article-date">
+    <a href="/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A22/" class="article-date">
   <time datetime="2020-10-15T11:17:56.000Z" itemprop="datePublished">2020-10-15</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tools/">Tools</a>►<a class="article-category-link" href="/categories/Tools/Blog/">Blog</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -536,7 +516,110 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/15/%E5%A6%82%E4%BD%95%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">如何用Hexo+Github搭建个人博客</a>
+      <a class="article-title" href="/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A22/">如何用Hexo+Github搭建个人博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="添加分类"><a href="#添加分类" class="headerlink" title="添加分类"></a>添加分类</h2><h3 id="1-创建“分类”选项"><a href="#1-创建“分类”选项" class="headerlink" title="1  创建“分类”选项"></a>1  创建“分类”选项</h3><h3 id="1-1-生成“分类”页并添加tpye属性"><a href="#1-1-生成“分类”页并添加tpye属性" class="headerlink" title="1.1 生成“分类”页并添加tpye属性"></a>1.1 生成“分类”页并添加tpye属性</h3><p>打开命令行，进入博客所在文件夹。执行命令</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+
+<p>成功后会提示：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO  Created: ~/Documents/blog/source/categories/index.md</span><br></pre></td></tr></table></figure>
+
+<p>根据上面的路径，找到<code>index.md</code>这个文件，打开后默认内容是这样的：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 文章分类</span><br><span class="line">date: 2018-10-31 13:47:40</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>添加<code>type: &quot;categories&quot;</code>到内容中，添加后是这样的：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 文章分类</span><br><span class="line">date: 2018-10-31 13:47:40</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>保存并关闭文件。</p>
+<h4 id="1-2-给文章添加“categories”属性"><a href="#1-2-给文章添加“categories”属性" class="headerlink" title="1.2 给文章添加“categories”属性"></a>1.2 给文章添加“categories”属性</h4><p>打开需要添加分类的文章，为其添加categories属性。下方的<code>categories: web前端</code>表示添加这篇文章到“web前端”这个分类。注意：hexo一篇文章只能属于一个分类，也就是说如果在“- web前端”下方添加“-xxx”，hexo不会产生两个分类，而是把分类嵌套（即该文章属于 “- web前端”下的 “-xxx ”分类）。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo博客+Github博客教程：03添加分类，标签</span><br><span class="line">date: 2018-11-01 14:17:46</span><br><span class="line">categories: </span><br><span class="line">- hexo</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>至此，成功给文章添加分类，点击首页的“分类”可以看到该分类下的所有文章。当然，只有添加了<code>categories: xxx</code>的文章才会被收录到首页的“分类”中。</p>
+<h3 id="2-创建“标签”选项"><a href="#2-创建“标签”选项" class="headerlink" title="2  创建“标签”选项"></a>2  创建“标签”选项</h3><h4 id="2-1-生成“标签”页并添加tpye属性"><a href="#2-1-生成“标签”页并添加tpye属性" class="headerlink" title="2.1 生成“标签”页并添加tpye属性"></a>2.1 生成“标签”页并添加tpye属性</h4><p>打开命令行，进入博客所在文件夹。执行命令</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
+
+<p>成功后会提示：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO  Created: ~/Documents/blog/source/tags/index.md</span><br></pre></td></tr></table></figure>
+
+<p>根据上面的路径，找到<code>index.md</code>这个文件，打开后默认内容是这样的：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 标签</span><br><span class="line">date: 2018-10-31 13:47:40</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>添加<code>type: &quot;tags&quot;</code>到内容中，添加后是这样的：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 文章分类</span><br><span class="line">date: 2018-10-31 13:47:40</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>保存并关闭文件。</p>
+<h4 id="2-2-给文章添加“tags”属性"><a href="#2-2-给文章添加“tags”属性" class="headerlink" title="2.2 给文章添加“tags”属性"></a>2.2 给文章添加“tags”属性</h4><p>打开需要添加标签的文章，为其添加tags属性。下方的<code>tags:</code>下方的<code>- jQuery</code> <code>- 表格</code> <code>- 表单验证</code>就是这篇文章的标签了</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo博客+Github博客教程：03添加分类，标签</span><br><span class="line">date: 2018-11-01 14:17:46</span><br><span class="line">categories: </span><br><span class="line">- 基础知识</span><br><span class="line">- hexo</span><br><span class="line">tags:</span><br><span class="line">- hexo</span><br><span class="line">- github</span><br><span class="line">- 博客</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>至此，成功给文章添加分类，点击首页的“标签”可以看到该标签下的所有文章。当然，只有添加了<code>tags: xxx</code>的文章才会被收录到首页的“标签”中。</p>
+<p>细心的朋友可能已经发现，这两个的设置几乎一模一样！是的，没错，思路都是一样的。所以我们可以打开scaffolds/post.md文件，在tages:上面加入categories:,保存后，之后执行<code>hexo new 文章名</code>命令生成的文件，页面里就有<code>categories:</code>项了。</p>
+<h2 id="主题优化"><a href="#主题优化" class="headerlink" title="主题优化"></a>主题优化</h2><h2 id="文章加密"><a href="#文章加密" class="headerlink" title="文章加密"></a>文章加密</h2><ol>
+<li>安装 <code>Hexo-blog-encrypt</code> 插件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>修改 _config.yml</li>
+</ol>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Security</span></span><br><span class="line">encrypt:</span><br><span class="line"><span class="code">    enable: true # 开启为true，关闭为false</span></span><br><span class="line"><span class="code">    default_abstract: 这是篇受保护的文章！#默认文章描述，可选</span></span><br><span class="line"><span class="code">    default_message: 请输入文章密码！#默认密码输入提示，可选</span></span><br><span class="line"><span class="code">    default_template: </span></span><br><span class="line"><span class="code">                    &lt;script src=&quot;//cdn.bootcss.com/jquery/1.11.3/jquery.min.js&quot;&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="code">                    &lt;div id=&quot;security&quot;&gt;</span></span><br><span class="line"><span class="code">                        &lt;div class=&quot;input-container&quot;&gt;</span></span><br><span class="line"><span class="code">                            &lt;input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;pass&quot; placeholder=&quot; &#123;&#123;message&#125;&#125; &quot; /&gt;</span></span><br><span class="line"><span class="code">                            &lt;label for=&quot;pass&quot;&gt; &#123;&#123;message&#125;&#125; &lt;/label&gt;</span></span><br><span class="line"><span class="code">                            &lt;div class=&quot;bottom-line&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="code">                        &lt;/div&gt;</span></span><br><span class="line"><span class="code">                    &lt;/div&gt;</span></span><br><span class="line"><span class="code">                    &lt;div id=&quot;encrypt-blog&quot; style=&quot;display:none&quot;&gt;</span></span><br><span class="line"><span class="code">                        &#123;&#123;content&#125;&#125;</span></span><br><span class="line"><span class="code">                    &lt;/div&gt;</span></span><br><span class="line"><span class="code">                    #默认的文章详情页密码输入提示框，可选</span></span><br></pre></td></tr></table></figure>
+
+<p><code>default_template</code> ，这个是指在文章详情页，我们看到的输入密码阅读的模板，同理，这个也是针对所有文章的。<br> 最后的 <code>content</code> 显示 <code>div</code> 的 <code>id</code> 必须 是 <code>encrypt-blog</code>同时为了好看，也希望进行隐藏。<br> 必须要有一个 <code>input</code> 输入框，<code>id</code> 必须是<code>&quot;pass&quot;</code>，用来供用户输入密码。<br> 输入密码之后，务必要有一个触发器，用来调用<code>decryptAES</code> 函数。样例中以 <code>button</code> 来触发。</p>
+<ol start="3">
+<li><p>针对某篇文章加密</p>
+<p>在Front-Matter添加<code>password: 密码</code>即可。</p>
+<p>或者如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: hello world</span><br><span class="line">date: </span><br><span class="line">tags:</span><br><span class="line"><span class="bullet">    -</span> tags1</span><br><span class="line"><span class="bullet">    -</span> tags2</span><br><span class="line">password: password </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50787870">Hexo+Github博客教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50787832">Hexo+Github博客教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://ohlia.github.io/Wiki-site/wiki/Hexo/encrypt-hexo-post/">hexo文章加密</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A22/" data-id="ckhudlw390006goy8fnlkdk65" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blog/" rel="tag">Blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Hexo-Github搭建个人博客1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A21/" class="article-date">
+  <time datetime="2020-10-15T11:17:56.000Z" itemprop="datePublished">2020-10-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tools/">Tools</a>►<a class="article-category-link" href="/categories/Tools/Blog/">Blog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A21/">如何用Hexo+Github搭建个人博客</a>
     </h1>
   
 
@@ -557,7 +640,7 @@
 
 <p>然后直接三个回车即可，默认不需要设置密码<br>然后找到生成的.ssh的文件夹中的id_rsa.pub密钥，将内容全部复制</p>
 <p>打开<a href="https://link.zhihu.com/?target=https://github.com/settings/keys">GitHub_Settings_keys</a> 页面，新建new SSH Key</p>
-<p>Title为标题，任意填即可，将刚刚复制的id_rsa.pub内容粘贴进去，最后点击Add SSH key。<br>在Git Bash中检测GitHub公钥设置是否成功，输入 ssh <a href="mailto:&#x67;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#98;&#46;&#99;&#111;&#109;">&#x67;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#98;&#46;&#99;&#111;&#109;</a> ：</p>
+<p>Title为标题，任意填即可，将刚刚复制的id_rsa.pub内容粘贴进去，最后点击Add SSH key。<br>在Git Bash中检测GitHub公钥设置是否成功，输入 ssh <a href="mailto:&#103;&#105;&#x74;&#64;&#103;&#x69;&#x74;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;">&#103;&#105;&#x74;&#64;&#103;&#x69;&#x74;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;</a> ：</p>
 <p>如上则说明成功。这里之所以设置GitHub密钥原因是，通过非对称加密的公钥与私钥来完成加密，公钥放置在GitHub上，私钥放置在自己的电脑里。GitHub要求每次推送代码都是合法用户，所以每次推送都需要输入账号密码验证推送用户是否是合法用户，为了省去每次输入密码的步骤，采用了ssh，当你推送的时候，git就会匹配你的私钥跟GitHub上面的公钥是否是配对的，若是匹配就认为你是合法用户，则允许推送。这样可以保证每次的推送都是正确合法的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:theme-next&#x2F;theme-next.org.git</span><br></pre></td></tr></table></figure>
 
@@ -591,8 +674,9 @@
 </li>
 <li><p>打开<strong>主题</strong>的_config.yml配置文件，不是站点主题文件，找到Scheme Settings。next主题有三个样式，选择你自己喜欢的样式（只需要把行首的#去除，#是注释），选择好后，再次部署网站，hexo g、hexo d，查看效果。</p>
 </li>
-<li><p>为了检测我们的网站雏形，分别按顺序输入以下三条命令：</p>
-</li>
+</ul>
+<h3 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h3><ul>
+<li>为了检测我们的网站雏形，分别按顺序输入以下三条命令：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo new my_test # 新建文章</span><br><span class="line">hexo g # 生成</span><br><span class="line">hexo s # 部署</span><br></pre></td></tr></table></figure>
 
@@ -629,7 +713,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
 
 <p>提交修改文件至远程仓库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add 博客文章名字.md</span><br><span class="line">git commit -m &quot;update files&quot;</span><br><span class="line">git push origin source</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add 博客文章名字.md # git add -A</span><br><span class="line">git commit -m &quot;update files&quot;</span><br><span class="line">git push origin source</span><br><span class="line"># git push origin</span><br></pre></td></tr></table></figure>
 
 <p>随后可以在浏览器中输入域名浏览。</p>
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ol>
@@ -640,9 +724,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/15/%E5%A6%82%E4%BD%95%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-id="ckgaqd8w60000rwv30cdc19xo" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A21/" data-id="ckhudmfez000igoy8euusglzi" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blog/" rel="tag">Blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
+
     </footer>
   </div>
   
@@ -660,7 +746,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/hexo/">hexo</a></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Private/">Private</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/R/">R</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/R/Undef/">Undef</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/Blog/">Blog</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/System/">System</a></li></ul></li></ul>
     </div>
   </div>
 
@@ -670,7 +756,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUST/" rel="tag">MUST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHD/" rel="tag">PHD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rmarkdown/" rel="tag">Rmarkdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Snakemake/" rel="tag">Snakemake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/" rel="tag">VScode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtual-systems/" rel="tag">Virtual systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anaconda/" rel="tag">anaconda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/" rel="tag">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resume/" rel="tag">resume</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li></ul>
     </div>
   </div>
 
@@ -680,7 +766,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a>
+      <a href="/tags/Blog/" style="font-size: 20px;">Blog</a> <a href="/tags/Github/" style="font-size: 20px;">Github</a> <a href="/tags/Hexo/" style="font-size: 20px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MUST/" style="font-size: 10px;">MUST</a> <a href="/tags/PHD/" style="font-size: 10px;">PHD</a> <a href="/tags/Rmarkdown/" style="font-size: 10px;">Rmarkdown</a> <a href="/tags/Snakemake/" style="font-size: 10px;">Snakemake</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VScode/" style="font-size: 10px;">VScode</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/Virtual-systems/" style="font-size: 10px;">Virtual systems</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/resume/" style="font-size: 10px;">resume</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
     </div>
   </div>
 
@@ -702,23 +788,23 @@
       <ul>
         
           <li>
-            <a href="/2020/11/17/%E7%94%A8Rmarkdown%E7%94%9F%E6%88%90%E7%AE%80%E5%8E%86/">(no title)</a>
+            <a href="/2020/11/17/%E7%94%A8Rmarkdown%E7%94%9F%E6%88%90%E7%AE%80%E5%8E%86/">用Rmarkdown生成简历</a>
           </li>
         
           <li>
-            <a href="/2020/11/16/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">(no title)</a>
+            <a href="/2020/11/15/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">关于澳科大联培的一些问题</a>
           </li>
         
           <li>
-            <a href="/2020/11/13/essay/">(no title)</a>
+            <a href="/2020/10/30/windows%E4%B8%8A%E4%BD%BF%E7%94%A8linux%E8%99%9A%E6%8B%9F%E7%B3%BB%E7%BB%9F/">Windows上使用linux虚拟系统</a>
           </li>
         
           <li>
-            <a href="/2020/10/30/windows_QA/">(no title)</a>
+            <a href="/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/">Vim中如何对Snakemake代码进行高亮</a>
           </li>
         
           <li>
-            <a href="/2020/10/30/windows%E4%B8%8A%E4%BD%BF%E7%94%A8linux%E8%99%9A%E6%8B%9F%E7%B3%BB%E7%BB%9F/">(no title)</a>
+            <a href="/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/">Visual Studio Code连接集群配置</a>
           </li>
         
       </ul>
