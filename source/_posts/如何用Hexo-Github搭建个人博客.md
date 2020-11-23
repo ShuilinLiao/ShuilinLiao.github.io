@@ -175,6 +175,7 @@ git status
 git add 博客文章名字.md # git add -A
 git commit -m "update files"
 git push origin source
+# git push origin
 ```
 
 随后可以在浏览器中输入域名浏览。
