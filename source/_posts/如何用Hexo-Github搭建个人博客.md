@@ -172,7 +172,7 @@ git status
 提交修改文件至远程仓库
 
 ```
-git add 博客文章名字.md
+git add 博客文章名字.md # git add -A
 git commit -m "update files"
 git push origin source
 ```
