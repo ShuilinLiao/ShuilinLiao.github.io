@@ -125,17 +125,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">19</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">8</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a>
 
   </li>
         <li class="menu-item menu-item-message">
@@ -348,6 +348,98 @@
 <li><a target="_blank" rel="noopener" href="https://zouhua.top/archives/ec7d7221.html#more">Hexo搭建个人博客</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26625249">GitHub+Hexo 搭建个人网站详细教程</a></li>
 </ol>
+
+      
+    </div>
+
+    
+    
+    
+	
+	
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/24/R%E5%AE%89%E8%A3%85%E5%8C%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/headshot.jpg">
+      <meta itemprop="name" content="ShuilinL">
+      <meta itemprop="description" content="种一棵树最好的时间是十年前，其次是现在">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="滴水穿石">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/24/R%E5%AE%89%E8%A3%85%E5%8C%85/" class="post-title-link" itemprop="url">如何安装R包</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-24 09:15:56 / 修改时间：09:31:18" itemprop="dateCreated datePublished" datetime="2020-11-24T09:15:56+08:00">2020-11-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/R/Package/" itemprop="url" rel="index"><span itemprop="name">Package</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="R安装"><a href="#R安装" class="headerlink" title="R安装"></a>R安装</h1><p>首先<a target="_blank" rel="noopener" href="https://cran.r-project.org/">安装R环境</a>，上官网选择适当的版本</p>
+<h1 id="Rtools"><a href="#Rtools" class="headerlink" title="Rtools"></a>Rtools</h1><p><a target="_blank" rel="noopener" href="https://cran.r-project.org/bin/windows/Rtools/">Rtools的下载安装</a>，为了方便之后下载R包</p>
+<ol>
+<li>下载</li>
+<li>安装，记得选择 默认路径 + 勾选设置环境变量 <code>Add rtools to system PATH</code></li>
+<li>在R中输入 <code>writeLines(&#39;PATH=&quot;C:\\rtools40\\usr\\bin;$&#123;PATH&#125;&quot;&#39;,     con = &quot;~/.Renviron&quot;)</code></li>
+<li>重启测试是否成功 在R中输入 Sys.which(“make”) 若出现  <code>## &quot;C:\\rtools40\\usr\\bin\\make.exe&quot;</code> 则表示配置成功</li>
+<li>Rstudio</li>
+</ol>
+<h1 id="Rstudio"><a href="#Rstudio" class="headerlink" title="Rstudio"></a>Rstudio</h1><p><a target="_blank" rel="noopener" href="https://rstudio.com/products/rstudio/download/">Rstudio的下载安装</a>，Rstudio是个IDE，代码编写的集成环境</p>
+<h1 id="R包的下载安装"><a href="#R包的下载安装" class="headerlink" title="R包的下载安装"></a>R包的下载安装</h1><p>有两种方式：</p>
+<ol>
+<li>尝试用install.packages下载安装R包，eg：<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install.packages(<span class="string">&quot;jsonlite&quot;</span>, type = <span class="string">&quot;source&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li>利用Bioconductor安装，首先需要安装<a target="_blank" rel="noopener" href="https://bioconductor.org/install/">Bioconductor包</a>，<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!requireNamespace(<span class="string">&quot;BiocManager&quot;</span>, quietly = <span class="literal">TRUE</span>))</span><br><span class="line">  install.packages(<span class="string">&quot;BiocManager&quot;</span>)</span><br></pre></td></tr></table></figure>
+再用<code>BiocManager::install</code>函数安装其他所需包，如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BiocManager::install(&quot;DESeq2&quot;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liugh/p/9937489.html">Windows下使用Rtools编译R语言包</a></p>
 
       
     </div>
@@ -1336,20 +1428,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
