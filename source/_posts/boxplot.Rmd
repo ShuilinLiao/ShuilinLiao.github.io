@@ -1,0 +1,355 @@
+---
+title: "如何绘制带有显著性标记的箱线图/柱状图"
+date: "2020-11-25 9:17:56"
+tags:
+- R
+- ggplot
+- p-value
+categories:
+- R
+- Visualization
+---
+
+介绍如何用R绘制多组比较的箱线图/柱状图。
+<!-- more -->
+
+## 数据准备
+
+Prerequisites
+Make sure you have installed the following R packages:
+tidyverse for data manipulation and visualization
+ggpubr for creating easily publication ready plots
+rstatix provides pipe-friendly R functions for easy statistical analyses.
+
+```{r}
+library(ggpubr)
+library(rstatix)
+# Transform `dose` into factor variable 
+df <- ToothGrowth 
+df$dose <- as.factor(df$dose) 
+# Add a random grouping variable 
+df$group <- factor(rep(c("grp1", "grp2"), 30)) 
+head(df, 3)
+```
+
+
+
+## 每个panel中包含两组数据
+
+### 使用一个变量进行分面
+
+Statistical tests
+使用dose变量进行分面，并在x轴上水平上比较supp变量。
+```{r}
+stat.test <- df %>%
+  group_by(dose) %>%
+  t_test(len ~ supp) %>%
+  adjust_pvalue(method = "bonferroni") %>%
+  add_significance()
+stat.test
+```
+
+Box plots
+```{r}
+# Create a box plot
+bxp <- ggboxplot(
+  df, x = "supp", y = "len", fill = "#00AFBB", 
+  facet.by = "dose"
+  )
+
+# Make facet and add p-values
+stat.test <- stat.test %>% add_xy_position(x = "supp")
+bxp + stat_pvalue_manual(stat.test)
+```
+
+Box plots 显示P值
+使分面比例自由，并添加散点Make the facet scale free and add jitter points
+使用 `bracket.nudge.y`将括号位置向下调整
+不显示ns (non-significant)
+显示矫正之后并且Pvalue显著的标志
+在p-value标签和plot边框之间添加10%的空格
+```{r}
+bxp <- ggboxplot(
+  df, x = "supp", y = "len", fill = "#00AFBB", 
+  facet.by = "dose", scales = "free", add = "jitter"
+  )
+bxp +  
+  stat_pvalue_manual(
+    stat.test, bracket.nudge.y = -2, hide.ns = TRUE,
+    label = "{p.adj}{p.adj.signif}"
+    ) +
+  scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))
+```
+
+Bar plots
+使用 add = "mean_sd"用于创建error bar(mean +/- SD)。
+需要使用汇总统计函数来自动计算p-value标签位置 add_xy_position()。
+```{r}
+# Create a bar plot with error bars (mean +/- sd)
+bp <- ggbarplot(
+  df, x = "supp", y = "len", add = "mean_sd", 
+  fill = "#00AFBB", facet.by = "dose"
+  )
+
+# Add p-values onto the bar plots
+stat.test <- stat.test %>% add_xy_position(fun = "mean_sd", x = "supp")
+bp + stat_pvalue_manual(stat.test)
+```
+
+Bar plots with jitter points
+在计算p-value标签的位置时，需要设定fun = "max"，
+从而将括号将从数据点的最大值开始，避免数据点和括号之间的重叠。
+```{r}
+# Create a bar plot with error bars (mean +/- sd)
+bp <- ggbarplot(
+  df, x = "supp", y = "len", add = c("mean_sd", "jitter"), 
+  fill = "#00AFBB", facet.by = "dose"
+  )
+
+# Add p-values onto the bar plots
+stat.test <- stat.test %>% add_xy_position(fun = "max", x = "supp")
+bp + stat_pvalue_manual(stat.test)
+```
+
+
+###  使用两个变量进行分面
+使用dose和group变量进行分面，并在x轴上水平上比较supp变量。
+
+Statistical tests
+```{r}
+stat.test <- df %>%
+  group_by(group, dose) %>%
+  t_test(len ~ supp) %>%
+  adjust_pvalue(method = "bonferroni") %>%
+  add_significance()
+stat.test 
+```
+
+Box plots
+```{r}
+# Create box plots with significance levels
+# Hide ns (non-significant)
+stat.test <- stat.test %>% add_xy_position(x = "supp")
+ggboxplot(
+  df, x = "supp", y = "len", fill = "#E7B800",
+  facet = c("group", "dose")
+  ) +
+  stat_pvalue_manual(stat.test, hide.ns = TRUE)
+```
+
+Bar plots
+```{r}
+# Create bar plots with significance levels
+# Hide ns (non-significant)
+stat.test <- stat.test %>% add_xy_position(x = "supp", fun = "mean_sd")
+ggbarplot(
+  df, x = "supp", y = "len", fill = "#E7B800",
+  add = c("mean_sd", "jitter"), facet = c("group", "dose")
+  ) +
+  stat_pvalue_manual(stat.test, hide.ns = TRUE)
+```
+## 每个panel中包含三组或以上的数据
+
+### 使用一个变量进行分面
+
+#### 执行所有两两比较
+使用supp变量进行分组，然后对dose变量之间的水平进行两两比较。
+Statistical test:
+```{r}
+stat.test <- df %>%
+  group_by(supp) %>%
+  t_test(len ~ dose)
+stat.test
+```
+
+在图中添加p值。
+ggplot2中scale_y_continuous(expand = expand (mult = c(0,0.1))用于在标签和图形顶部边框之间添加更多空格
+```{r}
+# Box plots with p-values
+stat.test <- stat.test %>% add_y_position()
+ggboxplot(df, x = "dose", y = "len", fill = "#FC4E07", facet.by = "supp") +
+  stat_pvalue_manual(stat.test, label = "p.adj.signif", tip.length = 0.01) +
+  scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))
+```
+
+```{r}
+# Bar plot with p-values
+# Add 10% space on the y-axis above the box plots
+stat.test <- stat.test %>% add_y_position(fun = "mean_sd")
+ggbarplot(
+  df, x = "dose", y = "len", fill = "#FC4E07",
+  add = "mean_sd", facet.by = "supp"
+  ) + 
+  stat_pvalue_manual(stat.test,  label = "p.adj.signif", tip.length = 0.01) +
+  scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))
+```
+
+#### 与参照组进行两两比较
+Statistical test:
+```{r}
+stat.test <- df %>%
+  group_by(supp) %>%
+  t_test(len ~ dose, ref.group = "0.5")
+stat.test
+```
+
+Box plots 
+```{r}
+stat.test <- stat.test %>% add_y_position()
+ggboxplot(df, x = "dose", y = "len", fill = "#FC4E07", facet.by = "supp") +
+  stat_pvalue_manual(stat.test, label = "p.adj.signif", tip.length = 0.01) +
+  scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))
+```
+
+```{r}
+# Show only significance levels at x = group2
+# Move down significance symbols using vjust
+stat.test <- stat.test %>% add_y_position()
+ggboxplot(df, x = "dose", y = "len", fill = "#FC4E07", facet.by = "supp") +
+  stat_pvalue_manual(stat.test, label = "p.adj.signif", x = "group2", vjust = 2) 
+```
+
+Bar plot
+```{r}
+# Add 10% space on the y-axis above the box plots
+stat.test <- stat.test %>% add_y_position(fun = "mean_sd")
+ggbarplot(
+  df, x = "dose", y = "len", fill = "#FC4E07",
+  add = c("mean_sd", "jitter"), facet.by = "supp"
+  ) + 
+  stat_pvalue_manual(stat.test,  label = "p.adj.signif", tip.length = 0.01) +
+  scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))
+```
+
+### 使用两个变量进行分面
+Statistical test
+使用dose和group变量进行分面，并在x轴上水平上比较supp变量。
+```{r}
+stat.test <- df %>%
+  group_by(group, supp) %>%
+  t_test(len ~ dose) %>%
+  adjust_pvalue(method = "bonferroni") %>%
+  add_significance()
+stat.test 
+```
+
+Box plots
+```{r}
+# Create box plots with significance levels
+# Hide ns (non-significant)
+# Add 15% space between labels and the plot top border
+stat.test <- stat.test %>% add_xy_position(x = "dose")
+ggboxplot(
+  df, x = "dose", y = "len", fill = "#FC4E07",
+  facet = c("group", "supp")
+  ) +
+  stat_pvalue_manual(stat.test, hide.ns = TRUE) +
+  scale_y_continuous(expand = expansion(mult = c(0.05, 0.15)))
+```
+
+Bar plots
+```{r}
+# Create bar plots with significance levels
+# Hide ns (non-significant)
+# Add 15% space between labels and the plot top border
+stat.test <- stat.test %>% add_xy_position(x = "dose", fun = "mean_sd")
+ggbarplot(
+  df, x = "dose", y = "len", fill = "#FC4E07",
+  add = c("mean_sd", "jitter"), facet = c("group", "supp")
+  ) +
+  stat_pvalue_manual(stat.test, hide.ns = TRUE) +
+  scale_y_continuous(expand = expansion(mult = c(0.05, 0.15)))
+```
+
+### 使用group变量进行分面
+简单的plot
+```{r}
+# Box plots
+bxp <- ggboxplot(
+  df, x = "supp", y = "len", color = "dose", 
+   palette = "jco", facet.by = "group"
+  )
+bxp 
+```
+
+Bar plots
+```{r}
+bp <- ggbarplot(
+  df, x = "supp", y = "len", color = "dose",
+  palette = "jco", add = "mean_sd",
+  position = position_dodge(0.8),
+  facet.by = "group"
+  )
+bp
+```
+
+#### 执行所有两两比较
+Statistical test:
+```{r}
+stat.test <- df %>%
+  group_by(supp, group) %>%
+  t_test(len ~ dose) 
+stat.test
+```
+
+在图上添加p值:
+```{r}
+# Box plots with p-values
+# Hide ns (non-significant)
+stat.test <- stat.test %>%
+  add_xy_position(x = "supp", dodge = 0.8)
+bxp + 
+  stat_pvalue_manual(
+    stat.test, label = "p.adj.signif", tip.length = 0.01,
+    hide.ns = TRUE
+    ) +
+  scale_y_continuous(expand = expansion(mult = c(0.01, 0.1)))
+```
+
+Bar plots 
+```{r}
+stat.test <- stat.test %>%
+  add_xy_position(x = "supp", fun = "mean_sd", dodge = 0.8)
+bp + 
+  stat_pvalue_manual(
+    stat.test, label = "p.adj.signif", tip.length = 0.01,
+    hide.ns = TRUE
+    ) +
+  scale_y_continuous(expand = expansion(mult = c(0.01, 0.1)))
+```
+
+#### 与参照组进行两两比较
+
+Statistical test:
+```{r}
+stat.test <- df %>%
+  group_by(supp, group) %>%
+  t_test(len ~ dose, ref.group = "0.5")
+stat.test
+```
+
+Box plots with p-values
+```{r}
+stat.test <- stat.test %>%
+  add_xy_position(x = "supp", dodge = 0.8)
+bxp + 
+  stat_pvalue_manual(
+    stat.test, label = "p.adj.signif", tip.length = 0.01
+    ) +
+  scale_y_continuous(expand = expansion(mult = c(0.01, 0.1)))
+```
+
+Bar plots with p-values
+```{r}
+stat.test <- stat.test %>%
+  add_xy_position(x = "supp", fun = "mean_sd", dodge = 0.8)
+bp + 
+  stat_pvalue_manual(
+    stat.test, label = "p.adj.signif", tip.length = 0.01
+    ) +
+  scale_y_continuous(expand = expansion(mult = c(0.01, 0.1)))
+```
+
+更多相关问题，请参考 [ggpubr FAQ](https://www.datanovia.com/en/blog/tag/ggpubr/)
+### 参考链接
+[HOW TO ADD P-VALUES TO GGPLOT FACETS](https://www.datanovia.com/en/blog/how-to-add-p-values-to-ggplot-facets/)

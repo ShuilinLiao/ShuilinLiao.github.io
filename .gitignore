@@ -7,3 +7,4 @@ public/
 .deploy*/
 *.pdf/
 source/_posts/*.md
+source/*.md
