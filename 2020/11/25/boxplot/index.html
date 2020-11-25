@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="介绍如何用R绘制多组比较的箱线图&#x2F;柱状图。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何绘制带有显著性标记的箱线图&#x2F;柱状图">
+<meta property="og:url" content="http://example.com/2020/11/25/boxplot/index.html">
+<meta property="og:site_name" content="滴水穿石">
+<meta property="og:description" content="介绍如何用R绘制多组比较的箱线图&#x2F;柱状图。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-35-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-36-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-37-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-38-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-40-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-41-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-43-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-44-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-46-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-47-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-48-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-50-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-51-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-52-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-53-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-55-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-56-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-58-1.png">
+<meta property="og:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-59-1.png">
+<meta property="article:published_time" content="2020-11-25T01:17:56.000Z">
+<meta property="article:modified_time" content="2020-11-25T02:35:32.531Z">
+<meta property="article:author" content="ShuilinL">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="ggplot">
+<meta property="article:tag" content="p-value">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/11/25/boxplot/figure/unnamed-chunk-35-1.png">
+
+<link rel="canonical" href="http://example.com/2020/11/25/boxplot/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>如何绘制带有显著性标记的箱线图/柱状图 | 滴水穿石</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">滴水穿石</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">种一棵树最好的时间是十年前，其次是现在</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">20</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-message">
+
+    <a href="/message/" rel="section"><i class="fa fa-comment fa-fw"></i>message</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/25/boxplot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/headshot.jpg">
+      <meta itemprop="name" content="ShuilinL">
+      <meta itemprop="description" content="Bioinformatics">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="滴水穿石">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何绘制带有显著性标记的箱线图/柱状图
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-25 09:17:56 / 修改时间：10:35:32" itemprop="dateCreated datePublished" datetime="2020-11-25T09:17:56+08:00">2020-11-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/R/Visualization/" itemprop="url" rel="index"><span itemprop="name">Visualization</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>介绍如何用R绘制多组比较的箱线图/柱状图。</p>
+<a id="more"></a>
+
+<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><p>Prerequisites<br>Make sure you have installed the following R packages:<br>tidyverse for data manipulation and visualization<br>ggpubr for creating easily publication ready plots<br>rstatix provides pipe-friendly R functions for easy statistical analyses.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggpubr)</span><br><span class="line"><span class="keyword">library</span>(rstatix)</span><br><span class="line"><span class="comment"># Transform `dose` into factor variable </span></span><br><span class="line">df &lt;- ToothGrowth </span><br><span class="line">df$dose &lt;- as.factor(df$dose) </span><br><span class="line"><span class="comment"># Add a random grouping variable </span></span><br><span class="line">df$group &lt;- factor(rep(c(<span class="string">&quot;grp1&quot;</span>, <span class="string">&quot;grp2&quot;</span>), <span class="number">30</span>)) </span><br><span class="line">head(df, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">##    len supp dose group</span><br><span class="line">## 1  4.2   VC  0.5  grp1</span><br><span class="line">## 2 11.5   VC  0.5  grp2</span><br><span class="line">## 3  7.3   VC  0.5  grp1</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="每个panel中包含两组数据"><a href="#每个panel中包含两组数据" class="headerlink" title="每个panel中包含两组数据"></a>每个panel中包含两组数据</h2><h3 id="使用一个变量进行分面"><a href="#使用一个变量进行分面" class="headerlink" title="使用一个变量进行分面"></a>使用一个变量进行分面</h3><p>Statistical tests<br>使用dose变量进行分面，并在x轴上水平上比较supp变量。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stat.test &lt;- df %&gt;%</span><br><span class="line">  group_by(dose) %&gt;%</span><br><span class="line">  t_test(len ~ supp) %&gt;%</span><br><span class="line">  adjust_pvalue(method = <span class="string">&quot;bonferroni&quot;</span>) %&gt;%</span><br><span class="line">  add_significance()</span><br><span class="line">stat.test</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 3 x 11</span><br><span class="line">##   dose  .y.   group1 group2    n1    n2 statistic    df       p   p.adj p.adj.signif</span><br><span class="line">##   &lt;fct&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       </span><br><span class="line">## 1 0.5   len   OJ     VC        10    10    3.17    15.0 0.00636 0.0191  *           </span><br><span class="line">## 2 1     len   OJ     VC        10    10    4.03    15.4 0.00104 0.00312 **          </span><br><span class="line">## 3 2     len   OJ     VC        10    10   -0.0461  14.0 0.964   1       ns</span><br></pre></td></tr></table></figure>
+
+<p>Box plots</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create a box plot</span></span><br><span class="line">bxp &lt;- ggboxplot(</span><br><span class="line">  df, x = <span class="string">&quot;supp&quot;</span>, y = <span class="string">&quot;len&quot;</span>, fill = <span class="string">&quot;#00AFBB&quot;</span>, </span><br><span class="line">  facet.by = <span class="string">&quot;dose&quot;</span></span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line"><span class="comment"># Make facet and add p-values</span></span><br><span class="line">stat.test &lt;- stat.test %&gt;% add_xy_position(x = <span class="string">&quot;supp&quot;</span>)</span><br><span class="line">bxp + stat_pvalue_manual(stat.test)</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-35-1.png" alt="plot of chunk unnamed-chunk-35"></p>
+<p>Box plots 显示P值<br>使分面比例自由，并添加散点Make the facet scale free and add jitter points<br>使用 <code>bracket.nudge.y</code>将括号位置向下调整<br>不显示ns (non-significant)<br>显示矫正之后并且Pvalue显著的标志<br>在p-value标签和plot边框之间添加10%的空格</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bxp &lt;- ggboxplot(</span><br><span class="line">  df, x = <span class="string">&quot;supp&quot;</span>, y = <span class="string">&quot;len&quot;</span>, fill = <span class="string">&quot;#00AFBB&quot;</span>, </span><br><span class="line">  facet.by = <span class="string">&quot;dose&quot;</span>, scales = <span class="string">&quot;free&quot;</span>, add = <span class="string">&quot;jitter&quot;</span></span><br><span class="line">  )</span><br><span class="line">bxp +  </span><br><span class="line">  stat_pvalue_manual(</span><br><span class="line">    stat.test, bracket.nudge.y = -<span class="number">2</span>, hide.ns = <span class="literal">TRUE</span>,</span><br><span class="line">    label = <span class="string">&quot;&#123;p.adj&#125;&#123;p.adj.signif&#125;&quot;</span></span><br><span class="line">    ) +</span><br><span class="line">  scale_y_continuous(expand = expansion(mult = c(<span class="number">0.05</span>, <span class="number">0.1</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-36-1.png" alt="plot of chunk unnamed-chunk-36"></p>
+<p>Bar plots<br>使用 add = “mean_sd”用于创建error bar(mean +/- SD)。<br>需要使用汇总统计函数来自动计算p-value标签位置 add_xy_position()。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create a bar plot with error bars (mean +/- sd)</span></span><br><span class="line">bp &lt;- ggbarplot(</span><br><span class="line">  df, x = <span class="string">&quot;supp&quot;</span>, y = <span class="string">&quot;len&quot;</span>, add = <span class="string">&quot;mean_sd&quot;</span>, </span><br><span class="line">  fill = <span class="string">&quot;#00AFBB&quot;</span>, facet.by = <span class="string">&quot;dose&quot;</span></span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add p-values onto the bar plots</span></span><br><span class="line">stat.test &lt;- stat.test %&gt;% add_xy_position(fun = <span class="string">&quot;mean_sd&quot;</span>, x = <span class="string">&quot;supp&quot;</span>)</span><br><span class="line">bp + stat_pvalue_manual(stat.test)</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-37-1.png" alt="plot of chunk unnamed-chunk-37"></p>
+<p>Bar plots with jitter points<br>在计算p-value标签的位置时，需要设定fun = “max”，<br>从而将括号将从数据点的最大值开始，避免数据点和括号之间的重叠。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create a bar plot with error bars (mean +/- sd)</span></span><br><span class="line">bp &lt;- ggbarplot(</span><br><span class="line">  df, x = <span class="string">&quot;supp&quot;</span>, y = <span class="string">&quot;len&quot;</span>, add = c(<span class="string">&quot;mean_sd&quot;</span>, <span class="string">&quot;jitter&quot;</span>), </span><br><span class="line">  fill = <span class="string">&quot;#00AFBB&quot;</span>, facet.by = <span class="string">&quot;dose&quot;</span></span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add p-values onto the bar plots</span></span><br><span class="line">stat.test &lt;- stat.test %&gt;% add_xy_position(fun = <span class="string">&quot;max&quot;</span>, x = <span class="string">&quot;supp&quot;</span>)</span><br><span class="line">bp + stat_pvalue_manual(stat.test)</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-38-1.png" alt="plot of chunk unnamed-chunk-38"></p>
+<h3 id="使用两个变量进行分面"><a href="#使用两个变量进行分面" class="headerlink" title="使用两个变量进行分面"></a>使用两个变量进行分面</h3><p>使用dose和group变量进行分面，并在x轴上水平上比较supp变量。</p>
+<p>Statistical tests</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stat.test &lt;- df %&gt;%</span><br><span class="line">  group_by(group, dose) %&gt;%</span><br><span class="line">  t_test(len ~ supp) %&gt;%</span><br><span class="line">  adjust_pvalue(method = <span class="string">&quot;bonferroni&quot;</span>) %&gt;%</span><br><span class="line">  add_significance()</span><br><span class="line">stat.test </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 6 x 12</span><br><span class="line">##   dose  group .y.   group1 group2    n1    n2 statistic    df       p   p.adj p.adj.signif</span><br><span class="line">##   &lt;fct&gt; &lt;fct&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       </span><br><span class="line">## 1 0.5   grp1  len   OJ     VC         5     5     3.71   7.35 0.00697 0.0418  *           </span><br><span class="line">## 2 1     grp1  len   OJ     VC         5     5     1.37   7.65 0.208   1       ns          </span><br><span class="line">## 3 2     grp1  len   OJ     VC         5     5    -0.485  6.52 0.643   1       ns          </span><br><span class="line">## 4 0.5   grp2  len   OJ     VC         5     5     1.13   5.79 0.304   1       ns          </span><br><span class="line">## 5 1     grp2  len   OJ     VC         5     5     6.91   5.84 0.00051 0.00306 **          </span><br><span class="line">## 6 2     grp2  len   OJ     VC         5     5     0.319  6.07 0.76    1       ns</span><br></pre></td></tr></table></figure>
+
+<p>Box plots</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create box plots with significance levels</span></span><br><span class="line"><span class="comment"># Hide ns (non-significant)</span></span><br><span class="line">stat.test &lt;- stat.test %&gt;% add_xy_position(x = <span class="string">&quot;supp&quot;</span>)</span><br><span class="line">ggboxplot(</span><br><span class="line">  df, x = <span class="string">&quot;supp&quot;</span>, y = <span class="string">&quot;len&quot;</span>, fill = <span class="string">&quot;#E7B800&quot;</span>,</span><br><span class="line">  facet = c(<span class="string">&quot;group&quot;</span>, <span class="string">&quot;dose&quot;</span>)</span><br><span class="line">  ) +</span><br><span class="line">  stat_pvalue_manual(stat.test, hide.ns = <span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-40-1.png" alt="plot of chunk unnamed-chunk-40"></p>
+<p>Bar plots</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create bar plots with significance levels</span></span><br><span class="line"><span class="comment"># Hide ns (non-significant)</span></span><br><span class="line">stat.test &lt;- stat.test %&gt;% add_xy_position(x = <span class="string">&quot;supp&quot;</span>, fun = <span class="string">&quot;mean_sd&quot;</span>)</span><br><span class="line">ggbarplot(</span><br><span class="line">  df, x = <span class="string">&quot;supp&quot;</span>, y = <span class="string">&quot;len&quot;</span>, fill = <span class="string">&quot;#E7B800&quot;</span>,</span><br><span class="line">  add = c(<span class="string">&quot;mean_sd&quot;</span>, <span class="string">&quot;jitter&quot;</span>), facet = c(<span class="string">&quot;group&quot;</span>, <span class="string">&quot;dose&quot;</span>)</span><br><span class="line">  ) +</span><br><span class="line">  stat_pvalue_manual(stat.test, hide.ns = <span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-41-1.png" alt="plot of chunk unnamed-chunk-41"></p>
+<h2 id="每个panel中包含三组或以上的数据"><a href="#每个panel中包含三组或以上的数据" class="headerlink" title="每个panel中包含三组或以上的数据"></a>每个panel中包含三组或以上的数据</h2><h3 id="使用一个变量进行分面-1"><a href="#使用一个变量进行分面-1" class="headerlink" title="使用一个变量进行分面"></a>使用一个变量进行分面</h3><h4 id="执行所有两两比较"><a href="#执行所有两两比较" class="headerlink" title="执行所有两两比较"></a>执行所有两两比较</h4><p>使用supp变量进行分组，然后对dose变量之间的水平进行两两比较。<br>Statistical test:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">stat.test &lt;- df %&gt;%</span><br><span class="line">  group_by(supp) %&gt;%</span><br><span class="line">  t_test(len ~ dose)</span><br><span class="line">stat.test</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 6 x 11</span><br><span class="line">##   supp  .y.   group1 group2    n1    n2 statistic    df            p      p.adj p.adj.signif</span><br><span class="line">## * &lt;fct&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;       </span><br><span class="line">## 1 OJ    len   0.5    1         10    10     -5.05  17.7 0.0000878    0.000176   ***         </span><br><span class="line">## 2 OJ    len   0.5    2         10    10     -7.82  14.7 0.00000132   0.00000396 ****        </span><br><span class="line">## 3 OJ    len   1      2         10    10     -2.25  15.8 0.039        0.039      *           </span><br><span class="line">## 4 VC    len   0.5    1         10    10     -7.46  17.9 0.000000681  0.00000136 ****        </span><br><span class="line">## 5 VC    len   0.5    2         10    10    -10.4   14.3 0.0000000468 0.00000014 ****        </span><br><span class="line">## 6 VC    len   1      2         10    10     -5.47  13.6 0.0000916    0.0000916  ****</span><br></pre></td></tr></table></figure>
+
+<p>在图中添加p值。<br>ggplot2中scale_y_continuous(expand = expand (mult = c(0,0.1))用于在标签和图形顶部边框之间添加更多空格</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Box plots with p-values</span></span><br><span class="line">stat.test &lt;- stat.test %&gt;% add_y_position()</span><br><span class="line">ggboxplot(df, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>, fill = <span class="string">&quot;#FC4E07&quot;</span>, facet.by = <span class="string">&quot;supp&quot;</span>) +</span><br><span class="line">  stat_pvalue_manual(stat.test, label = <span class="string">&quot;p.adj.signif&quot;</span>, tip.length = <span class="number">0.01</span>) +</span><br><span class="line">  scale_y_continuous(expand = expansion(mult = c(<span class="number">0.05</span>, <span class="number">0.1</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-43-1.png" alt="plot of chunk unnamed-chunk-43"></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Bar plot with p-values</span></span><br><span class="line"><span class="comment"># Add 10% space on the y-axis above the box plots</span></span><br><span class="line">stat.test &lt;- stat.test %&gt;% add_y_position(fun = <span class="string">&quot;mean_sd&quot;</span>)</span><br><span class="line">ggbarplot(</span><br><span class="line">  df, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>, fill = <span class="string">&quot;#FC4E07&quot;</span>,</span><br><span class="line">  add = <span class="string">&quot;mean_sd&quot;</span>, facet.by = <span class="string">&quot;supp&quot;</span></span><br><span class="line">  ) + </span><br><span class="line">  stat_pvalue_manual(stat.test,  label = <span class="string">&quot;p.adj.signif&quot;</span>, tip.length = <span class="number">0.01</span>) +</span><br><span class="line">  scale_y_continuous(expand = expansion(mult = c(<span class="number">0.05</span>, <span class="number">0.1</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-44-1.png" alt="plot of chunk unnamed-chunk-44"></p>
+<h4 id="与参照组进行两两比较"><a href="#与参照组进行两两比较" class="headerlink" title="与参照组进行两两比较"></a>与参照组进行两两比较</h4><p>Statistical test:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">stat.test &lt;- df %&gt;%</span><br><span class="line">  group_by(supp) %&gt;%</span><br><span class="line">  t_test(len ~ dose, ref.group = <span class="string">&quot;0.5&quot;</span>)</span><br><span class="line">stat.test</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 4 x 11</span><br><span class="line">##   supp  .y.   group1 group2    n1    n2 statistic    df            p        p.adj p.adj.signif</span><br><span class="line">## * &lt;fct&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;       </span><br><span class="line">## 1 OJ    len   0.5    1         10    10     -5.05  17.7 0.0000878    0.0000878    ****        </span><br><span class="line">## 2 OJ    len   0.5    2         10    10     -7.82  14.7 0.00000132   0.00000264   ****        </span><br><span class="line">## 3 VC    len   0.5    1         10    10     -7.46  17.9 0.000000681  0.000000681  ****        </span><br><span class="line">## 4 VC    len   0.5    2         10    10    -10.4   14.3 0.0000000468 0.0000000936 ****</span><br></pre></td></tr></table></figure>
+
+<p>Box plots </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">stat.test &lt;- stat.test %&gt;% add_y_position()</span><br><span class="line">ggboxplot(df, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>, fill = <span class="string">&quot;#FC4E07&quot;</span>, facet.by = <span class="string">&quot;supp&quot;</span>) +</span><br><span class="line">  stat_pvalue_manual(stat.test, label = <span class="string">&quot;p.adj.signif&quot;</span>, tip.length = <span class="number">0.01</span>) +</span><br><span class="line">  scale_y_continuous(expand = expansion(mult = c(<span class="number">0.05</span>, <span class="number">0.1</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-46-1.png" alt="plot of chunk unnamed-chunk-46"></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Show only significance levels at x = group2</span></span><br><span class="line"><span class="comment"># Move down significance symbols using vjust</span></span><br><span class="line">stat.test &lt;- stat.test %&gt;% add_y_position()</span><br><span class="line">ggboxplot(df, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>, fill = <span class="string">&quot;#FC4E07&quot;</span>, facet.by = <span class="string">&quot;supp&quot;</span>) +</span><br><span class="line">  stat_pvalue_manual(stat.test, label = <span class="string">&quot;p.adj.signif&quot;</span>, x = <span class="string">&quot;group2&quot;</span>, vjust = <span class="number">2</span>) </span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-47-1.png" alt="plot of chunk unnamed-chunk-47"></p>
+<p>Bar plot</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add 10% space on the y-axis above the box plots</span></span><br><span class="line">stat.test &lt;- stat.test %&gt;% add_y_position(fun = <span class="string">&quot;mean_sd&quot;</span>)</span><br><span class="line">ggbarplot(</span><br><span class="line">  df, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>, fill = <span class="string">&quot;#FC4E07&quot;</span>,</span><br><span class="line">  add = c(<span class="string">&quot;mean_sd&quot;</span>, <span class="string">&quot;jitter&quot;</span>), facet.by = <span class="string">&quot;supp&quot;</span></span><br><span class="line">  ) + </span><br><span class="line">  stat_pvalue_manual(stat.test,  label = <span class="string">&quot;p.adj.signif&quot;</span>, tip.length = <span class="number">0.01</span>) +</span><br><span class="line">  scale_y_continuous(expand = expansion(mult = c(<span class="number">0.05</span>, <span class="number">0.1</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-48-1.png" alt="plot of chunk unnamed-chunk-48"></p>
+<h3 id="使用两个变量进行分面-1"><a href="#使用两个变量进行分面-1" class="headerlink" title="使用两个变量进行分面"></a>使用两个变量进行分面</h3><p>Statistical test<br>使用dose和group变量进行分面，并在x轴上水平上比较supp变量。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stat.test &lt;- df %&gt;%</span><br><span class="line">  group_by(group, supp) %&gt;%</span><br><span class="line">  t_test(len ~ dose) %&gt;%</span><br><span class="line">  adjust_pvalue(method = <span class="string">&quot;bonferroni&quot;</span>) %&gt;%</span><br><span class="line">  add_significance()</span><br><span class="line">stat.test </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 12 x 12</span><br><span class="line">##    supp  group .y.   group1 group2    n1    n2 statistic    df         p    p.adj p.adj.signif</span><br><span class="line">##    &lt;fct&gt; &lt;fct&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       </span><br><span class="line">##  1 OJ    grp1  len   0.5    1          5     5     -2.50  7.80 0.038     0.456    ns          </span><br><span class="line">##  2 OJ    grp1  len   0.5    2          5     5     -5.66  7.13 0.000717  0.00860  **          </span><br><span class="line">##  3 OJ    grp1  len   1      2          5     5     -2.22  6.49 0.064     0.768    ns          </span><br><span class="line">##  4 VC    grp1  len   0.5    1          5     5     -5.33  7.54 0.000855  0.0103   *           </span><br><span class="line">##  5 VC    grp1  len   0.5    2          5     5     -8.81  6.75 0.0000606 0.000727 ***         </span><br><span class="line">##  6 VC    grp1  len   1      2          5     5     -3.84  7.67 0.005     0.06     ns          </span><br><span class="line">##  7 OJ    grp2  len   0.5    1          5     5     -4.85  5.65 0.003     0.036    *           </span><br><span class="line">##  8 OJ    grp2  len   0.5    2          5     5     -5.28  6.35 0.002     0.024    *           </span><br><span class="line">##  9 OJ    grp2  len   1      2          5     5     -1.00  7.69 0.347     1        ns          </span><br><span class="line">## 10 VC    grp2  len   0.5    1          5     5     -5.61  5.71 0.002     0.024    *           </span><br><span class="line">## 11 VC    grp2  len   0.5    2          5     5     -5.87  5.55 0.001     0.012    *           </span><br><span class="line">## 12 VC    grp2  len   1      2          5     5     -3.56  4.36 0.02      0.24     ns</span><br></pre></td></tr></table></figure>
+
+<p>Box plots</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create box plots with significance levels</span></span><br><span class="line"><span class="comment"># Hide ns (non-significant)</span></span><br><span class="line"><span class="comment"># Add 15% space between labels and the plot top border</span></span><br><span class="line">stat.test &lt;- stat.test %&gt;% add_xy_position(x = <span class="string">&quot;dose&quot;</span>)</span><br><span class="line">ggboxplot(</span><br><span class="line">  df, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>, fill = <span class="string">&quot;#FC4E07&quot;</span>,</span><br><span class="line">  facet = c(<span class="string">&quot;group&quot;</span>, <span class="string">&quot;supp&quot;</span>)</span><br><span class="line">  ) +</span><br><span class="line">  stat_pvalue_manual(stat.test, hide.ns = <span class="literal">TRUE</span>) +</span><br><span class="line">  scale_y_continuous(expand = expansion(mult = c(<span class="number">0.05</span>, <span class="number">0.15</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-50-1.png" alt="plot of chunk unnamed-chunk-50"></p>
+<p>Bar plots</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create bar plots with significance levels</span></span><br><span class="line"><span class="comment"># Hide ns (non-significant)</span></span><br><span class="line"><span class="comment"># Add 15% space between labels and the plot top border</span></span><br><span class="line">stat.test &lt;- stat.test %&gt;% add_xy_position(x = <span class="string">&quot;dose&quot;</span>, fun = <span class="string">&quot;mean_sd&quot;</span>)</span><br><span class="line">ggbarplot(</span><br><span class="line">  df, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>, fill = <span class="string">&quot;#FC4E07&quot;</span>,</span><br><span class="line">  add = c(<span class="string">&quot;mean_sd&quot;</span>, <span class="string">&quot;jitter&quot;</span>), facet = c(<span class="string">&quot;group&quot;</span>, <span class="string">&quot;supp&quot;</span>)</span><br><span class="line">  ) +</span><br><span class="line">  stat_pvalue_manual(stat.test, hide.ns = <span class="literal">TRUE</span>) +</span><br><span class="line">  scale_y_continuous(expand = expansion(mult = c(<span class="number">0.05</span>, <span class="number">0.15</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-51-1.png" alt="plot of chunk unnamed-chunk-51"></p>
+<h3 id="使用group变量进行分面"><a href="#使用group变量进行分面" class="headerlink" title="使用group变量进行分面"></a>使用group变量进行分面</h3><p>简单的plot</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Box plots</span></span><br><span class="line">bxp &lt;- ggboxplot(</span><br><span class="line">  df, x = <span class="string">&quot;supp&quot;</span>, y = <span class="string">&quot;len&quot;</span>, color = <span class="string">&quot;dose&quot;</span>, </span><br><span class="line">   palette = <span class="string">&quot;jco&quot;</span>, facet.by = <span class="string">&quot;group&quot;</span></span><br><span class="line">  )</span><br><span class="line">bxp </span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-52-1.png" alt="plot of chunk unnamed-chunk-52"></p>
+<p>Bar plots</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bp &lt;- ggbarplot(</span><br><span class="line">  df, x = <span class="string">&quot;supp&quot;</span>, y = <span class="string">&quot;len&quot;</span>, color = <span class="string">&quot;dose&quot;</span>,</span><br><span class="line">  palette = <span class="string">&quot;jco&quot;</span>, add = <span class="string">&quot;mean_sd&quot;</span>,</span><br><span class="line">  position = position_dodge(<span class="number">0.8</span>),</span><br><span class="line">  facet.by = <span class="string">&quot;group&quot;</span></span><br><span class="line">  )</span><br><span class="line">bp</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-53-1.png" alt="plot of chunk unnamed-chunk-53"></p>
+<h4 id="执行所有两两比较-1"><a href="#执行所有两两比较-1" class="headerlink" title="执行所有两两比较"></a>执行所有两两比较</h4><p>Statistical test:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">stat.test &lt;- df %&gt;%</span><br><span class="line">  group_by(supp, group) %&gt;%</span><br><span class="line">  t_test(len ~ dose) </span><br><span class="line">stat.test</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 12 x 12</span><br><span class="line">##    supp  group .y.   group1 group2    n1    n2 statistic    df         p    p.adj p.adj.signif</span><br><span class="line">##  * &lt;fct&gt; &lt;fct&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       </span><br><span class="line">##  1 OJ    grp1  len   0.5    1          5     5     -2.50  7.80 0.038     0.076    ns          </span><br><span class="line">##  2 OJ    grp1  len   0.5    2          5     5     -5.66  7.13 0.000717  0.002    **          </span><br><span class="line">##  3 OJ    grp1  len   1      2          5     5     -2.22  6.49 0.064     0.076    ns          </span><br><span class="line">##  4 OJ    grp2  len   0.5    1          5     5     -4.85  5.65 0.003     0.007    **          </span><br><span class="line">##  5 OJ    grp2  len   0.5    2          5     5     -5.28  6.35 0.002     0.005    **          </span><br><span class="line">##  6 OJ    grp2  len   1      2          5     5     -1.00  7.69 0.347     0.347    ns          </span><br><span class="line">##  7 VC    grp1  len   0.5    1          5     5     -5.33  7.54 0.000855  0.002    **          </span><br><span class="line">##  8 VC    grp1  len   0.5    2          5     5     -8.81  6.75 0.0000606 0.000182 ***         </span><br><span class="line">##  9 VC    grp1  len   1      2          5     5     -3.84  7.67 0.005     0.005    **          </span><br><span class="line">## 10 VC    grp2  len   0.5    1          5     5     -5.61  5.71 0.002     0.004    **          </span><br><span class="line">## 11 VC    grp2  len   0.5    2          5     5     -5.87  5.55 0.001     0.004    **          </span><br><span class="line">## 12 VC    grp2  len   1      2          5     5     -3.56  4.36 0.02      0.02     *</span><br></pre></td></tr></table></figure>
+
+<p>在图上添加p值:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Box plots with p-values</span></span><br><span class="line"><span class="comment"># Hide ns (non-significant)</span></span><br><span class="line">stat.test &lt;- stat.test %&gt;%</span><br><span class="line">  add_xy_position(x = <span class="string">&quot;supp&quot;</span>, dodge = <span class="number">0.8</span>)</span><br><span class="line">bxp + </span><br><span class="line">  stat_pvalue_manual(</span><br><span class="line">    stat.test, label = <span class="string">&quot;p.adj.signif&quot;</span>, tip.length = <span class="number">0.01</span>,</span><br><span class="line">    hide.ns = <span class="literal">TRUE</span></span><br><span class="line">    ) +</span><br><span class="line">  scale_y_continuous(expand = expansion(mult = c(<span class="number">0.01</span>, <span class="number">0.1</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-55-1.png" alt="plot of chunk unnamed-chunk-55"></p>
+<p>Bar plots </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">stat.test &lt;- stat.test %&gt;%</span><br><span class="line">  add_xy_position(x = <span class="string">&quot;supp&quot;</span>, fun = <span class="string">&quot;mean_sd&quot;</span>, dodge = <span class="number">0.8</span>)</span><br><span class="line">bp + </span><br><span class="line">  stat_pvalue_manual(</span><br><span class="line">    stat.test, label = <span class="string">&quot;p.adj.signif&quot;</span>, tip.length = <span class="number">0.01</span>,</span><br><span class="line">    hide.ns = <span class="literal">TRUE</span></span><br><span class="line">    ) +</span><br><span class="line">  scale_y_continuous(expand = expansion(mult = c(<span class="number">0.01</span>, <span class="number">0.1</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-56-1.png" alt="plot of chunk unnamed-chunk-56"></p>
+<h4 id="与参照组进行两两比较-1"><a href="#与参照组进行两两比较-1" class="headerlink" title="与参照组进行两两比较"></a>与参照组进行两两比较</h4><p>Statistical test:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">stat.test &lt;- df %&gt;%</span><br><span class="line">  group_by(supp, group) %&gt;%</span><br><span class="line">  t_test(len ~ dose, ref.group = <span class="string">&quot;0.5&quot;</span>)</span><br><span class="line">stat.test</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 8 x 12</span><br><span class="line">##   supp  group .y.   group1 group2    n1    n2 statistic    df         p    p.adj p.adj.signif</span><br><span class="line">## * &lt;fct&gt; &lt;fct&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       </span><br><span class="line">## 1 OJ    grp1  len   0.5    1          5     5     -2.50  7.80 0.038     0.038    *           </span><br><span class="line">## 2 OJ    grp1  len   0.5    2          5     5     -5.66  7.13 0.000717  0.001    **          </span><br><span class="line">## 3 OJ    grp2  len   0.5    1          5     5     -4.85  5.65 0.003     0.003    **          </span><br><span class="line">## 4 OJ    grp2  len   0.5    2          5     5     -5.28  6.35 0.002     0.003    **          </span><br><span class="line">## 5 VC    grp1  len   0.5    1          5     5     -5.33  7.54 0.000855  0.000855 ***         </span><br><span class="line">## 6 VC    grp1  len   0.5    2          5     5     -8.81  6.75 0.0000606 0.000121 ***         </span><br><span class="line">## 7 VC    grp2  len   0.5    1          5     5     -5.61  5.71 0.002     0.003    **          </span><br><span class="line">## 8 VC    grp2  len   0.5    2          5     5     -5.87  5.55 0.001     0.003    **</span><br></pre></td></tr></table></figure>
+
+<p>Box plots with p-values</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">stat.test &lt;- stat.test %&gt;%</span><br><span class="line">  add_xy_position(x = <span class="string">&quot;supp&quot;</span>, dodge = <span class="number">0.8</span>)</span><br><span class="line">bxp + </span><br><span class="line">  stat_pvalue_manual(</span><br><span class="line">    stat.test, label = <span class="string">&quot;p.adj.signif&quot;</span>, tip.length = <span class="number">0.01</span></span><br><span class="line">    ) +</span><br><span class="line">  scale_y_continuous(expand = expansion(mult = c(<span class="number">0.01</span>, <span class="number">0.1</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-58-1.png" alt="plot of chunk unnamed-chunk-58"></p>
+<p>Bar plots with p-values</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">stat.test &lt;- stat.test %&gt;%</span><br><span class="line">  add_xy_position(x = <span class="string">&quot;supp&quot;</span>, fun = <span class="string">&quot;mean_sd&quot;</span>, dodge = <span class="number">0.8</span>)</span><br><span class="line">bp + </span><br><span class="line">  stat_pvalue_manual(</span><br><span class="line">    stat.test, label = <span class="string">&quot;p.adj.signif&quot;</span>, tip.length = <span class="number">0.01</span></span><br><span class="line">    ) +</span><br><span class="line">  scale_y_continuous(expand = expansion(mult = c(<span class="number">0.01</span>, <span class="number">0.1</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-59-1.png" alt="plot of chunk unnamed-chunk-59"></p>
+<p>更多相关问题，请参考 <a target="_blank" rel="noopener" href="https://www.datanovia.com/en/blog/tag/ggpubr/">ggpubr FAQ</a></p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a target="_blank" rel="noopener" href="https://www.datanovia.com/en/blog/how-to-add-p-values-to-ggplot-facets/">HOW TO ADD P-VALUES TO GGPLOT FACETS</a></p>
+
+    </div>
+
+    
+    
+    
+	
+	
+	  <div>
+	    <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>-------- 本文结束 </span>
+      <i class="fa fa-paw"></i>
+      <span> 感谢阅读 --------</span>
+    </div>
+  
+</div>  # 添加内容
+	  </div>
+	
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ShuilinL
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2020/11/25/boxplot/" title="如何绘制带有显著性标记的箱线图&#x2F;柱状图">http://example.com/2020/11/25/boxplot/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/R/" rel="tag"># R</a>
+              <a href="/tags/ggplot/" rel="tag"># ggplot</a>
+              <a href="/tags/p-value/" rel="tag"># p-value</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/24/R%E5%AE%89%E8%A3%85%E5%8C%85/" rel="prev" title="如何安装R包">
+      <i class="fa fa-chevron-left"></i> 如何安装R包
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">数据准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%8F%E4%B8%AApanel%E4%B8%AD%E5%8C%85%E5%90%AB%E4%B8%A4%E7%BB%84%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">每个panel中包含两组数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F%E8%BF%9B%E8%A1%8C%E5%88%86%E9%9D%A2"><span class="nav-number">2.1.</span> <span class="nav-text">使用一个变量进行分面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%A4%E4%B8%AA%E5%8F%98%E9%87%8F%E8%BF%9B%E8%A1%8C%E5%88%86%E9%9D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">使用两个变量进行分面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%8F%E4%B8%AApanel%E4%B8%AD%E5%8C%85%E5%90%AB%E4%B8%89%E7%BB%84%E6%88%96%E4%BB%A5%E4%B8%8A%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">3.</span> <span class="nav-text">每个panel中包含三组或以上的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F%E8%BF%9B%E8%A1%8C%E5%88%86%E9%9D%A2-1"><span class="nav-number">3.1.</span> <span class="nav-text">使用一个变量进行分面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%89%80%E6%9C%89%E4%B8%A4%E4%B8%A4%E6%AF%94%E8%BE%83"><span class="nav-number">3.1.1.</span> <span class="nav-text">执行所有两两比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8E%E5%8F%82%E7%85%A7%E7%BB%84%E8%BF%9B%E8%A1%8C%E4%B8%A4%E4%B8%A4%E6%AF%94%E8%BE%83"><span class="nav-number">3.1.2.</span> <span class="nav-text">与参照组进行两两比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%A4%E4%B8%AA%E5%8F%98%E9%87%8F%E8%BF%9B%E8%A1%8C%E5%88%86%E9%9D%A2-1"><span class="nav-number">3.2.</span> <span class="nav-text">使用两个变量进行分面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8group%E5%8F%98%E9%87%8F%E8%BF%9B%E8%A1%8C%E5%88%86%E9%9D%A2"><span class="nav-number">3.3.</span> <span class="nav-text">使用group变量进行分面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%89%80%E6%9C%89%E4%B8%A4%E4%B8%A4%E6%AF%94%E8%BE%83-1"><span class="nav-number">3.3.1.</span> <span class="nav-text">执行所有两两比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8E%E5%8F%82%E7%85%A7%E7%BB%84%E8%BF%9B%E8%A1%8C%E4%B8%A4%E4%B8%A4%E6%AF%94%E8%BE%83-1"><span class="nav-number">3.3.2.</span> <span class="nav-text">与参照组进行两两比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">3.4.</span> <span class="nav-text">参考链接</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ShuilinL"
+      src="/images/headshot.jpg">
+  <p class="site-author-name" itemprop="name">ShuilinL</p>
+  <div class="site-description" itemprop="description">Bioinformatics</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ShuilinLiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ShuilinLiao" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/liaoshuilin@outlook.com" title="E-Mail → liaoshuilin@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShuilinL</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>
