@@ -1,0 +1,152 @@
+---
+date: "Created:2020-10-13"
+    codes: hide
+---
+
+### new_md_post 函数
+
+写好模板文档后，你可以用这个函数来创建markdown文档
+
+参数说明：
+* post_name:     博文名（最好英文，显示不会乱码）
+                 
+* post_path:     你想把生成的文档放在哪个路径，默认当前工作路径
+
+```{r}
+new_md_post <- function(post_name=NULL,
+                         post_path=getwd()){
+  
+  fl_content <- "---
+title: 
+categories:
+  - 
+  - 
+tags:
+  - 
+  -
+
+date: '2020-10-02 11:26:00'
+updated: '2020-10-02 23:00:00'
+---
+
+这是一篇demo。
+<!-- more -->
+
+## title1  
+
+## 引用
+[]()
+
+参考文章如引起任何侵权问题，可以与我[联系](liaoshuilin@outlook.com)，谢谢。"
+  
+  if(is.null(post_name)){
+    stop("A post name must be given!")
+  }
+  current_time <- Sys.Date()
+  out_file     <- paste0(post_path,"/",current_time, "-",post_name,".md")
+  writeLines(fl_content, out_file)
+  print("New Rmarkdown post creat successfully!")
+}
+```
+
+```{r}
+new_md_post(post_name = "test",post_path="../source/_posts")
+```
+
+### new_rmd_post 函数
+
+写好模板文档后，你可以用这个函数来创建Rmarkdown文档， 并对其进行编写博客内容
+
+参数说明：
+* post_name:     博文名（最好英文，显示不会乱码）。
+                 
+* post_path:     你想把生成的文档放在哪个路径，默认当前工作路径
+
+```{r}
+new_rmd_post <- function(post_name=NULL, 
+                         template_name="template.Rmd",
+                         template_path=getwd(), 
+                         post_path=getwd()){
+  
+  if(is.null(post_name)){
+    stop("A post name must be given!")
+  }
+  
+  input_file   <- paste(template_path,template_name, sep="/")
+  current_time <- Sys.Date()
+  out_file     <- paste0(post_path,"/",current_time, "-",post_name,".Rmd")
+  fl_content   <- readLines(input_file)
+  writeLines(fl_content, out_file)
+  print("New Rmarkdown post creat successfully!")
+}
+```
+
+```{r}
+new_rmd_post(post_name = "test",post_path="../source/_posts")
+```
+
+### rmd_to_md 函数 
+
+你可以用这个函数来将Rmd文档转换为markdown文档，并在对其进行修改。
+
+需要安装knitr包，命令为 install.packages("knitr")
+
+参数说明：
+
+* post_name: 文章文档名，推荐使用 年-月-日-英文名 的方式
+
+* template_name: 模板名，你需要转换的Rmd文档
+
+* template_path: 模板文档的路径，默认当前工作路径
+
+* post_path:     你想把生成的文档放在哪个路径，默认当前工作路径
+
+* time_tag:      时间标签，如果你转换的文档没有年-月-日这种标记，
+                 将time_tag设定为TRUE会自动在名字前加上
+
+```{r}
+rmd_to_md <- function(post_name=NULL,
+                        template_name="template.Rmd",
+                        template_path=getwd(),
+                        post_path=getwd(),
+                        time_tag=FALSE){
+  
+  if(is.null(post_name)){
+    post_name <- gsub(pattern = "^(.*)\\.[Rr]md$", "\\1", x = template_name)
+  }
+  
+  input_file   <- paste(template_path,template_name, sep="/")
+  # retrieve system date
+  if(time_tag){
+    current_time <- Sys.Date()
+    out_file     <- paste0(post_path, "/", current_time, "-",post_name,".md")
+  }else{
+    out_file     <- paste0(post_path, "/", post_name,".md")
+  }
+  
+  knitr::knit(input = input_file, output = out_file)
+  print("New markdown post creat successfully!")
+}
+```
+
+```{r}
+rmd_to_md(post_name = "2020-11-26-boxplot", 
+            post_path = "../source/_posts",
+            template_name = "2020-11-26-boxplot.Rmd", 
+            template_path = "../source/_posts")
+```
+
+
+### 修改图片引用路径
+
+1 以绝对路径的方式：
+
+  修改“figure”文件夹名字为post_name相同的名字，如“2020-11-26-boxplot”，并转移到source/images路径下；
+
+  打开2020-11-26-boxplot.md，将"figure/” 替换为 “/images/2020-11-26-boxplot/”。然后进行渲染。
+
+2 以相对路径的方式：
+
+  修改“figure”文件夹名字为post_name相同的名字，如“2020-11-26-boxplot”，并转移到/_posts路径下；
+  
+  打开2020-11-26-boxplot.md，将"figure/” 替换为空值。然后进行渲染。
