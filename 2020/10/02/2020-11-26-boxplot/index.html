@@ -20,20 +20,24 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="Bioinformatics">
+  <meta name="description" content="。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test">
-<meta property="og:url" content="http://example.com/2020/11/25/test/index.html">
+<meta property="og:title" content="如何绘制带有显著性标记的箱线图&#x2F;柱状图">
+<meta property="og:url" content="http://example.com/2020/10/02/2020-11-26-boxplot/index.html">
 <meta property="og:site_name" content="滴水穿石">
-<meta property="og:description" content="Bioinformatics">
+<meta property="og:description" content="。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-11-25T03:54:42.000Z">
-<meta property="article:modified_time" content="2020-11-25T03:54:42.813Z">
+<meta property="og:image" content="http://example.com/.com//unnamed-chunk-4-1.png">
+<meta property="article:published_time" content="2020-10-02T03:26:00.000Z">
+<meta property="article:modified_time" content="2020-10-02T15:00:00.000Z">
 <meta property="article:author" content="ShuilinL">
-<meta property="article:tag" content="Bioinformatics">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="ggplot">
+<meta property="article:tag" content="p-value">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/.com//unnamed-chunk-4-1.png">
 
-<link rel="canonical" href="http://example.com/2020/11/25/test/">
+<link rel="canonical" href="http://example.com/2020/10/02/2020-11-26-boxplot/">
 
 
 <script id="page-configurations">
@@ -46,7 +50,7 @@
   };
 </script>
 
-  <title>test | 滴水穿石</title>
+  <title>如何绘制带有显著性标记的箱线图/柱状图 | 滴水穿石</title>
   
 
 
@@ -132,12 +136,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">13</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
 
   </li>
         <li class="menu-item menu-item-message">
@@ -200,7 +204,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/25/test/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/02/2020-11-26-boxplot/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/headshot.jpg">
@@ -213,7 +217,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          test
+          如何绘制带有显著性标记的箱线图/柱状图
         </h1>
 
         <div class="post-meta">
@@ -222,8 +226,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-11-25 11:54:42" itemprop="dateCreated datePublished" datetime="2020-11-25T11:54:42+08:00">2020-11-25</time>
+              <time title="创建时间：2020-10-02 11:26:00 / 修改时间：23:00:00" itemprop="dateCreated datePublished" datetime="2020-10-02T11:26:00+08:00">2020-10-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/R/Visualization/" itemprop="url" rel="index"><span itemprop="name">Visualization</span></a>
+                </span>
             </span>
 
           
@@ -237,7 +255,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>介绍如何用R绘制多组比较的箱线图/柱状图。</p>
+<!-- more -->
+
+<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><p>Prerequisites<br>Make sure you have installed the following R packages:<br>tidyverse for data manipulation and visualization<br>ggpubr for creating easily publication ready plots<br>rstatix provides pipe-friendly R functions for easy statistical analyses.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggpubr)</span><br><span class="line"><span class="keyword">library</span>(rstatix)</span><br><span class="line"><span class="comment"># Transform `dose` into factor variable </span></span><br><span class="line">df &lt;- ToothGrowth </span><br><span class="line">df$dose &lt;- as.factor(df$dose) </span><br><span class="line"><span class="comment"># Add a random grouping variable </span></span><br><span class="line">df$group &lt;- factor(rep(c(<span class="string">&quot;grp1&quot;</span>, <span class="string">&quot;grp2&quot;</span>), <span class="number">30</span>)) </span><br><span class="line">head(df, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="每个panel中包含两组数据"><a href="#每个panel中包含两组数据" class="headerlink" title="每个panel中包含两组数据"></a>每个panel中包含两组数据</h2><h3 id="使用一个变量进行分面"><a href="#使用一个变量进行分面" class="headerlink" title="使用一个变量进行分面"></a>使用一个变量进行分面</h3><p>Statistical tests<br>使用dose变量进行分面，并在x轴上水平上比较supp变量。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stat.test &lt;- df %&gt;%</span><br><span class="line">  group_by(dose) %&gt;%</span><br><span class="line">  t_test(len ~ supp) %&gt;%</span><br><span class="line">  adjust_pvalue(method = <span class="string">&quot;bonferroni&quot;</span>) %&gt;%</span><br><span class="line">  add_significance()</span><br><span class="line">stat.test</span><br></pre></td></tr></table></figure>
+
+<p>Box plots</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create a box plot</span></span><br><span class="line">bxp &lt;- ggboxplot(</span><br><span class="line">  df, x = <span class="string">&quot;supp&quot;</span>, y = <span class="string">&quot;len&quot;</span>, fill = <span class="string">&quot;#00AFBB&quot;</span>, </span><br><span class="line">  facet.by = <span class="string">&quot;dose&quot;</span></span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line"><span class="comment"># Make facet and add p-values</span></span><br><span class="line">stat.test &lt;- stat.test %&gt;% add_xy_position(x = <span class="string">&quot;supp&quot;</span>)</span><br><span class="line">bxp + stat_pvalue_manual(stat.test)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/.com//unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"></p>
+<p>参考文章如引起任何侵权问题，可以与我<a href="liaoshuilin@outlook.com">联系</a>，谢谢。</p>
+
     </div>
 
     
@@ -266,7 +300,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://example.com/2020/11/25/test/" title="test">http://example.com/2020/11/25/test/</a>
+    <a href="http://example.com/2020/10/02/2020-11-26-boxplot/" title="如何绘制带有显著性标记的箱线图&#x2F;柱状图">http://example.com/2020/10/02/2020-11-26-boxplot/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -276,17 +310,22 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/R/" rel="tag"># R</a>
+              <a href="/tags/ggplot/" rel="tag"># ggplot</a>
+              <a href="/tags/p-value/" rel="tag"># p-value</a>
+          </div>
 
         
 
 
         
     <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/11/25/boxplot/" rel="prev" title="如何绘制带有显著性标记的箱线图/柱状图">
-      <i class="fa fa-chevron-left"></i> 如何绘制带有显著性标记的箱线图/柱状图
-    </a></div>
       <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A21/" rel="next" title="如何用Hexo+Github搭建个人博客1">
+      如何用Hexo+Github搭建个人博客1 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -345,6 +384,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">数据准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%8F%E4%B8%AApanel%E4%B8%AD%E5%8C%85%E5%90%AB%E4%B8%A4%E7%BB%84%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">每个panel中包含两组数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F%E8%BF%9B%E8%A1%8C%E5%88%86%E9%9D%A2"><span class="nav-number">2.1.</span> <span class="nav-text">使用一个变量进行分面</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -360,14 +400,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

@@ -28,7 +28,7 @@
 <meta property="og:description" content="如何用Hexo+Github搭建个人博客（下）。主要涉及分类和标签的添加、文章加密和主题的配置等。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-10-15T11:17:56.000Z">
-<meta property="article:modified_time" content="2020-11-25T04:24:20.125Z">
+<meta property="article:modified_time" content="2020-11-25T04:30:07.673Z">
 <meta property="article:author" content="ShuilinL">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Github">
@@ -134,12 +134,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">9</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">13</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
 
   </li>
         <li class="menu-item menu-item-message">
@@ -232,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-25 12:24:20" itemprop="dateModified" datetime="2020-11-25T12:24:20+08:00">2020-11-25</time>
+                <time title="修改时间：2020-11-25 12:30:07" itemprop="dateModified" datetime="2020-11-25T12:30:07+08:00">2020-11-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -431,7 +431,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">reward_settings:</span><br><span class="line">  # If true, reward will be displayed in every article by default.</span><br><span class="line">  enable: true</span><br><span class="line">  animation: false</span><br><span class="line">  #comment: 赞赏一瓶优酸乳</span><br><span class="line"></span><br><span class="line">reward:</span><br><span class="line">  wechatpay: &#x2F;images&#x2F;wechatpay.png</span><br><span class="line">  alipay: &#x2F;images&#x2F;alipay.png</span><br></pre></td></tr></table></figure>
 
 <h1 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h1><h2 id="使用Rmarkdown写文章"><a href="#使用Rmarkdown写文章" class="headerlink" title="使用Rmarkdown写文章"></a>使用Rmarkdown写文章</h2><p>直接使用kinr包的knit函数将Rmd转化成md格式，但是尤其注意一定要把图片放在同目录下的figure文件夹中。<br>在Hexo系统下的source/_posts创建一个test.Rmd文件。在R里面运行下面两行命令：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setwd(<span class="string">&quot;E:/02GDL/Blog/ShuilinLiao.github.io/source/_posts&quot;</span>) <span class="comment">#这里写上你自己_posts所在的路径  </span></span><br><span class="line">knitr::knit(input = <span class="string">&quot;boxplot.Rmd&quot;</span>) <span class="comment">#没有安装包的请加载knitr包</span></span><br><span class="line">rmarkdown::render(<span class="string">&#x27;boxplot.Rmd&#x27;</span>, output_file=<span class="string">&#x27;boxplot.md&#x27;</span>, output_dir=<span class="string">&#x27;boxplot&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setwd(<span class="string">&quot;E:/02GDL/Blog/ShuilinLiao.github.io/source/_posts&quot;</span>) <span class="comment">#这里写上你自己_posts所在的路径  </span></span><br><span class="line">knitr::knit(input = <span class="string">&quot;boxplot.Rmd&quot;</span>) <span class="comment">#没有安装包的请加载knitr包</span></span><br><span class="line"><span class="comment"># rmarkdown::render(&#x27;boxplot.Rmd&#x27;, output_file=&#x27;boxplot.md&#x27;, output_dir=&#x27;boxplot&#x27;)</span></span><br></pre></td></tr></table></figure>
 
 <p>hexo所在目录，<code>hexo g</code>, <code>hexo s</code> 预览一下效果</p>
 <h2 id="解决hexo中发布文章后图片无法显示的问题"><a href="#解决hexo中发布文章后图片无法显示的问题" class="headerlink" title="解决hexo中发布文章后图片无法显示的问题"></a>解决hexo中发布文章后图片无法显示的问题</h2><p>默认情况下，在 hexo 中新建一篇<code>markdown博文</code>，在文章中插入本地图片，再部署到 github 上面，是无法显示这些图片的。<br>首先找到博客根目录下面的<code>_config.yml</code>文件，修改<code>post_assrt_folder</code>的值为<code>true</code>.<br>接着 git bash 切换到博客根目录下面，安装第三方插件<code>hexo-assrt-image</code></p>
@@ -577,14 +577,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
