@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>滴水穿石</title>
+  
+  <subtitle>种一棵树最好的时间是十年前，其次是现在</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2020-12-01T02:18:10.485Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>ShuilinL</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>学习数学、python和单细胞测序分析计划</title>
+    <link href="http://example.com/2020/12/01/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/"/>
+    <id>http://example.com/2020/12/01/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/</id>
+    <published>2020-12-01T02:17:56.000Z</published>
+    <updated>2020-12-01T02:18:10.485Z</updated>
+    
+    
+    <summary type="html">有东西被加密了, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Private" scheme="http://example.com/categories/Private/"/>
+    
+    
+    <category term="Plan" scheme="http://example.com/tags/Plan/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何绘制带有显著性标记的箱线图/柱状图</title>
+    <link href="http://example.com/2020/11/26/2020-11-26-boxplot/"/>
+    <id>http://example.com/2020/11/26/2020-11-26-boxplot/</id>
+    <published>2020-11-26T03:26:00.000Z</published>
+    <updated>2020-11-26T15:00:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;介绍如何用R绘制多组比较的箱线图/柱状图。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="R" scheme="http://example.com/categories/R/"/>
+    
+    <category term="Visualization" scheme="http://example.com/categories/R/Visualization/"/>
+    
+    
+    <category term="R" scheme="http://example.com/tags/R/"/>
+    
+    <category term="ggplot" scheme="http://example.com/tags/ggplot/"/>
+    
+    <category term="p-value" scheme="http://example.com/tags/p-value/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Metabolism in heart</title>
+    <link href="http://example.com/2020/11/26/2020-11-26-heart_metabolism/"/>
+    <id>http://example.com/2020/11/26/2020-11-26-heart_metabolism/</id>
+    <published>2020-11-26T03:26:00.000Z</published>
+    <updated>2020-11-26T05:51:54.961Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;关于心脏当中的代谢介绍。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Biological  wisdom" scheme="http://example.com/categories/Biological-wisdom/"/>
+    
+    <category term="Metabolism" scheme="http://example.com/categories/Biological-wisdom/Metabolism/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>如何安装R包</title>
+    <link href="http://example.com/2020/11/24/R%E5%AE%89%E8%A3%85%E5%8C%85/"/>
+    <id>http://example.com/2020/11/24/R%E5%AE%89%E8%A3%85%E5%8C%85/</id>
+    <published>2020-11-24T01:15:56.000Z</published>
+    <updated>2020-11-24T06:27:35.791Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;如何安装R并且下载安装R包。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="R" scheme="http://example.com/categories/R/"/>
+    
+    <category term="Packages" scheme="http://example.com/categories/R/Packages/"/>
+    
+    
+    <category term="R" scheme="http://example.com/tags/R/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用Rmarkdown生成简历</title>
+    <link href="http://example.com/2020/11/17/%E7%94%A8Rmarkdown%E7%94%9F%E6%88%90%E7%AE%80%E5%8E%86/"/>
+    <id>http://example.com/2020/11/17/%E7%94%A8Rmarkdown%E7%94%9F%E6%88%90%E7%AE%80%E5%8E%86/</id>
+    <published>2020-11-16T16:00:00.000Z</published>
+    <updated>2020-11-24T06:33:27.523Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;参考他人的模板傻瓜式用Rmarkdown生成简历&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="R" scheme="http://example.com/categories/R/"/>
+    
+    <category term="Undef" scheme="http://example.com/categories/R/Undef/"/>
+    
+    
+    <category term="Rmarkdown" scheme="http://example.com/tags/Rmarkdown/"/>
+    
+    <category term="resume" scheme="http://example.com/tags/resume/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于澳科大联培的一些问题</title>
+    <link href="http://example.com/2020/11/15/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/"/>
+    <id>http://example.com/2020/11/15/%E5%85%B3%E4%BA%8E%E6%BE%B3%E7%A7%91%E5%A4%A7%E8%81%94%E5%9F%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/</id>
+    <published>2020-11-15T11:17:56.000Z</published>
+    <updated>2020-11-24T06:33:00.515Z</updated>
+    
+    
+    <summary type="html">有东西被加密了, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Private" scheme="http://example.com/categories/Private/"/>
+    
+    
+    <category term="MUST" scheme="http://example.com/tags/MUST/"/>
+    
+    <category term="PHD" scheme="http://example.com/tags/PHD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Windows上使用Linux虚拟系统</title>
+    <link href="http://example.com/2020/10/30/windows%E4%B8%8A%E4%BD%BF%E7%94%A8linux%E8%99%9A%E6%8B%9F%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://example.com/2020/10/30/windows%E4%B8%8A%E4%BD%BF%E7%94%A8linux%E8%99%9A%E6%8B%9F%E7%B3%BB%E7%BB%9F/</id>
+    <published>2020-10-30T07:00:26.000Z</published>
+    <updated>2020-11-26T05:14:38.635Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在Windows store上下载Ubuntu虚拟系统，并且安装window terminal进行登录。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="http://example.com/categories/Tools/"/>
+    
+    <category term="Systems" scheme="http://example.com/categories/Tools/Systems/"/>
+    
+    
+    <category term="Ubuntu" scheme="http://example.com/tags/Ubuntu/"/>
+    
+    <category term="Windows" scheme="http://example.com/tags/Windows/"/>
+    
+    <category term="Linux" scheme="http://example.com/tags/Linux/"/>
+    
+    <category term="Virtual systems" scheme="http://example.com/tags/Virtual-systems/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vim中如何对Snakemake代码进行高亮</title>
+    <link href="http://example.com/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/"/>
+    <id>http://example.com/2020/10/21/Vim%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AF%B9Snakemake%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E9%AB%98%E4%BA%AE/</id>
+    <published>2020-10-21T07:00:26.000Z</published>
+    <updated>2020-11-24T06:45:26.875Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;以配置文件的形式在vim中对Snakemake代码进行高亮。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="http://example.com/categories/Tools/"/>
+    
+    <category term="Systems" scheme="http://example.com/categories/Tools/Systems/"/>
+    
+    
+    <category term="Tools" scheme="http://example.com/tags/Tools/"/>
+    
+    <category term="Vim" scheme="http://example.com/tags/Vim/"/>
+    
+    <category term="Snakemake" scheme="http://example.com/tags/Snakemake/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Visual Studio Code连接集群配置</title>
+    <link href="http://example.com/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/"/>
+    <id>http://example.com/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/</id>
+    <published>2020-10-21T06:44:08.000Z</published>
+    <updated>2020-11-24T06:37:28.533Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在Windows上使用Visual Studio Code免密码登录集群/服务器。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="http://example.com/categories/Tools/"/>
+    
+    <category term="Systems" scheme="http://example.com/categories/Tools/Systems/"/>
+    
+    
+    <category term="VScode" scheme="http://example.com/tags/VScode/"/>
+    
+    <category term="cluster" scheme="http://example.com/tags/cluster/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何用Hexo+Github搭建个人博客1</title>
+    <link href="http://example.com/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A21/"/>
+    <id>http://example.com/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A21/</id>
+    <published>2020-10-15T11:17:56.000Z</published>
+    <updated>2020-11-24T08:53:03.276Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;如何用Hexo+Github搭建个人博客（上）。主要涉及如何构建环境和搭建博客。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="http://example.com/categories/Tools/"/>
+    
+    <category term="Blog" scheme="http://example.com/categories/Tools/Blog/"/>
+    
+    
+    <category term="Hexo" scheme="http://example.com/tags/Hexo/"/>
+    
+    <category term="Github" scheme="http://example.com/tags/Github/"/>
+    
+    <category term="Blog" scheme="http://example.com/tags/Blog/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu中安装Anaconda</title>
+    <link href="http://example.com/2020/10/15/ubuntu%E5%AE%89%E8%A3%85anaconda/"/>
+    <id>http://example.com/2020/10/15/ubuntu%E5%AE%89%E8%A3%85anaconda/</id>
+    <published>2020-10-15T11:17:56.000Z</published>
+    <updated>2020-11-24T06:37:12.618Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;介绍如何在Ubuntu上下载Anaconda。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="http://example.com/categories/Tools/"/>
+    
+    <category term="Systems" scheme="http://example.com/categories/Tools/Systems/"/>
+    
+    
+    <category term="Ubuntu" scheme="http://example.com/tags/Ubuntu/"/>
+    
+    <category term="Anaconda" scheme="http://example.com/tags/Anaconda/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何用Hexo+Github搭建个人博客2</title>
+    <link href="http://example.com/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A22/"/>
+    <id>http://example.com/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A22/</id>
+    <published>2020-10-15T11:17:56.000Z</published>
+    <updated>2020-12-01T02:56:18.438Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;如何用Hexo+Github搭建个人博客（下）。主要涉及分类和标签的添加、文章加密和主题的配置等。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="http://example.com/categories/Tools/"/>
+    
+    <category term="Blog" scheme="http://example.com/categories/Tools/Blog/"/>
+    
+    
+    <category term="Hexo" scheme="http://example.com/tags/Hexo/"/>
+    
+    <category term="Github" scheme="http://example.com/tags/Github/"/>
+    
+    <category term="Blog" scheme="http://example.com/tags/Blog/"/>
+    
+  </entry>
+  
+</feed>

@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="如何用Hexo+Github搭建个人博客（上）。主要涉及如何构建环境和搭建博客。">
@@ -79,6 +79,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="滴水穿石" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -145,6 +146,11 @@
         <li class="menu-item menu-item-message">
 
     <a href="/message/" rel="section"><i class="fa fa-comment fa-fw"></i>message</a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-book fa-fw"></i>留言板</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -242,6 +248,27 @@
             </span>
 
           
+            <span id="/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A21/" class="post-meta-item leancloud_visitors" data-flag-title="如何用Hexo+Github搭建个人博客1" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A21/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A21/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -268,7 +295,7 @@
 
 <p>然后直接三个回车即可，默认不需要设置密码<br>然后找到生成的.ssh的文件夹中的id_rsa.pub密钥，将内容全部复制</p>
 <p>打开<a href="https://link.zhihu.com/?target=https://github.com/settings/keys">GitHub_Settings_keys</a> 页面，新建new SSH Key</p>
-<p>Title为标题，任意填即可，将刚刚复制的id_rsa.pub内容粘贴进去，最后点击Add SSH key。<br>在Git Bash中检测GitHub公钥设置是否成功，输入 ssh <a href="mailto:&#103;&#x69;&#116;&#64;&#x67;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#x63;&#111;&#109;">&#103;&#x69;&#116;&#64;&#x67;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#x63;&#111;&#109;</a> ：</p>
+<p>Title为标题，任意填即可，将刚刚复制的id_rsa.pub内容粘贴进去，最后点击Add SSH key。<br>在Git Bash中检测GitHub公钥设置是否成功，输入 ssh <a href="mailto:&#103;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#x62;&#46;&#x63;&#x6f;&#x6d;">&#103;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#x62;&#46;&#x63;&#x6f;&#x6d;</a> ：</p>
 <p>如上则说明成功。这里之所以设置GitHub密钥原因是，通过非对称加密的公钥与私钥来完成加密，公钥放置在GitHub上，私钥放置在自己的电脑里。GitHub要求每次推送代码都是合法用户，所以每次推送都需要输入账号密码验证推送用户是否是合法用户，为了省去每次输入密码的步骤，采用了ssh，当你推送的时候，git就会匹配你的私钥跟GitHub上面的公钥是否是配对的，若是匹配就认为你是合法用户，则允许推送。这样可以保证每次的推送都是正确合法的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:theme-next&#x2F;theme-next.org.git</span><br></pre></td></tr></table></figure>
 
@@ -404,10 +431,13 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A22/" rel="next" title="如何用Hexo+Github搭建个人博客2">
-      如何用Hexo+Github搭建个人博客2 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/10/15/ubuntu%E5%AE%89%E8%A3%85anaconda/" rel="prev" title="Ubuntu中安装Anaconda">
+      <i class="fa fa-chevron-left"></i> Ubuntu中安装Anaconda
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/21/Visual-Studio-Code%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/" rel="next" title="Visual Studio Code连接集群配置">
+      Visual Studio Code连接集群配置 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -421,6 +451,7 @@
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -594,6 +625,35 @@
   
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'MzBl7JJb4fknGe29QPTfvdou-gzGzoHsz',
+      appKey     : 'SEnyER5fvAO1rUpH4njX1Vxp',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : '',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 <div class="moon-menu">
   <div class="moon-menu-items">
     
