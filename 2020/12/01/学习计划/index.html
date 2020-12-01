@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="有东西被加密了, 请输入密码查看.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习数学、python和单细胞测序分析计划">
+<meta property="og:url" content="http://example.com/2020/12/01/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/index.html">
+<meta property="og:site_name" content="滴水穿石">
+<meta property="og:description" content="有东西被加密了, 请输入密码查看.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-01T02:17:56.000Z">
+<meta property="article:modified_time" content="2020-12-01T02:18:10.485Z">
+<meta property="article:author" content="ShuilinL">
+<meta property="article:tag" content="Plan">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/12/01/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>学习数学、python和单细胞测序分析计划 | 滴水穿石</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">滴水穿石</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">种一棵树最好的时间是十年前，其次是现在</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-message">
+
+    <a href="/message/" rel="section"><i class="fa fa-comment fa-fw"></i>message</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/01/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/headshot.jpg">
+      <meta itemprop="name" content="ShuilinL">
+      <meta itemprop="description" content="Bioinformatics">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="滴水穿石">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          学习数学、python和单细胞测序分析计划
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-01 10:17:56" itemprop="dateCreated datePublished" datetime="2020-12-01T10:17:56+08:00">2020-12-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Private/" itemprop="url" rel="index"><span itemprop="name">Private</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder="" />
+    <label for="hbePass">您好, 这里需要密码.</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="a2a3ad9b91bddc33aed412e066c060b64399ede40bdcda1a5220a6a098272e0b">8345408e92e0f78304ecb1463714cdd8690d8aac7de3a24515a3076e5345d2ac0f6bf90bda28942bdc9b3be379007b0d34104edb6c60a85c47d83a59131ad5df3bb59fd8f22a0b83601728f394bc5a7cb93b142d2094fcfc3f9b421b7e1d678a1260776ff37617b4423ede3356a2ebb55494585def38ded10d458f6e3539e4aca48926e73d36cf423e6d850fad4ad982df2ce952aacb97a04ebcce338546c2c2cb50eb224929805ba1582a81a0d5b62c0e9a5f5c66692272466eb099dcdd66f0216caf69751a4484dcdd8b3900b7b0af10d68689ea069e55041bffb287bdd9ea8a78cc7403be1e035d4e96438e3c8cb92e286b3afe7a83d9444fcc62345bfef8850e9821a2a733b8db356e81f66fbc06deeb68856ce52d11b6952a578d5d7884928b6cce70967b1b028187439313117a00acdfd63a62d62230dd1af449ba4bbf35a2bff620dd1c89cac64020549cdda089a2bb77f13541a4aafba35882b451ca1c1b08fecd55daf7e87172e520d364e795594bde5b2538e69462874d553f274a0225ec2ac3360f59d66a2599521b31d0234028349987501460cdf64d56c556f26e8c2246bab2c17c475b91d4c774ca02fc5182a9df210669042df5b8129b3923314c7e8937b64fa62af9cde072e55f4c1f607998e2edf5299df7e0801b7a559c1ba9323e5b8d30c95e4da6435d2c0eff8b33c38dd9b4a345148d1c71ef32b4f1b9e1ece49eb00d3f848961f6659fae64c7fa5ad2ee13abcd4cf7eaf49e1a739195e2ea676b6b006e679341c47b9fc32f3d86bf56c7712734116d4bcc552723f54524201f9593a3a76a592e17469dafa0003b6d00faf59835ea97c9afd6a1716ff36e8f11c8662361a5182b1746f98a171b0399a4b63c17f8a72497ee8a3b77aca49b8f1efaace3ab8179dee0f29f82ebcd4af11ddab4616840622c18eb8aaa283416eea9fbe776a47b2b0b53e135e995eb8d725c00e425d25948d79c4cc9590c065ec5a5f1c317189ee606f6a8491f4ee19811eda9c942bb72a1ef337f62eaf1183e07699549f00b5794989dacb2152d41030c556fa38c0e56a5de2cf3ec64d8a2fe391dce40913b2991f39bde2e73e5cb33ff28372a5b8d2cbc03ea4ffcf1f6c10d1a2eaaece23cc62bfabdb92264607690dc22110f3bb5322b05303f571a20b3e27a9b4c4b8b672295cee9b4fc234f66b30342671f6b5c2a1a07d7e648a5ff7c8f35004b0b5902436b704ec71c209de7340782cc9b0773e07d599413af2a6852215d03490fbbf5dac911c63a9588a62e8353fd36c88ed7bd90b09f33072ecc2fa36f5a58a7acbc9cdb7cd55ffa18dc2b151efba0acf353883967e4f2ee01260f7e92ced912bb62804eb387b66e8e96676cdf11b281f6d4298d4c49dd50af3bcff286f9d3f0ef68f359cf183c8a2769e761b78fa1d17718e32b6e4fb2b938631bf7757b195277d4a3c5edf74aded6fd2fecc4d5e08e7ad861e957785a723cfa1412e49573893866f86d0380ced5fe68df2ab05d498714ae040decf943e6ba60c4379fd6f744f0c12f8e454a3c5cbe03f798b2d1a55dc857fd2081555d92cfbcc1b19f60977f4c8878a81ee005dc6cecfdd227d5d1e5edc2f36b535f1014e0bed4c50c7ab9f78deeef95d8a9c3bd765bb3a10905239f28fb06168dd63d69bcf45823b47dc372601beb4357affc755866ebcdf9a1141e7e4a55f86f2f37f612338f50b4d91f195476b2edc7e7ab9f85a82aedec1422b87644475e61acc30b4745321ef1d8c9c1cd00c0d8bca451ced6dc192b08506104d71e4863d64508378b768d656a4becbfdef64aacc47842c0e0e46961ed09f46c2f0ee124c67f6ad647e58754c22ba04e71cf9e1a0b964db45360edeb18d96db7cf4fa9005cbbc1090e5edad7109e1ba51677b986f10900a9ca8ed8a7efa0c7e7c92e5070b3b134527a45c235330374fc10cda103bc6e826c3f560dc32d2b58d65450a58c5b768eaebaeddd93c9618e651ca93be33962fe612fb8ab154eab71ca5bf44d3b77eac96e173d41686ca6fefd120d4c21063a25966bec9fa1b1e5da914eb0a5e4d4b68e9db8ea8db8d6e11f0423c568fcd3df8225ae7393c35c86cca2988f269555f3994508c76c3868b9e65ba0d09754c679db89c205d43d49febe44528dee2eadc156fb052cb433440d84ebd9c0fd125ca1286e9e3589bdcce2a1525396558006ce8298196fd830da75f8896ebfdab51bf7855d05573ef30680c8d5f11b87c136d5bb1ff658354833f3571337515ff1734c5947bda9f4e4be6818f84b47b230fedf021361cfa6286c85d34273a0c8a7fefd947f7491d432698c9586203b71e29b4d4ed34421ace1e670c124bed4dd92bb2a8426f2a8e5792bc84d6a6dad9135bc6d0c0b1cf91c9d85e1630ce27969ce628e20b27dcaf547ffe5e6cc88c16f40ea45485d9914598c733603366718ca7392674070c2922b46157a1eddb54e4a7ccf358b21a7791c63628053d6569caf41d31aa99d7494b70c0227716893cba56fae239d4021db1d878f109885912a2384d0bef225e2c68485cdb3e31acc60fee28d4a860318002eea558c51533b20fcd9841a4969b8a4853016a81c749142b715973a4d69da91dbf9fdc982249721269684442146a91944e180523eccb11dab186782b2c17dacbc0d69054640e87e394cb1e4243aa362595a4c628a95d04cb377f112828987f4bd313ca2e60704b1fa7162247f35e900385b63d06fa8b7122b44c167571a3fb1ff24302c7052698362c1afa84d57411a6f696108d3a3f56e1e118f29c2c29daabc251e335ef1c5bc52579dd9b11387b984df35610733138a3ecd4ebc96e8b1b6d6d04426be3f48fd31259497f0e8c33cfdabf82d913460cc4e3b2a84c2688fad2f7486c7ac73ce6e65f2822f84c6163932c09e86c45bb4cc8ab66afd2848523752379c6e4a726abb5bd24f52781e6b71147967c243936660e2a48cf17496e7c7b6c9909164fb60dbd5bc971aa2058732bf6889a865d684ff8f21f361f4d0f0b1</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
+    </div>
+
+    
+    
+    
+	
+	
+	  <div>
+	    <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>-------- 本文结束 </span>
+      <i class="fa fa-paw"></i>
+      <span> 感谢阅读 --------</span>
+    </div>
+  
+</div>  # 添加内容
+	  </div>
+	
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ShuilinL
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2020/12/01/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/" title="学习数学、python和单细胞测序分析计划">http://example.com/2020/12/01/学习计划/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Plan/" rel="tag"># Plan</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/26/2020-11-26-boxplot/" rel="prev" title="如何绘制带有显著性标记的箱线图/柱状图">
+      <i class="fa fa-chevron-left"></i> 如何绘制带有显著性标记的箱线图/柱状图
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ShuilinL"
+      src="/images/headshot.jpg">
+  <p class="site-author-name" itemprop="name">ShuilinL</p>
+  <div class="site-description" itemprop="description">Bioinformatics</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ShuilinLiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ShuilinLiao" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/liaoshuilin@outlook.com" title="E-Mail → liaoshuilin@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShuilinL</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>
