@@ -34,7 +34,7 @@
 <meta property="article:modified_time" content="2020-12-04T05:00:00.000Z">
 <meta property="article:author" content="ShuilinL">
 <meta property="article:tag" content="p-value">
-<meta property="article:tag" content="Multiple comparison">
+<meta property="article:tag" content="Multiple comparisons">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2020/12/04/2020-12-04-p_adjust/1607063160.jpg">
 
@@ -368,7 +368,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/p-value/" rel="tag"># p-value</a>
-              <a href="/tags/Multiple-comparison/" rel="tag"># Multiple comparison</a>
+              <a href="/tags/Multiple-comparisons/" rel="tag"># Multiple comparisons</a>
           </div>
 
         
@@ -567,6 +567,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

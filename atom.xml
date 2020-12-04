@@ -35,7 +35,7 @@
     
     <category term="p-value" scheme="http://example.com/tags/p-value/"/>
     
-    <category term="Multiple comparison" scheme="http://example.com/tags/Multiple-comparison/"/>
+    <category term="Multiple comparisons" scheme="http://example.com/tags/Multiple-comparisons/"/>
     
   </entry>
   
