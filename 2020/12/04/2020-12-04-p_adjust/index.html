@@ -20,24 +20,25 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="关于心脏当中的代谢介绍。">
+  <meta name="description" content="多重比较校正方法，并在R中实现。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Metabolism in heart">
-<meta property="og:url" content="http://example.com/2020/11/26/2020-11-26-heart_metabolism/index.html">
+<meta property="og:title" content="P值校正">
+<meta property="og:url" content="http://example.com/2020/12/04/2020-12-04-p_adjust/index.html">
 <meta property="og:site_name" content="滴水穿石">
-<meta property="og:description" content="关于心脏当中的代谢介绍。">
+<meta property="og:description" content="多重比较校正方法，并在R中实现。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/2020-11-26-heart_metabolism/pic1.png">
-<meta property="og:image" content="http://example.com/images/2020-11-26-heart_metabolism/pic2.png">
-<meta property="og:image" content="http://example.com/images/2020-11-26-heart_metabolism/pic3.png">
-<meta property="article:published_time" content="2020-11-26T03:26:00.000Z">
-<meta property="article:modified_time" content="2020-11-26T05:51:54.961Z">
+<meta property="og:image" content="http://example.com/2020/12/04/2020-12-04-p_adjust/1607063160.jpg">
+<meta property="og:image" content="http://example.com/2020/12/04/2020-12-04-p_adjust/1607066685.jpg">
+<meta property="og:image" content="http://example.com/2020/12/04/2020-12-04-p_adjust/1607066775.jpg">
+<meta property="article:published_time" content="2020-12-04T05:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-04T05:00:00.000Z">
 <meta property="article:author" content="ShuilinL">
-<meta property="article:tag" content="Bioinformatics">
+<meta property="article:tag" content="p-value">
+<meta property="article:tag" content="Multiple comparison">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/2020-11-26-heart_metabolism/pic1.png">
+<meta name="twitter:image" content="http://example.com/2020/12/04/2020-12-04-p_adjust/1607063160.jpg">
 
-<link rel="canonical" href="http://example.com/2020/11/26/2020-11-26-heart_metabolism/">
+<link rel="canonical" href="http://example.com/2020/12/04/2020-12-04-p_adjust/">
 
 
 <script id="page-configurations">
@@ -50,7 +51,7 @@
   };
 </script>
 
-  <title>Metabolism in heart | 滴水穿石</title>
+  <title>P值校正 | 滴水穿石</title>
   
 
 
@@ -205,7 +206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/26/2020-11-26-heart_metabolism/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/04/2020-12-04-p_adjust/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/headshot.jpg">
@@ -218,7 +219,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Metabolism in heart
+          P值校正
         </h1>
 
         <div class="post-meta">
@@ -228,7 +229,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-26 11:26:00" itemprop="dateCreated datePublished" datetime="2020-11-26T11:26:00+08:00">2020-11-26</time>
+              <time title="创建时间：2020-12-04 13:00:00" itemprop="dateCreated datePublished" datetime="2020-12-04T13:00:00+08:00">2020-12-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,16 +237,16 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Biological-wisdom/" itemprop="url" rel="index"><span itemprop="name">Biological  wisdom</span></a>
+                  <a href="/categories/Math/" itemprop="url" rel="index"><span itemprop="name">Math</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Biological-wisdom/Metabolism/" itemprop="url" rel="index"><span itemprop="name">Metabolism</span></a>
+                  <a href="/categories/Math/Comparison/" itemprop="url" rel="index"><span itemprop="name">Comparison</span></a>
                 </span>
             </span>
 
           
-            <span id="/2020/11/26/2020-11-26-heart_metabolism/" class="post-meta-item leancloud_visitors" data-flag-title="Metabolism in heart" title="阅读次数">
+            <span id="/2020/12/04/2020-12-04-p_adjust/" class="post-meta-item leancloud_visitors" data-flag-title="P值校正" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -260,8 +261,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/11/26/2020-11-26-heart_metabolism/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/26/2020-11-26-heart_metabolism/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/12/04/2020-12-04-p_adjust/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/12/04/2020-12-04-p_adjust/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -276,20 +277,55 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>关于心脏当中的代谢介绍。</p>
-<a id="more"></a>
-
-<h2 id="能量代谢概述"><a href="#能量代谢概述" class="headerlink" title="能量代谢概述"></a>能量代谢概述</h2><p>1.在第一阶段，<strong>食物中的大分子断裂成较小的分子</strong>。这个过程叫消化。蛋白质被降解成20种氨基酸，多糖被降解成简单的糖（如葡萄糖），脂肪被分解成甘油和脂肪酸。这个阶段属于能量抽取的准备阶段，没有捕获有用的能量。</p>
-<p>2.在第二阶段，第一阶段产生的各种小分子物质进一步降解成少数几种在代谢中起中心作用的简单单元（simple units)。实际上，<strong>糖、脂肪酸、和一些氨基酸被转化成乙酰辅酶A</strong>。在这个过程中能合成一些ATP，但合成量比后续的第三阶段少得多。</p>
-<p>3.第三阶段，<strong>乙酰辅酶A完全氧化产生ATP</strong>。第三阶段有柠檬酸循环和氧化磷酸化。此处是燃料分子氧化过程中最后的共有的代谢途径。<strong>乙酰辅酶A将乙酰基带入三羧酸循环（或称TCA循环/Krebs循环/柠檬酸循环）</strong>，并在此被完全氧化成CO2。每个乙酰基氧化过程中有四对电子发生转移，三对转移给NAD+，一对转移给FAD。随着这些还原型载体将电子传递给O2就形成了质子梯度，后者可以用来合成ATP。</p>
-<p><img src="/images/2020-11-26-heart_metabolism/pic1.png" alt="pic1"></p>
-<h2 id="糖酵解"><a href="#糖酵解" class="headerlink" title="糖酵解"></a>糖酵解</h2><p>1.糖酵解在<strong>细胞质</strong>中进行。</p>
-<p>2.<strong>糖酵解途径是将一个葡萄糖分子代谢成两个丙酮酸</strong>，同时产生两个ATP的代谢途径。糖酵解不需要氧气。因此糖酵解途径在地球出现足量氧气之前，生物建立了这种代谢途径。</p>
-<p>3.糖酵解分三个阶段：第一阶段，葡萄糖转化成果糖1,6-二磷酸，有三个反应步骤（磷酸化，异构化，第二次磷酸化）。糖酵解起始反应的策略是将葡萄糖分子限定在细胞内，形成一种能够被转化成磷酸化三碳单位的化合物。第二阶段是将果糖1,6-二磷酸裂解成两个三碳组分，这两种三碳组分可以相互转化。在第三阶段，三碳组分氧化成丙酮酸，产生ATP。有3种关键酶控制着不可逆反应，分别为 <strong>hexokinase (HK)</strong>, <strong>phosphofructokinase (PFK)</strong>, 和<strong>pyruvate kinase (PK)</strong> 。</p>
-<p>4.丙酮酸能进一步加工，无氧条件下产生乳酸（乳酸发酵）或乙醇（乙醇发酵）。有氧条件下被彻底氧化成CO2 。</p>
-<p><img src="/images/2020-11-26-heart_metabolism/pic2.png" alt="pic2"></p>
-<p><img src="/images/2020-11-26-heart_metabolism/pic3.png" alt="pic3"></p>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a href="*https://rgd.mcw.edu/rgdweb/pathway/pathwayRecord.html?processType=view&species=Human&acc_id=PW:0000640#annot*">GLYCOLYSIS PATHWAY (PW:0000640)</a></p>
+        <p>多重比较校正方法，并在R中实现。<br><a id="more"></a></p>
+<h1 id="为什么要进行多重比较校正"><a href="#为什么要进行多重比较校正" class="headerlink" title="为什么要进行多重比较校正"></a>为什么要进行多重比较校正</h1><p><strong>当在同一个数据集上进行多次统计检验时，就需要进行多重比较校正。</strong>举个简单的例子，A、B两组被试，我们从每个被试身上得出10个指标。如果我们要研究A、B两组被试的某一个指标是否存在显著差异，那么此时我们只做一次统计分析就行；假设这个指标的p值小于0.05，我们会认为这个指标在A、B两组之间存在显著差异，此时，我们犯错的概率（或者称为假阳性率）是5%。<strong>假设我们把这10个指标都进行了统计分析，即使每个独立的指标的p值都小于0.05，此时我们犯错的概率不再是5%，至少有一个false positive的概率是1－（0.95）^10=0.4013，也就是说此时我们犯错的概率达到40%多，这在统计学上是不可接受的</strong>。因此，需要进行多重比较校正。</p>
+<p>因为假设检验是对<strong>原假设有利</strong>。（对，因为它本质上是一个反证法）。思想：</p>
+<ol>
+<li><strong>先预设原假设是成立的</strong></li>
+<li>那么看看当前的情况在原假设的条件下是不是极小概率事件，比如发生概率&lt;5%</li>
+<li>如果是的话。那原假设就很可疑，迫不得已认为它不成立</li>
+<li>不是的话。那原假设就凑活着用吧</li>
+<li>如果你多次使用假设检验，还好死不死全都通过了的话！<br>你的逻辑链条里将出现大量“就凑活着用吧”的命题，当然不靠谱啦！</li>
+</ol>
+<h1 id="矫正方法"><a href="#矫正方法" class="headerlink" title="矫正方法"></a>矫正方法</h1><p>在多重假设检验中，有不同的控制指标，包括：</p>
+<ul>
+<li>Per comparison error rate (PCER, 比较误差率): Type I Error的期望数目比总假设数</li>
+<li>Family-wise error rate (FWER): 至少出现1次Type I Error </li>
+<li>False discovery rate (FDR, 错误发现率): Type I Error在总拒绝数量中的比率（错误拒绝率）</li>
+<li>Positive false discovery rate (pFDR, 阳性错误发现率): 错误发现的比率<br>在实际应用中，我们一般希望减少Type I Error出现（错误拒绝H0）的可能，因此主要考虑FWER和FDR这两个数据。FWER指标有<strong>Bonferroni 校正</strong>和<strong>Holm’s方法</strong>；FDR指标有Benjamin and Hochberg (BH)方法。</li>
+</ul>
+<h2 id="基于Bonferroni-法的校正过程"><a href="#基于Bonferroni-法的校正过程" class="headerlink" title="基于Bonferroni 法的校正过程"></a>基于<strong>Bonferroni 法</strong>的校正过程</h2><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>Family-wise error rate ：</p>
+<script type="math/tex; mode=display">
+\alpha_{FW} = 1-(1-\alpha_{PC})^c</script><p>c为总检验次数（即P值的个数）; α<sub>PC</sub>为每次比较中的错误率（通常为0.05）。所以在3次比较中，α<sub>FW</sub>的值为 1-(1-0.05)^3 = 0.143。<br>有两种方法进行矫正（如下图）：</p>
+<ol>
+<li>Approach 1： 将原始的p-value和 α<sub>PC</sub> /3 = 0.05/3 = 0.017 比较，原始P value小于 矫正后的p-value（如0.017）即可认为是显著差异的p-value；</li>
+<li>Approach 2：将原始的p-value和总检验次数（如3）相乘，得到矫正后的p-value，如果矫正后的p-value可认为是显著差异的p-value；<img src="/2020/12/04/2020-12-04-p_adjust/1607063160.jpg" class title="This is an test image">
+</li>
+</ol>
+<p>如果原始的P值为0.05，检验次数为10000次，那么在Bonferroni 校正中，校正的阈值就等于5%/ 10000 = 0.000005，所有P值超过0.00005的结果都被认为是不可靠的。这样的话假阳性结果在10000次检验中出现的次数为 10000 * 0.000005 =0.5，还不到1次。</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>Bonferroni 校正法可以称作是“最简单粗暴有效”的校正方法，它拒绝了所有的假阳性结果发生的可能性，通过对p值的阈值进行校正来实现消除假阳性结果。但是这也存在问题：Bonferroni 委实太过严格，被校正后的阈值拒绝的不只有假阳性结果，很多阳性结果也会被它拒绝。</p>
+<h3 id="R实现"><a href="#R实现" class="headerlink" title="R实现"></a>R实现</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p=c(<span class="number">0.053</span>,<span class="number">0.001</span>,<span class="number">0.045</span>,<span class="number">0.03</span>,<span class="number">0.02</span>,<span class="number">0.01</span>)</span><br><span class="line">p.adjust(p,<span class="string">&quot;bonferroni&quot;</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="number">0.318</span> <span class="number">0.006</span> <span class="number">0.270</span> <span class="number">0.180</span> <span class="number">0.120</span> <span class="number">0.060</span></span><br></pre></td></tr></table></figure>
+<h2 id="基于BH法的FDR校正过程"><a href="#基于BH法的FDR校正过程" class="headerlink" title="基于BH法的FDR校正过程"></a>基于<strong>BH法</strong>的FDR校正过程</h2><h3 id="算法-1"><a href="#算法-1" class="headerlink" title="算法"></a>算法</h3><p>举个例子，我们最开始设定的情况中进行了10000次检验，这次我们设定FDR在一定的范围，如FDR&lt;0.05，如果我们的检验对象为差异表达的基因，那么在10000次检验中假如得到了500个基因，那么这500个基因中的假阳性结果小于 500*5% = 25 个。比较常用的BH发算法如下：</p>
+<ol>
+<li>BH 法需要将总计m次检验的结果按由小到大进行排序，k为其中一次检验结果的P值所对应的排名。</li>
+<li>找到符合原始阈值α的最大的k值，满足P(k)&lt;=α*k/m，认为排名从1到k的所有检验存在显著差异，并计算对应的q值公式为q = p*(m/k)。</li>
+<li><p>举个例子，如果我们有总共六个结果进行FDR校正：</p>
+<img src="/2020/12/04/2020-12-04-p_adjust/1607066685.jpg" class title="This is an test image">
+</li>
+<li><p>按α=0.05进行计算：<br>排名第四的 P (4) = 0.03 &lt; 0.05*4/6 = 0.033，符合要求<br>排名第五的 P (5)= 0.045 &gt; 0.05*5/6 = 0.041，不满足P(k)&lt;=α*k/m，因此在这个列表里排名前四的G2,G6,G5,G4 为具有显著差异的基因。</p>
+</li>
+</ol>
+<p>我们也可以用q值进行FDR校正：</p>
+<ol>
+<li><p>q-value = P * (k/m)</p>
+<img src="/2020/12/04/2020-12-04-p_adjust/1607066775.jpg" class title="This is an test image">
+</li>
+<li><p>排名第五的G3，其q值大于0.05，故G2,G6,G5,G4 为具有显著差异的基因。</p>
+</li>
+</ol>
+<h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><p>相对Bonferroni 来说，FDR温和得多，这种校正方法不追求完全没有假阳性结果，而是将假阳性结果和真阳性的比例控制在一定范围内。</p>
+<h3 id="R实现-1"><a href="#R实现-1" class="headerlink" title="R实现"></a>R实现</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p=c(<span class="number">0.053</span>,<span class="number">0.001</span>,<span class="number">0.045</span>,<span class="number">0.03</span>,<span class="number">0.02</span>,<span class="number">0.01</span>)</span><br><span class="line">p.adjust(p,<span class="string">&quot;BH&quot;</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="number">0.053</span> <span class="number">0.006</span> <span class="number">0.053</span> <span class="number">0.045</span> <span class="number">0.040</span> <span class="number">0.030</span></span><br></pre></td></tr></table></figure>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/77f9c858a072">谈一谈两种常用的多重比较校正方法</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/95530040">多重检验，P值校正</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/31027746">多重假设检验及其生物学应用</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/51546651">多重假设检验：Bonferroni 和 FDR</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=rMuNniCTsOw">how2stats - What is the Bonferroni Correction?</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=K8LQSvtjcEo">StatQuest - False Discovery Rates, FDR, clearly explained</a></p>
 <p>参考文章如引起任何侵权问题，可以与我<a href="liaoshuilin@outlook.com">联系</a>，谢谢。</p>
 
     </div>
@@ -320,7 +356,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://example.com/2020/11/26/2020-11-26-heart_metabolism/" title="Metabolism in heart">http://example.com/2020/11/26/2020-11-26-heart_metabolism/</a>
+    <a href="http://example.com/2020/12/04/2020-12-04-p_adjust/" title="P值校正">http://example.com/2020/12/04/2020-12-04-p_adjust/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -330,6 +366,10 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/p-value/" rel="tag"># p-value</a>
+              <a href="/tags/Multiple-comparison/" rel="tag"># Multiple comparison</a>
+          </div>
 
         
 
@@ -337,13 +377,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/11/24/R%E5%AE%89%E8%A3%85%E5%8C%85/" rel="prev" title="如何安装R包">
-      <i class="fa fa-chevron-left"></i> 如何安装R包
+    <a href="/2020/12/01/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/" rel="prev" title="学习数学、python和单细胞测序分析计划">
+      <i class="fa fa-chevron-left"></i> 学习数学、python和单细胞测序分析计划
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/11/26/2020-11-26-boxplot/" rel="next" title="如何绘制带有显著性标记的箱线图/柱状图">
-      如何绘制带有显著性标记的箱线图/柱状图 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -403,7 +440,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%BD%E9%87%8F%E4%BB%A3%E8%B0%A2%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">能量代谢概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%96%E9%85%B5%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">糖酵解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">引用</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C%E5%A4%9A%E9%87%8D%E6%AF%94%E8%BE%83%E6%A0%A1%E6%AD%A3"><span class="nav-number">1.</span> <span class="nav-text">为什么要进行多重比较校正</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%AB%E6%AD%A3%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">矫正方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EBonferroni-%E6%B3%95%E7%9A%84%E6%A0%A1%E6%AD%A3%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">基于Bonferroni 法的校正过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.1.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">2.1.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.3.</span> <span class="nav-text">R实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EBH%E6%B3%95%E7%9A%84FDR%E6%A0%A1%E6%AD%A3%E8%BF%87%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">基于BH法的FDR校正过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">2.2.3.</span> <span class="nav-text">R实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text">引用</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

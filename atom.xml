@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-12-01T02:18:10.485Z</updated>
+  <updated>2020-12-04T05:00:00.000Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>P值校正</title>
+    <link href="http://example.com/2020/12/04/2020-12-04-p_adjust/"/>
+    <id>http://example.com/2020/12/04/2020-12-04-p_adjust/</id>
+    <published>2020-12-04T05:00:00.000Z</published>
+    <updated>2020-12-04T05:00:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;多重比较校正方法，并在R中实现。&lt;br&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Math" scheme="http://example.com/categories/Math/"/>
+    
+    <category term="Comparison" scheme="http://example.com/categories/Math/Comparison/"/>
+    
+    
+    <category term="p-value" scheme="http://example.com/tags/p-value/"/>
+    
+    <category term="Multiple comparison" scheme="http://example.com/tags/Multiple-comparison/"/>
+    
+  </entry>
   
   <entry>
     <title>学习数学、python和单细胞测序分析计划</title>
@@ -272,10 +295,10 @@
     <link href="http://example.com/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A22/"/>
     <id>http://example.com/2020/10/15/Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A22/</id>
     <published>2020-10-15T11:17:56.000Z</published>
-    <updated>2020-12-01T03:39:28.683Z</updated>
+    <updated>2020-12-04T08:04:03.233Z</updated>
     
     
-    <summary type="html">&lt;p&gt;如何用Hexo+Github搭建个人博客（下）。主要涉及分类和标签的添加、文章加密和主题的配置等。&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;如何用Hexo+Github搭建个人博客（下）。主要涉及分类和标签的添加、文章加密和主题的配置等。&lt;br&gt;&lt;/p&gt;</summary>
     
     
     
