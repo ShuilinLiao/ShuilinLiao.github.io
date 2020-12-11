@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-12-04T05:00:00.000Z</updated>
+  <updated>2020-12-11T07:00:00.000Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>miRNA-seq生信分析（转生信菜鸟团）</title>
+    <link href="http://example.com/2020/12/11/2020-12-11-miRNA-seq/"/>
+    <id>http://example.com/2020/12/11/2020-12-11-miRNA-seq/</id>
+    <published>2020-12-11T07:00:00.000Z</published>
+    <updated>2020-12-11T07:00:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;以下内容均为复制生信菜鸟团的内容，为miRNA-seq的分析教程。&lt;br&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Pipeline" scheme="http://example.com/categories/Pipeline/"/>
+    
+    <category term="miRNA-seq" scheme="http://example.com/categories/Pipeline/miRNA-seq/"/>
+    
+    
+    <category term="miRNA-seq" scheme="http://example.com/tags/miRNA-seq/"/>
+    
+  </entry>
   
   <entry>
     <title>P值校正</title>
