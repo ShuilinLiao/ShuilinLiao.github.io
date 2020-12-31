@@ -14,43 +14,23 @@ date: "Created:2020-10-13"
 
 ```{r}
 new_md_post <- function(post_name=NULL,
+                        template_name="template.md",
+                        template_path=getwd(), 
                          post_path=getwd()){
-  
-  fl_content <- "---
-title: 
-categories:
-  - 
-  - 
-tags:
-  - 
-  -
-
-date: '2020-10-02 11:26:00'
-updated: '2020-10-02 23:00:00'
----
-
-这是一篇demo。
-<!-- more -->
-
-## title1  
-
-## 引用
-[]()
-
-参考文章如引起任何侵权问题，可以与我[联系](liaoshuilin@outlook.com)，谢谢。"
-  
   if(is.null(post_name)){
     stop("A post name must be given!")
   }
+  input_file   <- paste(template_path,template_name, sep="/")
   current_time <- Sys.Date()
   out_file     <- paste0(post_path,"/",current_time, "-",post_name,".md")
+  fl_content   <- readLines(input_file)
   writeLines(fl_content, out_file)
   print("New Rmarkdown post creat successfully!")
 }
 ```
 
 ```{r}
-new_md_post(post_name = "test",post_path="../source/_posts")
+new_md_post(post_name = "生存分析",post_path="../source/_posts")
 ```
 
 ### new_rmd_post 函数

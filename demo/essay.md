@@ -60,7 +60,18 @@ git push origin source
 ## 参考链接
 ### [gitignore 不生效的解决方案](https://blog.csdn.net/zwkkkk1/article/details/83550032)
 
+# bilibili视频下载
 
+## 问题
 
+下载bilibili的视频
 
+## 原因和解决方法
 
+1. 下载chrome插件：B站下载助手
+2. ubuntu自带ffmpeg
+
+```shell
+sudo apt-get install ffmpeg
+ffmpeg -i input.flv -c copy output.mp4
+```
