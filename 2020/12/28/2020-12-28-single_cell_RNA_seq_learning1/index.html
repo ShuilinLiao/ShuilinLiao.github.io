@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="单细胞测序数据分析学习教程（1）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="single_cell_RNA_seq_learning1">
+<meta property="og:url" content="http://example.com/2020/12/28/2020-12-28-single_cell_RNA_seq_learning1/index.html">
+<meta property="og:site_name" content="滴水穿石">
+<meta property="og:description" content="单细胞测序数据分析学习教程（1）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-28T08:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-30T08:00:00.000Z">
+<meta property="article:author" content="ShuilinL">
+<meta property="article:tag" content="scRNA-seq">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/12/28/2020-12-28-single_cell_RNA_seq_learning1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>single_cell_RNA_seq_learning1 | 滴水穿石</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="滴水穿石" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">滴水穿石</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">种一棵树最好的时间是十年前，其次是现在</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-book fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/28/2020-12-28-single_cell_RNA_seq_learning1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/headshot.jpg">
+      <meta itemprop="name" content="ShuilinL">
+      <meta itemprop="description" content="Bioinformatics">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="滴水穿石">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          single_cell_RNA_seq_learning1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-28 16:00:00" itemprop="dateCreated datePublished" datetime="2020-12-28T16:00:00+08:00">2020-12-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Omics-data/" itemprop="url" rel="index"><span itemprop="name">Omics data</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Omics-data/scRNA-seq/" itemprop="url" rel="index"><span itemprop="name">scRNA-seq</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/12/28/2020-12-28-single_cell_RNA_seq_learning1/" class="post-meta-item leancloud_visitors" data-flag-title="single_cell_RNA_seq_learning1" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/12/28/2020-12-28-single_cell_RNA_seq_learning1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/12/28/2020-12-28-single_cell_RNA_seq_learning1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>单细胞测序数据分析学习教程（1）<br><a id="more"></a></p>
+<h1 id="学习资源"><a href="#学习资源" class="headerlink" title="学习资源"></a>学习资源</h1><p>学习基于<u>芬兰CSC-IT科学中心</u>、<u>剑桥大学生物信息培训中心</u>以及<u>莱顿大学计算生物学中心(LeidenCBC)</u>的单细胞测序课程。</p>
+<ul>
+<li><p>芬兰CSC-IT科学中心：<br><strong>学习链接</strong>：<a target="_blank" rel="noopener" href="https://www.csc.fi/web/training/-/scrnaseq">https://www.csc.fi/web/training/-/scrnaseq</a><br><strong>GitHub</strong>：<a target="_blank" rel="noopener" href="https://github.com/NBISweden/excelerate-scRNAseq">https://github.com/NBISweden/excelerate-scRNAseq</a><br><strong>YouTube</strong>：<a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLjiXAZO27elC_xnk7gVNM85I2IQl5BEJN">https://www.youtube.com/playlist?list=PLjiXAZO27elC_xnk7gVNM85I2IQl5BEJN</a><br><strong>中文跟练教程</strong>：【生信start_site】 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c04c4dc99e2b">https://www.jianshu.com/p/c04c4dc99e2b</a></p>
+</li>
+<li><p>剑桥大学生物信息培训中心<br><strong>学习链接</strong>：<a target="_blank" rel="noopener" href="https://scrnaseq-course.cog.sanger.ac.uk/website/index.html">https://scrnaseq-course.cog.sanger.ac.uk/website/index.html</a><br><strong>GitHub</strong>：<a target="_blank" rel="noopener" href="https://github.com/hemberg-lab/scRNA.seq.course">https://github.com/hemberg-lab/scRNA.seq.course</a><br><strong>YouTube</strong>：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=thHgPqQpkE4&amp;feature=emb_err_woyt">https://www.youtube.com/watch?v=thHgPqQpkE4&amp;feature=emb_err_woyt</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=7dQ_pleDO2Y&amp;feature=emb_err_woyt">https://www.youtube.com/watch?v=7dQ_pleDO2Y&amp;feature=emb_err_woyt</a><br><strong>中文跟练教程</strong>：【生信宝典】 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c04c4dc99e2b">https://www.jianshu.com/p/c04c4dc99e2b</a></p>
+</li>
+<li><p>LeidenCBC<br><strong>GitHub</strong>：<a target="_blank" rel="noopener" href="https://github.com/LeidenCBC/MGC-BioSB-SingleCellAnalysis2020">https://github.com/LeidenCBC/MGC-BioSB-SingleCellAnalysis2020</a></p>
+</li>
+</ul>
+<h1 id="单细胞测序的介绍"><a href="#单细胞测序的介绍" class="headerlink" title="单细胞测序的介绍"></a>单细胞测序的介绍</h1>
+<p>​                                            scRNAseq技术的演变（Svensson et al. Nature Prorocols (2018)）</p>
+
+<p>​                        Single-cell RNA sequencing experiment workflow（Molecular Cell, 2015, 58, 615）</p>
+<p>每个scRNA-seq实验都需要经历以下步骤：单个细胞的捕获和溶解 — 将mRNA逆转录成为cDNA — cDNA通过PCR或者体外转录得到扩增  — 文库制备和测序。其中，单个细胞捕获的方法有低通量（ 显微操作、激光捕获显微切割（LCM）、流式细胞荧光分离（FACS））和高通量单细胞分离方法（微液滴和微流控系统等）。</p>
+<p>定量有两种类型—-<u>全长型</u>和<u>标签型</u> (tag-based)。全长型力图捕获并均匀测序整条转录本，标签型只捕获转录本的5’或3’端。不同定量方式需要自己对应的计算分析方法。全长方案理论上可以对整个转录本进行均匀测序，但实际上总会有测序覆盖偏好性的存在。标签型的主要优点是可以与唯一的分子标识符(UMIs)结合进行更精确定量。其缺点是，测序限制在转录本的5’或3’端，可能会降低比对率，并且难以区分不同剪接体的表达。</p>
+<p>捕获的策略决定了实验通量、细胞如何被选择和除测序外的哪些额外信息可获得。最常用的三种捕获方式是基于<strong>微孔- (microwell-)，微流- (microfluidic-)，液滴- (droplet-)</strong>，<strong>组合标签（Plate based）</strong>等。</p>
+<ul>
+<li>Plate based：SMART-seq2, CEL-seq2, STRT-seq</li>
+<li>Droplet based (Lecture from Susan and Miao)</li>
+</ul>
+<p>液滴型方法是将单独的细胞和一个包含建库所学酶的珠粒 (bead)包裹在一个纳米级液滴里面。特殊地，每个珠粒(bead)包含一段独特的条形码序列 (barcode)，会加到所有来自于液滴里面这个细胞的序列上，用于区分不同细胞的转录本。因此所有的液滴可以混合在一起测序，然后再根据barcode序列确定其是否归属于同一细胞。液滴型平台通常有最高的通量，因为文库的准备成本很低，约为0.05美元/每个细胞。随之而来的，测序成本往往是其限制因素，通常测序深度比较低，只检测几千个转录本的表达。</p>
+<p>本文讲着重介绍由10x genomics平台产出的数据进行分析的流程和方法。</p>
+<p>10x genomics平台测序原理：利用微流控技术进行单个细胞分选，将带有条形码和引物的凝胶珠和单个细胞包裹在油滴中；在每个油滴内，凝胶珠溶解，细胞裂解释放mRNA，通过逆转录产生用于测序的带条形码的cDNA；液体油层破坏后，cDNA后续进行文库构建，使用Illumina测序平台对文库进行测序检测，即可一次性获得大量单细胞的基因表达数据，10min内自动完成多至80,000个细胞的捕获，从而达到在单细胞水平进行表达测序的目的。</p>
+
+<p>​                                            10 x Chromium Single Cell Gene Expression Solution技术原理</p>
+<h1 id="从reads到matrixSTRT-seq"><a href="#从reads到matrixSTRT-seq" class="headerlink" title="从reads到matrixSTRT-seq"></a>从reads到matrixSTRT-seq</h1><h2 id="数据下载"><a href="#数据下载" class="headerlink" title="数据下载"></a>数据下载</h2><p>本次要练手的数据来源于文章：<a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/30250229/">Acquired cancer resistance to combination immunotherapy from transcriptional loss of class I HLA</a>。文章解读见 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1Njk4ODE0MQ==&amp;mid=2247484132&amp;idx=1&amp;sn=11e787fd663104c12b39cc933dd3c5bf&amp;chksm=ea1f0466dd688d7065ea73121f1ae2424d6daff6104acc3137111d40363be63947edbe4d732b&amp;scene=21#wechat_redirect">单细胞天地</a>。共有两名患者：</p>
+<ul>
+<li><p>在<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/geo/">GSE数据库</a>根据编号（GSE117988、GSE118056）进行搜索，拖到下方，点击<code>SRA Run Selector</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">discovery&#x2F;index patient: GSE117988 2586-4 六个样本</span><br><span class="line">validation patient: GSE118056   9245-3 四个样本</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选中需要的样本（全部）点击 <code>Metadata</code>和<code>Accession List</code></p>
+</li>
+<li><p>下载SRA</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  for i in `cat SRR_Acc_List.txt` ;</span><br><span class="line">  do</span><br><span class="line">    /disk/share/toolkits/enaBrowserTools-1.6/python3/enaDataGet -f sra -a $i -d ./sra</span><br><span class="line">    # -f fastq可直接下载fastq文件，但只有一个，不满足后续cellranger需要三个文件的需求，故下载sra格式，后期用fastq-dump进行转化</span><br><span class="line">    fastq-dump --gzip --split-files -A $i ./sra/$i/$&#123;i&#125;.sra</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="解释fastq文件"><a href="#解释fastq文件" class="headerlink" title="解释fastq文件"></a>解释fastq文件</h2><p> 10X单细胞数据比较特殊，它的测序文库中包括index、barcode、UMI和测序reads</p>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1Njk4ODE0MQ==&amp;mid=2247484146&amp;idx=1&amp;sn=16e09b82d048eed1ff6100b22970abd5&amp;scene=21#wechat_redirect">单细胞实战(一)数据下载</a></p>
+<p>参考文章如引起任何侵权问题，可以与我<a href="mailto:liaoshuilin@outlook.com">联系</a>，谢谢。</p>
+
+    </div>
+
+    
+    
+    
+	
+	
+	  <div>
+	    <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>-------- 本文结束 </span>
+      <i class="fa fa-paw"></i>
+      <span> 感谢阅读 --------</span>
+    </div>
+  
+</div>  # 添加内容
+	  </div>
+	
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ShuilinL
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2020/12/28/2020-12-28-single_cell_RNA_seq_learning1/" title="single_cell_RNA_seq_learning1">http://example.com/2020/12/28/2020-12-28-single_cell_RNA_seq_learning1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/scRNA-seq/" rel="tag"># scRNA-seq</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/28/2020-12-28-%E5%A6%82%E4%BD%95%E9%AB%98%E9%80%9F%E4%B8%8B%E8%BD%BDSRA/" rel="prev" title="如何高速下载SRA">
+      <i class="fa fa-chevron-left"></i> 如何高速下载SRA
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/29/2020-12-29-%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/" rel="next" title="生存分析">
+      生存分析 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90"><span class="nav-number">1.</span> <span class="nav-text">学习资源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E7%BB%86%E8%83%9E%E6%B5%8B%E5%BA%8F%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">单细胞测序的介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8Ereads%E5%88%B0matrixSTRT-seq"><span class="nav-number">3.</span> <span class="nav-text">从reads到matrixSTRT-seq</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD"><span class="nav-number">3.1.</span> <span class="nav-text">数据下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%87%8Afastq%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">解释fastq文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">引用</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ShuilinL"
+      src="/images/headshot.jpg">
+  <p class="site-author-name" itemprop="name">ShuilinL</p>
+  <div class="site-description" itemprop="description">Bioinformatics</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ShuilinLiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ShuilinLiao" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:liaoshuilin@outlook.com" title="E-Mail → mailto:liaoshuilin@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShuilinL</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'MzBl7JJb4fknGe29QPTfvdou-gzGzoHsz',
+      appKey     : 'SEnyER5fvAO1rUpH4njX1Vxp',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : '',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>

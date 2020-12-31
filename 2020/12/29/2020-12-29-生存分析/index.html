@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="生存分析学习以及在R中的实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="生存分析">
+<meta property="og:url" content="http://example.com/2020/12/29/2020-12-29-%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="滴水穿石">
+<meta property="og:description" content="生存分析学习以及在R中的实现。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2020/12/29/2020-12-29-%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/Users/liaos/AppData/Roaming/Typora/typora-user-images/image-20201229141302703.png">
+<meta property="article:published_time" content="2020-12-29T02:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-29T02:00:00.000Z">
+<meta property="article:author" content="ShuilinL">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="Survival Analyze">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/12/29/2020-12-29-%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/Users/liaos/AppData/Roaming/Typora/typora-user-images/image-20201229141302703.png">
+
+<link rel="canonical" href="http://example.com/2020/12/29/2020-12-29-%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>生存分析 | 滴水穿石</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="滴水穿石" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">滴水穿石</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">种一棵树最好的时间是十年前，其次是现在</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-book fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/29/2020-12-29-%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/headshot.jpg">
+      <meta itemprop="name" content="ShuilinL">
+      <meta itemprop="description" content="Bioinformatics">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="滴水穿石">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          生存分析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-29 10:00:00" itemprop="dateCreated datePublished" datetime="2020-12-29T10:00:00+08:00">2020-12-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/R/Undef/" itemprop="url" rel="index"><span itemprop="name">Undef</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/12/29/2020-12-29-%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/" class="post-meta-item leancloud_visitors" data-flag-title="生存分析" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/12/29/2020-12-29-%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/12/29/2020-12-29-%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>生存分析学习以及在R中的实现。<br><a id="more"></a></p>
+<h1 id="生存分析（survival-analysis）"><a href="#生存分析（survival-analysis）" class="headerlink" title="生存分析（survival analysis）"></a>生存分析（survival analysis）</h1><p>生存分析是对一个或多个非负随机变量进行统计推断，研究生存现象和响应时间数据及其统计规律的一门学科。它是一种既考虑结果又考虑生存时间的统计方法，并可充分利用截尾数据所提供的不完全信息，对生存时间的分布特征进行描述，对影响生存时间的主要因素进行分析。生存分析不同于其它多因素分析的主要区别点：生存分析考虑了每个观测出现某一结局的时间长短。</p>
+<p><strong>生存分析</strong>可用于许多领域，例如：</p>
+<ul>
+<li>用于患者生存时间分析的癌症研究，如，研究某种药物的疗效，手术后的存活时间，某件机器的使用寿命等。</li>
+<li>社会学研究中的“事件-历史分析”，如，出狱犯人第一次犯罪，失业人员第一次找到工作，</li>
+<li><em>工程学中</em>用于“故障-时间分析”，如，产品的失效。<br>以上内容都可以被转换为“生存资料”；对生存资料的分析称为生存分析。所谓生存资料就是描述寿命或者一个发生时间的数据。更详细的说一个人的生存时间的长短与许多因素有联系的，研究因素与生存时间的联系有无及程度大小，称为生存分析。</li>
+</ul>
+<p>在癌症研究中，典型的研究问题如下：</p>
+<ul>
+<li>某些临床特征对患者生存的影响是什么？</li>
+<li>一个人生存3年的概率是多少？</li>
+<li>两组患者的生存率是否存在差异？</li>
+</ul>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li>几个概念</li>
+<li>研究内容</li>
+<li>Kaplan-Meier图可视化生存曲线</li>
+<li>对数秩检验以比较两组或更多组的生存曲线间是否存在差异。</li>
+<li>用Cox比例风险回归描述变量对生存的影响</li>
+<li>R代码实现</li>
+</ul>
+<h1 id="几个概念"><a href="#几个概念" class="headerlink" title="几个概念"></a>几个概念</h1><p><strong>事件包括起始事件和失效事件。</strong></p>
+<ul>
+<li><strong>起始事件</strong>：反应生存时间起始特征的事件，如疾病确诊、某种疾病治疗开始等。</li>
+<li><strong>失效事件</strong>（Failure Event）：常被简称为事件，研究者规定的终点结局，医学研究中可以是患者死亡，也可以是疾病的发生、某种治疗的反应、疾病的复发等。与之对应的起始事件可以是疾病的确诊、某种治疗的开始等。也称之为死亡事件、终点事件。</li>
+<li><strong>生存时间</strong>（Survival Time）：广义上指某个起点事件开始到某个终点事件发生所经历的时间，度量单位可以是年、月、日、小时等，常用符号t所示。</li>
+</ul>
+<p>根据研究对象的结局，生存时间数据可分为两种类型：</p>
+<ul>
+<li><strong>完全数据</strong>(Completed Data)：从观察起点到发生死亡事件所经历的时间。</li>
+<li><strong>不完全数据</strong>(Incomplete Data)：生存时间观察过程的截止不是由于死亡事件，而是由其他原因引起的。<strong>不完全数据分为</strong>：删失数据(censored Data)，截断数据。常见原因有失访、患者退出试验、事件发生是由于非研究性疾病（如研究病人发生脑卒中后的生存时间，结果病人因为车祸死亡）、研究结束时研究对象仍未发生失效事件。删失数据的生存时间为起始事件到截尾点所经历的时间。常在截尾数据的右上角放一个“+”表示其实该对象可能活的更久。</li>
+<li><strong>变量</strong>：生存分析的变量有两个：生存时间t和结局变量(0-1)。其中结局变量1表示死亡事件，0表示截尾。</li>
+<li><strong>生存曲线</strong>：以生存时间为横轴、生存率为纵轴绘制一条生存曲线。</li>
+<li><strong>中位生存时间</strong>（Median Survival Time）/<strong>平均生存时间</strong>（Mean Survival Time）：中位生存时间又称半数生存期，表示恰好一半个体未发生失效事件的时间，生存曲线上纵轴50%对应的时间。平均生存时间则表示生存曲线下的面积。</li>
+</ul>
+<p>生存和风险函数</p>
+<ul>
+<li><strong>生存函数</strong>，也被称为幸存者函数S(t)，是从时间起源（例如诊断癌症）到指定的未来时间t内仍然处于生存状态，未发生终点事件的概率。</li>
+<li><p>风险函数，h(t)是在时间t内被观察的个体在该时间发生事件的概率。</p>
+<p>请注意，生存函数侧重于没有事件发生，相反，风险函数着重于事件发生。</p>
+</li>
+</ul>
+<p>从分析的因素上看，有单因素分析和多因素分析。正如“连续资料的单因素分析常用t检验、方差分析，对应的多因素分析是多重线性回归”、“分类资料的单因素分析方法卡方分析，对应的多因素分析有logistic回归”一样，生存分析的<strong>常用单因素（或少数因素）</strong>的分析有<strong>Life Tables/寿命表法</strong>、<strong>Kaplan-Meier法</strong>，对应的<strong>多因素模型</strong>则常用<strong>Cox回归模型（Cox风险比例模型）</strong>。从采取的分析方法上看，生存分析有非参数法（如Wilcoxon法、Log-rank法）、参数法（如Weibull回归、lognormal回归等）和半参数分析（Cox回归）。</p>
+<h1 id="Kaplan-Meier法"><a href="#Kaplan-Meier法" class="headerlink" title="Kaplan-Meier法"></a>Kaplan-Meier法</h1><p>Kaplan-Meier（KM）方法是一种非参数方法，用于根据观察到的生存时间估算生存概率（Kaplan和Meier，1958年）。估计的生存概率（S(t)）是针对时间点t的函数，每个时间点t都有自己的对应值。我们也可以计算生存概率的置信区间。</p>
+<p><img src="/2020/12/29/2020-12-29-%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/Users\liaos\AppData\Roaming\Typora\typora-user-images\image-20201229141302703.png" alt="image-20201229141302703"></p>
+<ul>
+<li>S(ti-1) = 在ti-1还活着的概率</li>
+<li>ni = 在ti不久之前还活着的患者人数</li>
+<li>di = 在ti时间点发生的事件数</li>
+<li>t0 = 0， S(0) = 1</li>
+</ul>
+<p>Kaplan-Meier法，也称乘积极限法。<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43087035/article/details/109298584">【生存分析之Kaplan-Meier曲线都告诉我们什么】</a>说明了KM曲线能告诉我们什么，以及乘积极限法的基本原理。<br>Kaplan-Meier曲线为我们描画了患者生存率随时间变化的特征。各个时间点的生存率值也被称为时点生存率。横轴是时间，纵轴是生存率。生存曲线呈现折线的样子，每一个“台阶”都对应着一个发生终点事件的时间点，每次有终点事件出现的时刻都会计算一次生存率，把他们用折线连接就构成了生存曲线。如何计算？</p>
+<ul>
+<li>在研究的起始处，生存率是100%；</li>
+<li>第一个事件出现：在这个事件发生时，共有12例患者处于观察中，其中一人出现终点事件，死亡1/12=0.0833；生存11/12=0.9167，生存率计算：91.67%；</li>
+<li>第二个点出现：在这个时段，共有11人坚持随访，其中一人发生终点事件,10人生存。故而生存概率为10/11=0.9091。由于这个时刻的生存情况实在上一个时间点的基础上产生的，所以这个时点的累积生存率也要基于上一个时间点生存率计算：0.9167X0.9091=83.33%；</li>
+<li>第三个点出现：第三个结局事件发生之前，已经有一例删失病例出现，所以到这时，仅余9人在随访过程中，其中一人发生终点事件，生存8/9=0.8889。同样的，基于前一时刻的生存率计算本时刻的累计生存率：0.8333X0.8889=74.07%；</li>
+<li>如上往复，我们可以获得完整的生存曲线。</li>
+</ul>
+<h1 id="Cox比例风险模型回归"><a href="#Cox比例风险模型回归" class="headerlink" title="Cox比例风险模型回归"></a>Cox比例风险模型回归</h1><p>Cox回归要求满足比例风险假定(proportional-hazards assumption)的前提条件。所谓比例风险假定，就是假定风险比(HR，Hazard Ratio)不随时间t变化而变化。</p>
+<h1 id="R代码实现"><a href="#R代码实现" class="headerlink" title="R代码实现"></a>R代码实现</h1><ul>
+<li><p>环境搭建</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install.packages(&quot;survminer&quot;)</span></span><br><span class="line"><span class="comment"># install.packages(&quot;survival&quot;) </span></span><br><span class="line"><span class="keyword">library</span>(survival) </span><br><span class="line"><span class="keyword">library</span>(ggplot2) </span><br><span class="line"><span class="keyword">library</span>(ggpubr) </span><br><span class="line"><span class="keyword">library</span>(survminer) </span><br><span class="line"><span class="keyword">library</span>(dplyr)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>示例数据集<br>使用survival包中提供的肺癌数据。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data(<span class="string">&quot;lung&quot;</span>)</span><br><span class="line">head(lung)</span><br><span class="line">  inst time status age sex ph.ecog ph.karno pat.karno meal.cal wt.loss</span><br><span class="line"><span class="number">1</span>    <span class="number">3</span>  <span class="number">306</span>      <span class="number">2</span>  <span class="number">74</span>   <span class="number">1</span>       <span class="number">1</span>       <span class="number">90</span>       <span class="number">100</span>     <span class="number">1175</span>      <span class="literal">NA</span></span><br><span class="line"><span class="number">2</span>    <span class="number">3</span>  <span class="number">455</span>      <span class="number">2</span>  <span class="number">68</span>   <span class="number">1</span>       <span class="number">0</span>       <span class="number">90</span>        <span class="number">90</span>     <span class="number">1225</span>      <span class="number">15</span></span><br><span class="line"><span class="number">3</span>    <span class="number">3</span> <span class="number">1010</span>      <span class="number">1</span>  <span class="number">56</span>   <span class="number">1</span>       <span class="number">0</span>       <span class="number">90</span>        <span class="number">90</span>       <span class="literal">NA</span>      <span class="number">15</span></span><br><span class="line"><span class="number">4</span>    <span class="number">5</span>  <span class="number">210</span>      <span class="number">2</span>  <span class="number">57</span>   <span class="number">1</span>       <span class="number">1</span>       <span class="number">90</span>        <span class="number">60</span>     <span class="number">1150</span>      <span class="number">11</span></span><br><span class="line"><span class="number">5</span>    <span class="number">1</span>  <span class="number">883</span>      <span class="number">2</span>  <span class="number">60</span>   <span class="number">1</span>       <span class="number">0</span>      <span class="number">100</span>        <span class="number">90</span>       <span class="literal">NA</span>       <span class="number">0</span></span><br><span class="line"><span class="number">6</span>   <span class="number">12</span> <span class="number">1022</span>      <span class="number">1</span>  <span class="number">74</span>   <span class="number">1</span>       <span class="number">1</span>       <span class="number">50</span>        <span class="number">80</span>      <span class="number">513</span>       <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>inst：机构代码<br>time：以天为单位的生存时间<br>status：删失状态1 = 删失，2 = 出现失效事件<br>age：岁<br>sex：性别，男= 1女= 2<br>ph.ecog：ECOG评分（0 =好，5 =死）<br>ph.karno：医师进行的Karnofsky评分（0 = 差，100 = 好）<br>pat.karno：患者自行进行的Karnofsky评分（0 = 差，100 = 好）<br>meal.cal：用餐时消耗的卡路里<br>wt.loss：最近六个月的体重减轻</p>
+</li>
+</ul>
+<ul>
+<li>计算生存曲线：survfit()<br>目标：按性别计算生存率。<br>函数survfit()[在survival包中]可用于计算kaplan-Meier生存估计。主要论包括：<br>使用Surv()函数创建的生存对象<br>数据集中包含了数据内容。</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fit &lt;- survfit(Surv(time, status) ~ sex, data = lung)</span><br><span class="line">print(fit)</span><br><span class="line">Call: survfit(formula = Surv(time, status) ~ sex, data = lung)</span><br><span class="line">        n events median <span class="number">0.</span>95LCL <span class="number">0.</span>95UCL</span><br><span class="line">sex=<span class="number">1</span> <span class="number">138</span>    <span class="number">112</span>    <span class="number">270</span>     <span class="number">212</span>     <span class="number">310</span></span><br><span class="line">sex=<span class="number">2</span>  <span class="number">90</span>     <span class="number">53</span>    <span class="number">426</span>     <span class="number">348</span>     <span class="number">550</span></span><br></pre></td></tr></table></figure>
+<p>默认情况下，函数print()显示生存曲线的简短统计内容。它输入了观察值，事件数，中位生存率和其置信区间。<br>如果要显示生存曲线的更完整统计内容，请键入以下内容：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">summary(fit)</span><br><span class="line"><span class="comment"># 查看看完整的生存表格</span></span><br><span class="line">summary(fit)$table</span><br></pre></td></tr></table></figure>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43893431/article/details/111467915?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_baidulandingword-2&amp;spm=1001.2101.3001.4242">【Bioinfo Blog 011】【R Code 010】——生存分析(Kaplan-Meier &amp; Cox)</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/113676828">R语言统计与绘图：Kaplan-Meier生存曲线绘制</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35093424">生信补给站 — R|生存分析</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/160915839">第二十五讲 R语言 生存分析基础概念</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/163316406">第二十六讲 R-生存分析：绘制KM生存曲线</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/163316626">第二十七讲 R-生存分析：生存函数的假设检验</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/164351709">第二十八讲 R语言-Cox比例风险模型1</a></li>
+</ul>
+<p>参考文章如引起任何侵权问题，可以与我<a href="mailto:liaoshuilin@outlook.com">联系</a>，谢谢。</p>
+
+    </div>
+
+    
+    
+    
+	
+	
+	  <div>
+	    <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>-------- 本文结束 </span>
+      <i class="fa fa-paw"></i>
+      <span> 感谢阅读 --------</span>
+    </div>
+  
+</div>  # 添加内容
+	  </div>
+	
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ShuilinL
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2020/12/29/2020-12-29-%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90/" title="生存分析">http://example.com/2020/12/29/2020-12-29-生存分析/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/R/" rel="tag"># R</a>
+              <a href="/tags/Survival-Analyze/" rel="tag"># Survival Analyze</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/28/2020-12-28-single_cell_RNA_seq_learning1/" rel="prev" title="single_cell_RNA_seq_learning1">
+      <i class="fa fa-chevron-left"></i> single_cell_RNA_seq_learning1
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90%EF%BC%88survival-analysis%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">生存分析（survival analysis）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-number">2.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">几个概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kaplan-Meier%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">Kaplan-Meier法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cox%E6%AF%94%E4%BE%8B%E9%A3%8E%E9%99%A9%E6%A8%A1%E5%9E%8B%E5%9B%9E%E5%BD%92"><span class="nav-number">5.</span> <span class="nav-text">Cox比例风险模型回归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#R%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">6.</span> <span class="nav-text">R代码实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">引用</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ShuilinL"
+      src="/images/headshot.jpg">
+  <p class="site-author-name" itemprop="name">ShuilinL</p>
+  <div class="site-description" itemprop="description">Bioinformatics</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ShuilinLiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ShuilinLiao" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:liaoshuilin@outlook.com" title="E-Mail → mailto:liaoshuilin@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShuilinL</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'MzBl7JJb4fknGe29QPTfvdou-gzGzoHsz',
+      appKey     : 'SEnyER5fvAO1rUpH4njX1Vxp',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : '',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>
