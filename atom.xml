@@ -30,7 +30,7 @@
     
     <category term="Math" scheme="http://example.com/categories/Math/"/>
     
-    <category term="Mechine Learning" scheme="http://example.com/categories/Math/Mechine-Learning/"/>
+    <category term="Machine Learning" scheme="http://example.com/categories/Math/Machine-Learning/"/>
     
     
     <category term="ROC" scheme="http://example.com/tags/ROC/"/>
@@ -108,14 +108,16 @@
     <link href="http://example.com/2021/01/05/2021-01-05-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     <id>http://example.com/2021/01/05/2021-01-05-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</id>
     <published>2021-01-05T07:00:00.000Z</published>
-    <updated>2021-01-05T07:46:35.436Z</updated>
+    <updated>2021-07-27T06:01:33.367Z</updated>
     
     
     <summary type="html">&lt;p&gt;机器学习入门介绍。&lt;br&gt;&lt;/p&gt;</summary>
     
     
     
-    <category term="Machine learning" scheme="http://example.com/categories/Machine-learning/"/>
+    <category term="Math" scheme="http://example.com/categories/Math/"/>
+    
+    <category term="Machine learning" scheme="http://example.com/categories/Math/Machine-learning/"/>
     
     
     <category term="Machine learning" scheme="http://example.com/tags/Machine-learning/"/>
@@ -136,9 +138,9 @@
     
     
     
-    <category term="R" scheme="http://example.com/categories/R/"/>
+    <category term="Pipeline" scheme="http://example.com/categories/Pipeline/"/>
     
-    <category term="Undef" scheme="http://example.com/categories/R/Undef/"/>
+    <category term="Others" scheme="http://example.com/categories/Pipeline/Others/"/>
     
     
     <category term="R" scheme="http://example.com/tags/R/"/>
@@ -159,9 +161,9 @@
     
     
     
-    <category term="Omics data" scheme="http://example.com/categories/Omics-data/"/>
+    <category term="Pipeline" scheme="http://example.com/categories/Pipeline/"/>
     
-    <category term="scRNA-seq" scheme="http://example.com/categories/Omics-data/scRNA-seq/"/>
+    <category term="scRNA-seq" scheme="http://example.com/categories/Pipeline/scRNA-seq/"/>
     
     
     <category term="scRNA-seq" scheme="http://example.com/tags/scRNA-seq/"/>

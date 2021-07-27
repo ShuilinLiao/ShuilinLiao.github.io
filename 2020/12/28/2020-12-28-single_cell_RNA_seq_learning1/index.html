@@ -232,11 +232,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Omics-data/" itemprop="url" rel="index"><span itemprop="name">Omics data</span></a>
+                  <a href="/categories/Pipeline/" itemprop="url" rel="index"><span itemprop="name">Pipeline</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Omics-data/scRNA-seq/" itemprop="url" rel="index"><span itemprop="name">scRNA-seq</span></a>
+                  <a href="/categories/Pipeline/scRNA-seq/" itemprop="url" rel="index"><span itemprop="name">scRNA-seq</span></a>
                 </span>
             </span>
 
@@ -320,7 +320,7 @@
 <li><p>选中需要的样本（全部）点击 <code>Metadata</code>和<code>Accession List</code></p>
 </li>
 <li><p>下载SRA</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  for i in `cat SRR_Acc_List.txt` ;</span><br><span class="line">  do</span><br><span class="line">    /disk/share/toolkits/enaBrowserTools-1.6/python3/enaDataGet -f sra -a $i -d ./sra</span><br><span class="line">    # -f fastq可直接下载fastq文件，但只有一个，不满足后续cellranger需要三个文件的需求，故下载sra格式，后期用fastq-dump进行转化</span><br><span class="line">    fastq-dump --gzip --split-files -A $i ./sra/$i/$&#123;i&#125;.sra</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for i in `cat SRR_Acc_List.txt` ;</span><br><span class="line">do</span><br><span class="line">  /disk/share/toolkits/enaBrowserTools-1.6/python3/enaDataGet -f sra -a $i -d ./sra</span><br><span class="line"><span class="meta">  #</span><span class="bash"> -f fastq可直接下载fastq文件，但只有一个，不满足后续cellranger需要三个文件的需求，故下载sra格式，后期用fastq-dump进行转化</span></span><br><span class="line">  fastq-dump --gzip --split-files -A $i ./sra/$i/$&#123;i&#125;.sra</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="解释fastq文件"><a href="#解释fastq文件" class="headerlink" title="解释fastq文件"></a>解释fastq文件</h2><p> 10X单细胞数据比较特殊，它的测序文库中包括index、barcode、UMI和测序reads</p>
