@@ -30,7 +30,7 @@ new_md_post <- function(post_name=NULL,
 ```
 
 ```{r}
-new_md_post(post_name = "生存分析",post_path="../source/_posts")
+new_md_post(post_name = "kegg",post_path="../source/_posts")
 ```
 
 ### new_rmd_post 函数
