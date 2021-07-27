@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="由于处理数据太大导致本地电脑内存不够，因此才想着利用服务器安装Rstudio server。服务器版本的Rstudio可以通过网页版本访问：IP地址+端口。 PS： 安装系统是Ubuntu18.04LTS &#x2F; CentOS8, Rstudio Server的安装需要管理员root权限。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在centos或Ubuntu下安装Rstudio server，用浏览器打开">
+<meta property="og:url" content="http://example.com/2021/07/27/%E5%9C%A8centos8%E6%88%96Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85Rstudio%20server/index.html">
+<meta property="og:site_name" content="滴水穿石">
+<meta property="og:description" content="由于处理数据太大导致本地电脑内存不够，因此才想着利用服务器安装Rstudio server。服务器版本的Rstudio可以通过网页版本访问：IP地址+端口。 PS： 安装系统是Ubuntu18.04LTS &#x2F; CentOS8, Rstudio Server的安装需要管理员root权限。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-27T02:12:56.000Z">
+<meta property="article:modified_time" content="2021-07-27T02:36:45.350Z">
+<meta property="article:author" content="ShuilinL">
+<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="Rstudio server">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/07/27/%E5%9C%A8centos8%E6%88%96Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85Rstudio%20server/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>在centos或Ubuntu下安装Rstudio server，用浏览器打开 | 滴水穿石</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="滴水穿石" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">滴水穿石</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">种一棵树最好的时间是十年前，其次是现在</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">21</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-book fa-fw"></i>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/27/%E5%9C%A8centos8%E6%88%96Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85Rstudio%20server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/headshot.jpg">
+      <meta itemprop="name" content="ShuilinL">
+      <meta itemprop="description" content="Bioinformatics">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="滴水穿石">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在centos或Ubuntu下安装Rstudio server，用浏览器打开
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-27 10:12:56" itemprop="dateCreated datePublished" datetime="2021-07-27T10:12:56+08:00">2021-07-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/Systems/" itemprop="url" rel="index"><span itemprop="name">Systems</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/07/27/%E5%9C%A8centos8%E6%88%96Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85Rstudio%20server/" class="post-meta-item leancloud_visitors" data-flag-title="在centos或Ubuntu下安装Rstudio server，用浏览器打开" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/07/27/%E5%9C%A8centos8%E6%88%96Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85Rstudio%20server/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/07/27/%E5%9C%A8centos8%E6%88%96Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85Rstudio%20server/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>由于处理数据太大导致本地电脑内存不够，因此才想着利用服务器安装Rstudio server。服务器版本的Rstudio可以通过网页版本访问：IP地址+端口。</p>
+<p>PS： 安装系统是Ubuntu18.04LTS / CentOS8, Rstudio Server的安装需要管理员root权限。</p>
+<a id="more"></a>
+<h1 id="Ubuntu系统"><a href="#Ubuntu系统" class="headerlink" title="Ubuntu系统"></a>Ubuntu系统</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>先安装基础的依赖<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install gdebi-core</span><br><span class="line">apt-get install libapparmor1</span><br></pre></td></tr></table></figure></p>
+<p>下载目前最新版Rstudio server1.1.383<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://download2.rstudio.org/rstudio-server-1.1.383-amd64.deb</span><br><span class="line">sudo gdebi rstudio-server-1.1.383-amd64.deb</span><br></pre></td></tr></table></figure></p>
+<p>安装R，Rstudio server依赖R<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf install r-base</span><br></pre></td></tr></table></figure></p>
+<p>创建Rstudio配置文件:<br>/etc/rstudio/rserver.conf<br>/etc/rstudio/rsession.conf</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/rstudio/rserver.conf</span><br><span class="line">rsession-which-r=/home/chi/test/software/anaconda3/bin/R # 可通过修改配置文件，添加不同版本或路径的r-base</span><br><span class="line">www-port=8787 # 指定网页访问端口</span><br><span class="line">www-address=172.18.119.13 # 允许访问的IP地址</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/rstudio/rsession.conf</span><br><span class="line">session-timeout-minutes=30 # 会话超时时间</span><br><span class="line">r-cran-repos=http://ftp.ctex.org/mirrors/CRAN # CRAN资源库</span><br></pre></td></tr></table></figure>
+<p>打开8787端口<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ufw</span><br><span class="line">sudo ufw enable </span><br><span class="line">sudo ufw default deny</span><br></pre></td></tr></table></figure></p>
+<p>启动<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 运行</span></span><br><span class="line">sudo rstudio-server start</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看状态</span></span><br><span class="line">sudo rstudio-server status</span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启</span></span><br><span class="line">sudo rstudio-server restart</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">##################################################################</span><br><span class="line">● rstudio-server.service - RStudio Server</span><br><span class="line">   Loaded: loaded (&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;rstudio-server.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since Wed 2020-10-21 08:58:19 CST; 7s ago</span><br><span class="line">  Process: 19196 ExecStart&#x3D;&#x2F;usr&#x2F;lib&#x2F;rstudio-server&#x2F;bin&#x2F;rserver (code&#x3D;exited, status&#x3D;0&#x2F;SUCCESS)</span><br><span class="line"> Main PID: 19197 (rserver)</span><br><span class="line">    Tasks: 3 (limit: 822404)</span><br><span class="line">   Memory: 12.1M</span><br><span class="line">   CGroup: &#x2F;system.slice&#x2F;rstudio-server.service</span><br><span class="line">           └─19197 &#x2F;usr&#x2F;lib&#x2F;rstudio-server&#x2F;bin&#x2F;rserver</span><br><span class="line"></span><br><span class="line">Oct 21 08:58:19 dong.lab systemd[1]: Starting RStudio Server...</span><br><span class="line">Oct 21 08:58:19 dong.lab systemd[1]: Started RStudio Server.</span><br><span class="line">##################################################################</span><br></pre></td></tr></table></figure>
+<p>出现Active: active (running) since，则安装成功。</p>
+<p>通过本地浏览器服务器IP地址:8787打开。root用户无法登陆，需要新建一个用户进行登陆。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd hadoop  # 创建hadoop用户组</span><br><span class="line">sudo useradd hadoop -g hadoop  # 创建hadoop用户并加入到hadoop用户组</span><br><span class="line">sudo passwd hadoop  # 设置hadoop用户的密码</span><br><span class="line">sudo adduser hadoop sudo  # 增加hadoop用户到sudo组</span><br><span class="line">sudo mkdir /home/hadoop  # 创建hadoop用户的home目录</span><br><span class="line">sudo chown -R hadoop:hadoop /home/hadoop  # 给/home/hadoop目录及子目录，设置用户权限</span><br></pre></td></tr></table></figure><br>例如：172.18.119.13:8787。账户为Linux服务器账户。</p>
+<h1 id="CentOS系统"><a href="#CentOS系统" class="headerlink" title="CentOS系统"></a>CentOS系统</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf install r-base</span><br><span class="line">wget https://download2.rstudio.org/server/centos8/x86_64/rstudio-server-rhel-1.3.1093-x86_64.rpm</span><br><span class="line">sudo yum install rstudio-server-rhel-1.3.1093-x86_64.rpm</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看防火墙</span></span><br><span class="line">sudo firewall-cmd --list-ports</span><br><span class="line"><span class="meta">#</span><span class="bash"> 打开8787</span></span><br><span class="line">firewall-cmd --zone=public --add-port=8787/tcp --permanent</span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启防火墙 </span></span><br><span class="line">systemctl restart firewalld </span><br><span class="line">systemctl start firewalld #重启</span><br><span class="line">systemctl stop firewalld #关闭</span><br><span class="line">systemctl status firewalld #状态</span><br><span class="line">systemctl reload firewalld #重启</span><br></pre></td></tr></table></figure>
+<h1 id="Rstudio-server常用命令"><a href="#Rstudio-server常用命令" class="headerlink" title="Rstudio server常用命令"></a>Rstudio server常用命令</h1><h2 id="启动命令"><a href="#启动命令" class="headerlink" title="启动命令"></a>启动命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo rstudio-server verify-installation #查看安装是否正常</span><br><span class="line">sudo rstudio-server start               #启动RStudio-server</span><br><span class="line">sudo rstudio-server status              #查看RStudio-server</span><br><span class="line">sudo rstudio-server stop                #关闭RStudio-server</span><br><span class="line">sudo rstudio-server restart             #重启RStudio-server</span><br></pre></td></tr></table></figure>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看进程</span></span><br><span class="line">rstudio-server active-sessions</span><br><span class="line"><span class="meta">#</span><span class="bash">PID     TIME COMMAND</span></span><br><span class="line"><span class="meta">#</span><span class="bash">3389 00:00:38 /usr/lib/rstudio-server/bin/rsession -u zouhua ---</span></span><br><span class="line"><span class="meta">#</span><span class="bash">3487 00:00:08 /usr/lib/rstudio-server/bin/rsession -u liaoshuilin ---</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 终止进程</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 单个PID</span></span><br><span class="line">rstudio-server suspend-session &lt;pid&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 所有PID</span></span><br><span class="line">rstudio-server  suspend-all</span><br><span class="line"><span class="meta">#</span><span class="bash"> 强制停止运行中的R进程，优先级最高，立刻执行</span></span><br><span class="line">rstudio-server force-suspend-session &lt;pid&gt;</span><br><span class="line">rstudio-server force-suspend-all</span><br></pre></td></tr></table></figure>
+<h2 id="临时上下线"><a href="#临时上下线" class="headerlink" title="临时上下线"></a>临时上下线</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 不允许web访问，并给用户友好提示</span></span><br><span class="line">rstudio-server offline</span><br><span class="line">rstudio-server online</span><br></pre></td></tr></table></figure>
+<h1 id="遇到的bug"><a href="#遇到的bug" class="headerlink" title="遇到的bug"></a>遇到的bug</h1><p>登陆过程Rstudio initialization error unable to connect to service，这是因为SELinux（Security-Enhanced Linux）设置的问题</p>
+<ul>
+<li><p>报错信息: 是因为SELinux阻止了外界访问</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Oct 21 13:31:42 dong platform-python[51954]: SELinux is preventing rserver from using the setpgid access on a process.#012#012*****  Plugin catchall (100. confidence) suggests   **************************#012#012If you believe that rserver should be allowed setpgid access on processes labeled init_t by default.#012Then you should report this as a bug.#012You can generate a local policy module to allow this access.#012Do#012allow this access for now by executing:#012# ausearch -c &#39;rserver&#39; --raw | audit2allow -M my-rserver#012# semodule -X 300 -i my-rserver.pp#012</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>处理方法1，安装报错信息提示进行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示报错详细信息</span></span><br><span class="line">sealert -l 33a3acfb-52fa-4b2d-bcff-796eeb58eac0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 运行debug命令</span></span><br><span class="line">ausearch -c &#x27;rserver&#x27; --raw | audit2allow -M my-rserver</span><br><span class="line">semodule -X 300 -i my-rserver.pp</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>处理办法2，关闭SELinux（Work）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看 SELinux状态</span></span><br><span class="line">sestatus</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">SELinux status:                 enabled</span></span><br><span class="line"><span class="meta">#</span><span class="bash">SELinuxfs mount:                /sys/fs/selinux</span></span><br><span class="line"><span class="meta">#</span><span class="bash">SELinux root directory:         /etc/selinux</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Loaded policy name:             targeted</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Current mode:                   enforcing</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Mode from config file:          enforcing</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Policy MLS status:              enabled</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Policy deny_unknown status:     allowed</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Memory protection checking:     actual (secure)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Max kernel policy version:      31</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭SELinux status enabled</span></span><br><span class="line">sudo vi /etc/sysconfig/selinux </span><br><span class="line"><span class="meta">#</span><span class="bash">修改SELinux=enforcing 为 SELinux=disabled</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">reboot系统并检查SELinux</span></span><br><span class="line">sudo shutdown -r now</span><br><span class="line">sestatus</span><br><span class="line"><span class="meta">#</span><span class="bash">SELinux status:                 disabled</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在ubuntu20开启防火墙后，导致无法使用ssh命令登陆服务器ssh: connect to host 192.168.106.31 port 22: Connection timed out，使用如下命令关闭防火墙即可:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw status</span><br><span class="line"><span class="meta">#</span><span class="bash">Status: active</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash">To                         Action      From</span></span><br><span class="line"><span class="meta">#</span><span class="bash">--                         ------      ----</span></span><br><span class="line"><span class="meta">#</span><span class="bash">22/tcp                     ALLOW       Anywhere</span></span><br><span class="line"><span class="meta">#</span><span class="bash">22/tcp (v6)                ALLOW       Anywhere (v6)</span></span><br><span class="line"></span><br><span class="line">sudo ufw disable</span><br><span class="line"><span class="meta">#</span><span class="bash">Firewall stopped and disabled on system startup</span></span><br><span class="line"></span><br><span class="line">ssh zouhua@192.168.106.31</span><br><span class="line"><span class="meta">#</span><span class="bash">Activate the web console with: systemctl <span class="built_in">enable</span> --now cockpit.socket</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Last login: Wed Oct 21 10:37:00 2020 from 192.168.116.16</span></span><br></pre></td></tr></table></figure></p>
+<p>查看server的日志文件信息查看error message<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tail -f /var/log/syslog</span><br><span class="line">tail -f /var/log/messages</span><br></pre></td></tr></table></figure></p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a target="_blank" rel="noopener" href="https://zouhua.top/archives/f0a006e.html">在centos8下安装Rstudio server</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c714bfcc9cbe">Ubuntu安装 Rstudio server</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/587018d1a368">如何在Ubuntu 18.04上安装最新的R base 及Rstudio server</a></p>
+
+    </div>
+
+    
+    
+    
+	
+	
+	  <div>
+	    <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>-------- 本文结束 </span>
+      <i class="fa fa-paw"></i>
+      <span> 感谢阅读 --------</span>
+    </div>
+  
+</div>  # 添加内容
+	  </div>
+	
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ShuilinL
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/07/27/%E5%9C%A8centos8%E6%88%96Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85Rstudio%20server/" title="在centos或Ubuntu下安装Rstudio server，用浏览器打开">http://example.com/2021/07/27/在centos8或Ubuntu下安装Rstudio server/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+              <a href="/tags/Rstudio-server/" rel="tag"># Rstudio server</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/27/A_record/" rel="prev" title="随笔记录">
+      <i class="fa fa-chevron-left"></i> 随笔记录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/27/%E7%90%86%E8%A7%A3ROC%E5%92%8CAUC/" rel="next" title="理解ROC和AUC">
+      理解ROC和AUC <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ubuntu%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">Ubuntu系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CentOS%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">CentOS系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Rstudio-server%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">Rstudio server常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">3.1.</span> <span class="nav-text">启动命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B"><span class="nav-number">3.2.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E4%B8%8A%E4%B8%8B%E7%BA%BF"><span class="nav-number">3.3.</span> <span class="nav-text">临时上下线</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%81%87%E5%88%B0%E7%9A%84bug"><span class="nav-number">4.</span> <span class="nav-text">遇到的bug</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ShuilinL"
+      src="/images/headshot.jpg">
+  <p class="site-author-name" itemprop="name">ShuilinL</p>
+  <div class="site-description" itemprop="description">Bioinformatics</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ShuilinLiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ShuilinLiao" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:liaoshuilin@outlook.com" title="E-Mail → mailto:liaoshuilin@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShuilinL</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'MzBl7JJb4fknGe29QPTfvdou-gzGzoHsz',
+      appKey     : 'SEnyER5fvAO1rUpH4njX1Vxp',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : '',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+<div class="moon-menu">
+  <div class="moon-menu-items">
+    
+    <div class="moon-menu-item" onclick="back2bottom()">
+      <i class='fa fa-chevron-down'></i>    </div>
+    
+    <div class="moon-menu-item" onclick="back2top()">
+      <i class='fa fa-chevron-up'></i>    </div>
+    
+  </div>
+  <div class="moon-menu-button">
+    <svg class="moon-menu-bg">
+      <circle class="moon-menu-cricle" cx="50%" cy="50%" r="44%"></circle>
+      <circle class="moon-menu-border" cx="50%" cy="50%" r="48%"></circle>
+    </svg>
+    <div class="moon-menu-content">
+      <div class="moon-menu-icon"><i class='fas fa-ellipsis-v'></i></div>
+      <div class="moon-menu-text"></div>
+    </div>
+  </div>
+</div><script src="/js/injector.js"></script>
+</body>
+</html>

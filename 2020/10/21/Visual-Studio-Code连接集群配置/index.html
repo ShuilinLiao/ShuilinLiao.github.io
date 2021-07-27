@@ -131,17 +131,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">19</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">21</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -275,35 +275,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在Windows上使用Visual Studio Code免密码登录集群/服务器。</p>
-<a id="more"></a>
-
+        <p>在Windows上使用Visual Studio Code免密码登录集群/服务器。<br><a id="more"></a></p>
 <h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><p>配置远程开发首先需要安装一个名为<strong>Remote - SSH</strong>的插件，具体操作步骤如下，</p>
 <ul>
 <li>点击扩展按钮</li>
 <li>搜索<strong>Remote - SSH</strong> 、Remote -WSL 和 vscode-icons</li>
 <li>安装</li>
 </ul>
-<h1 id="配置VSCode"><a href="#配置VSCode" class="headerlink" title="配置VSCode"></a>配置VSCode</h1><p>step1: 点击VS code边栏的远程连接图标。<img src="/images/vscode/0.png"></p>
+<h1 id="配置VSCode"><a href="#配置VSCode" class="headerlink" title="配置VSCode"></a>配置VSCode</h1><p>step1: 点击VS code边栏的远程连接图标。<img src="/images/vscode/0.png" alt></p>
 <p>step2: 点击SSH TARGETS右边的齿轮状⚙️按钮。</p>
 <p>step3: 在弹出来的<code>C:\Users\XXX\.ssh\config</code>文件中添加下面内容（即本地的<code>C:\Users\user_name\.ssh\config</code>），根据自己的用户名填写好各个字段，<code>Ctrl + s</code>保存。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Read more about SSH config files: https:&#x2F;&#x2F;linux.die.net&#x2F;man&#x2F;5&#x2F;ssh_config</span><br><span class="line">Host gdl</span><br><span class="line">	HostName 192.168.106.31</span><br><span class="line">	User liaoshuilin</span><br><span class="line"> 	Port 22</span><br></pre></td></tr></table></figure>
-
 <p>step3: 参数设置 </p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Setting - Features - Terminal - Integrated &gt; Automation Shell:Linux</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;python.languageServer&quot;</span>: <span class="string">&quot;Microsoft&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.shell.windows&quot;</span>: <span class="string">&quot;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;remote.SSH.remotePlatform&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;gdl&quot;</span>: <span class="string">&quot;linux&quot;</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="attr">&quot;python.showStartPage&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">   <span class="attr">&quot;explorer.confirmDelete&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">   <span class="attr">&quot;window.zoomLevel&quot;</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.automationShell.windows&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.iconTheme&quot;</span>: <span class="string">&quot;vscode-icons&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.colorTheme&quot;</span>: <span class="string">&quot;Default Dark+&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.editor.enablePreview&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">&quot;workbench.editor.enablePreviewFromQuickOpen&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.inheritEnv&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.integrated.automationShell.linux&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>// Setting - Extension- Terminal - Remote - SSH，勾选✔ 以下项 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Remote.SSH: Allow Local Server Download</span><br><span class="line">Remote.SSH: Enable Agent Forwarding</span><br><span class="line">Remote.SSH: Enable Dynamic Forwarding</span><br><span class="line">Remote.SSH: Use Flock</span><br><span class="line">Remote.SSH: Use Local Server</span><br></pre></td></tr></table></figure>
-
 <h1 id="配置远程服务器免密码登录"><a href="#配置远程服务器免密码登录" class="headerlink" title="配置远程服务器免密码登录"></a>配置远程服务器免密码登录</h1><p>这个需要windows配置有ssh工具，可以通过安装git、openssh实现。在本地打开cmd，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen # 获得本地客户端的公钥</span><br></pre></td></tr></table></figure>
-
 <p>然后一直点击Enter键，不用输入任何内容，最后会在<code>C:\Users\user_name\.ssh</code>路径下生成公钥文件，可以看到有一个<code>id_rsa.pub</code>文件，然后通过FTP等方式把这个文件上传到远程服务器。进入集群SSH配置目录，<code>cd ~/.ssh</code>，查看一下是否有一个名为<code>authorized_keys</code>的文件，如果没有就创建一个，然后把刚上传的<code>id_rsa.pub</code>中的内容附到<code>authorized_keys</code>文件中，并更改文件权限</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch authorized_keys</span><br><span class="line">cat ~&#x2F;id_rsa.pub &gt;&gt; authorized_keys</span><br><span class="line">chmod -R 600 authorized_keys</span><br></pre></td></tr></table></figure>
-
 <p>删除 服务器中home目录下的 .vscode-server/目录后进行链接</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -r  ~&#x2F;.vscode-server&#x2F;</span><br></pre></td></tr></table></figure>
-
 <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ol>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/93239107"><strong>VS Code远程开发</strong></a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yamengxi/article/details/108156610">Windows10系统下使用VS code远程连接集群（在有跳板机的情况下）</a></li>
@@ -440,20 +432,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -488,7 +480,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

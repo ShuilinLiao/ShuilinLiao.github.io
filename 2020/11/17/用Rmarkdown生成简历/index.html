@@ -129,17 +129,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">19</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">21</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -273,9 +273,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>参考他人的模板傻瓜式用Rmarkdown生成简历</p>
-<a id="more"></a>
-
+        <p>参考他人的模板傻瓜式用Rmarkdown生成简历<br><a id="more"></a></p>
 <h3 id="用Rmarkdown生成简历"><a href="#用Rmarkdown生成简历" class="headerlink" title="用Rmarkdown生成简历"></a>用Rmarkdown生成简历</h3><ul>
 <li>将Y叔发表在GitHub上的代码用git clone下来<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;GuangchuangYu&#x2F;cv.git</span><br></pre></td></tr></table></figure></li>
 <li>为避免出现函数的冲突，建议将index.Rmd中select和rename函数前<strong>声明所属包</strong>，即有关部分将改成以下代码：<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xx[[i]] &lt;- dplyr::select(y, -c(start, end)) %&gt;%</span><br><span class="line">      dplyr::rename(start=start2, end=end2)</span><br></pre></td></tr></table></figure></li>
@@ -284,7 +282,6 @@
 <li>在R命令行或者Rstudio中的脚本中输入以下命令：<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmarkdown::render(<span class="string">&quot;index.Rmd&quot;</span>)</span><br></pre></td></tr></table></figure></li>
 <li>随即会生成<code>.html</code>格式的简历，另存为pdf即可。</li>
 <li>在csv中把<code>position.csv</code>信息更改好之后，再用文本编辑器（此处为Notepad++）将编码方式换成UTF-8编码（此时再用csv打开会出现乱码），并将代码中关于读取positions_CN.csv的部分改成以下内容：<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">position_data &lt;- read.csv(<span class="string">&#x27;positions_CN.csv&#x27;</span>,encoding = <span class="string">&#x27;UTF-8&#x27;</span>) %&gt;% </span><br><span class="line">  mutate_all(fill_nas) %&gt;% </span><br><span class="line">  arrange(order, desc(end)) %&gt;% </span><br><span class="line">  mutate(id = <span class="number">1</span>:n()) %&gt;% </span><br><span class="line">  nest(data = c(-id, -section)) <span class="comment"># read.csv打开，并增加encoding = &#x27;UTF-8&#x27;参数</span></span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Dz2fa83O_P5QPD8VLR7DRQ">Y叔笔记</a></p>
@@ -420,20 +417,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -468,7 +465,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

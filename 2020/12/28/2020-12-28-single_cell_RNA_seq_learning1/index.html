@@ -128,17 +128,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">19</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">21</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -298,7 +298,21 @@
 <p>10x genomics平台测序原理：利用微流控技术进行单个细胞分选，将带有条形码和引物的凝胶珠和单个细胞包裹在油滴中；在每个油滴内，凝胶珠溶解，细胞裂解释放mRNA，通过逆转录产生用于测序的带条形码的cDNA；液体油层破坏后，cDNA后续进行文库构建，使用Illumina测序平台对文库进行测序检测，即可一次性获得大量单细胞的基因表达数据，10min内自动完成多至80,000个细胞的捕获，从而达到在单细胞水平进行表达测序的目的。</p>
 
 <p>​                                            10 x Chromium Single Cell Gene Expression Solution技术原理</p>
-<h1 id="从reads到matrixSTRT-seq"><a href="#从reads到matrixSTRT-seq" class="headerlink" title="从reads到matrixSTRT-seq"></a>从reads到matrixSTRT-seq</h1><h2 id="数据下载"><a href="#数据下载" class="headerlink" title="数据下载"></a>数据下载</h2><p>本次要练手的数据来源于文章：<a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/30250229/">Acquired cancer resistance to combination immunotherapy from transcriptional loss of class I HLA</a>。文章解读见 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1Njk4ODE0MQ==&amp;mid=2247484132&amp;idx=1&amp;sn=11e787fd663104c12b39cc933dd3c5bf&amp;chksm=ea1f0466dd688d7065ea73121f1ae2424d6daff6104acc3137111d40363be63947edbe4d732b&amp;scene=21#wechat_redirect">单细胞天地</a>。共有两名患者：</p>
+<p>目前单细胞分析用到的软件主要是<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzI5MTcwNjA4NQ==&amp;mid=2247484047&amp;idx=1&amp;sn=3e2a79d9f56040a57ac2e16cf1923b54&amp;scene=21#wechat_redirect">FastQC</a>、Cellranger和R包Seurat、monocle；数据库有相应物种的<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzI5MTcwNjA4NQ==&amp;mid=2247484148&amp;idx=1&amp;sn=525233898721a9c3ebdf275babf14944&amp;scene=21#wechat_redirect">参考基因组</a>、<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzI5MTcwNjA4NQ==&amp;mid=2247484594&amp;idx=1&amp;sn=77c8a84ceaae6b672f198ebd531c21e4&amp;scene=21#wechat_redirect">KEGG、GO</a>；数据分析部分主要基于count矩阵和差异表达数据用<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI5MTcwNjA4NQ==&amp;mid=2247486262&amp;idx=1&amp;sn=d38221a4063d866b1f10f4c9ebab5f88&amp;scene=21#wechat_redirect">R</a>或者<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI5MTcwNjA4NQ==&amp;mid=2247483866&amp;idx=1&amp;sn=310341a1c8d348958c304df03dfd06a0&amp;scene=21#wechat_redirect">Python</a>来做。</p>
+<h1 id="名词介绍"><a href="#名词介绍" class="headerlink" title="名词介绍"></a>名词介绍</h1><ul>
+<li><p>Barcoding：给每个细胞加上独一无二的DNA序列（就是条形码barcode，就是为了识别），然后测序时将相同的barcode序列归为同一个细胞来源<br>单细胞转录组可以在polyT引物5’端加上barcode。</p>
+</li>
+<li><p>Spike-in：每个细胞都是独特的，和普通的Bulk RNA-seq不同，材料不容易获得，不太好做重复，因此通过生物学重复来评价技术手段/数据质量的方法不靠谱。但是数据质量还是需要评价的，那么就通过向每个细胞裂解液中加入已知序列与一定数量的合成mRNA，例如 external RNA control consortium (ERCC，外源RNA对照联盟)开发的“内参”，可以根据RNA读数判断样本间差异。</p>
+</li>
+<li><p>UMI(Unique molecular identifier)：一段随机序列，每一个DNA分子都有自己的UMI序列。可以大大降低PCR误差（比如：原来两个样本中某基因表达量相同，但是由于两个样本扩增效率不同，样本1为99%，样本2只有95%，那么同时扩增40个循环，这同一个基因就有了0.99^40 / 0.95^40 = 5.2倍差异，因此本来没有差异也会因为外界因素扩增效率的影响而产生“假阳性”）。UMI只用在3’转录本测序的方法中，如CEL-seq2, Drop-seq, MARS-seq。</p>
+</li>
+<li><p>Dropout：基因在一个细胞中有表达，但在另一个细胞中未检测到（按照道理，每个基因应该都可以检测到，只是表达量多少）。可能源于RNA总量少导致扩增建库丢失 或者 RNA表达随机性。</p>
+</li>
+</ul>
+<ul>
+<li></li>
+</ul>
+<h1 id="从reads到matrix"><a href="#从reads到matrix" class="headerlink" title="从reads到matrix"></a>从reads到matrix</h1><h2 id="数据下载"><a href="#数据下载" class="headerlink" title="数据下载"></a>数据下载</h2><p>本次要练手的数据来源于文章：<a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/30250229/">Acquired cancer resistance to combination immunotherapy from transcriptional loss of class I HLA</a>。文章解读见 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1Njk4ODE0MQ==&amp;mid=2247484132&amp;idx=1&amp;sn=11e787fd663104c12b39cc933dd3c5bf&amp;chksm=ea1f0466dd688d7065ea73121f1ae2424d6daff6104acc3137111d40363be63947edbe4d732b&amp;scene=21#wechat_redirect">单细胞天地</a>。共有两名患者：</p>
 <ul>
 <li><p>在<a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/geo/">GSE数据库</a>根据编号（GSE117988、GSE118056）进行搜索，拖到下方，点击<code>SRA Run Selector</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">discovery&#x2F;index patient: GSE117988 2586-4 六个样本</span><br><span class="line">validation patient: GSE118056   9245-3 四个样本</span><br></pre></td></tr></table></figure>
@@ -427,7 +441,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90"><span class="nav-number">1.</span> <span class="nav-text">学习资源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E7%BB%86%E8%83%9E%E6%B5%8B%E5%BA%8F%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">单细胞测序的介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8Ereads%E5%88%B0matrixSTRT-seq"><span class="nav-number">3.</span> <span class="nav-text">从reads到matrixSTRT-seq</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD"><span class="nav-number">3.1.</span> <span class="nav-text">数据下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%87%8Afastq%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">解释fastq文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">引用</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90"><span class="nav-number">1.</span> <span class="nav-text">学习资源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E7%BB%86%E8%83%9E%E6%B5%8B%E5%BA%8F%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">单细胞测序的介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8D%E8%AF%8D%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.</span> <span class="nav-text">名词介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8Ereads%E5%88%B0matrix"><span class="nav-number">4.</span> <span class="nav-text">从reads到matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD"><span class="nav-number">4.1.</span> <span class="nav-text">数据下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%87%8Afastq%E6%96%87%E4%BB%B6"><span class="nav-number">4.2.</span> <span class="nav-text">解释fastq文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">引用</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -443,20 +457,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -491,7 +505,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
